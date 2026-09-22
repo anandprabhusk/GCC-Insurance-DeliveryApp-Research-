@@ -16,12 +16,14 @@
   <style>
     /* ===== RESET & ROOT ===== */
     :root {
-      --qm: #8A1538;
-      --qmd: #5C0E25;
-      --qml: #B91C47;
+      --qm: #7A1030;
+      --qmd: #4D091E;
+      --qml: #9E153E;
+      --qm-glow: rgba(122, 16, 48, 0.35);
       --ga: #D4AF37;
       --gd: #A67C00;
       --gl: #F5DC6E;
+      --ga-glow: rgba(212, 175, 55, 0.35);
       --s50: #F8FAFC;
       --s100: #F1F5F9;
       --s200: #E2E8F0;
@@ -1012,11 +1014,12 @@
 
     /* ===== CALCULATOR ===== */
     .calc-box {
-      background: var(--s900);
+      background: linear-gradient(135deg, #0B1120 0%, #111827 50%, #1E1B2E 100%);
       border-radius: var(--r-xl);
       padding: 28px;
       margin-bottom: 20px;
-      border: 1px solid var(--s700);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
     }
 
     .calc-box h3 {
@@ -1491,12 +1494,12 @@
         TAM/SAM/SOM sizing, competitor benchmarking, 5-year financial projections, regulatory compliance roadmap, and
         DeliverQ investment thesis.</p>
       <div class="hdr-acts">
-        <a href="#tab-financials" class="btn btn-gold" onclick="switchTab(event,'tab-financials')">&#128176; Financial
-          Model</a>
-        <a href="#" class="btn btn-ghost" onclick="switchTab(event,'tab-competitors');return false;">&#9876;&#65039;
-          Competitor Intel</a>
-        <a href="#" class="btn btn-ghost" onclick="switchTab(event,'tab-visuals');return false;">&#128200; All
-          Charts</a>
+        <a href="simulator.html" class="btn btn-gold" style="box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45); font-weight: 700;">
+          <span style="font-size:1.1em;">&#9881;&#65039;</span> Live Economics Simulator <span style="font-size:0.7em;padding:2px 7px;background:rgba(0,0,0,0.2);border-radius:10px;margin-left:4px;letter-spacing:0.04em;font-weight:800;">PRO SUITE &#8599;</span>
+        </a>
+        <a href="#tab-financials" class="btn btn-ghost" onclick="switchTab(event,'tab-financials')">&#128176; Financial Model</a>
+        <a href="#" class="btn btn-ghost" onclick="switchTab(event,'tab-competitors');return false;">&#9876;&#65039; Competitor Intel</a>
+        <a href="#" class="btn btn-ghost" onclick="switchTab(event,'tab-visuals');return false;">&#128200; All Charts</a>
       </div>
     </div>
   </header>
@@ -1560,6 +1563,9 @@
         <button class="tab-btn" onclick="switchTab(event,'tab-visuals')">
           <span class="tab-icon">&#128200;</span> All Charts
         </button>
+        <a href="simulator.html" class="tab-btn" style="color:var(--qm);font-weight:700;background:rgba(212,175,55,0.12);border-radius:8px;margin:6px 6px;padding:8px 14px;border:1px solid rgba(212,175,55,0.35);text-decoration:none;" title="Open standalone Live Delivery Economics Simulator">
+          <span class="tab-icon">&#9881;&#65039;</span> Simulator Suite <span style="font-size:0.68em;padding:2px 6px;border-radius:10px;background:var(--qm);color:#fff;margin-left:4px;font-weight:800;">PRO &#8599;</span>
+        </a>
       </div>
     </div>
   </div>
@@ -2468,7 +2474,25 @@
         </div>
       </div>
 
-      <!-- Interactive Calculator -->
+      <!-- Dedicated Live Economics Simulator Suite Promo Card -->
+      <div class="card" style="background: linear-gradient(135deg, #3B0C1E 0%, #5C0E25 35%, #0F172A 100%); border: 2px solid var(--ga); border-radius: 16px; padding: 26px 28px; margin-bottom: 22px; color: #fff; box-shadow: 0 10px 30px rgba(138,21,56,0.3); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div style="max-width: 820px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="background:rgba(212,175,55,0.25); border:1px solid rgba(212,175,55,0.5); color:var(--gl); font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:12px;">NEW DEDICATED SUITE</span>
+            <span style="background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.4); color:#A7F3D0; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:12px;">Interactive Financial Modeling Lab</span>
+          </div>
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; font-family: Outfit, sans-serif;">Looking for Deep-Dive Scenario Modeling &amp; Sensitivity Analysis?</h3>
+          <p style="font-size: 0.92rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
+            Access the dedicated <strong>Live Delivery Economics Simulator</strong> featuring multi-variable unit economics (rider pay, summer van fuel, payment gateway tolls, ad yields), 2D sensitivity stress-matrices, 1-click market presets (Base Yr 3, Early Launch, West Bay Dining, Q-Commerce, Zero-Fee War), and print/PDF export.
+          </p>
+        </div>
+        <a href="simulator.html" class="btn btn-gold" style="font-size:0.95rem; padding:13px 22px; font-weight:800; border-radius:10px; display:inline-flex; align-items:center; gap:8px; text-decoration:none; white-space:nowrap; box-shadow: 0 4px 16px rgba(212,175,55,0.4);">
+          <span>Launch Full Simulator Suite</span>
+          <span style="font-size:1.15rem;">&#8599;</span>
+        </a>
+      </div>
+
+      <!-- Interactive Calculator (Quick Preview) -->
       <div class="calc-box">
         <h3>&#9881;&#65039; Live Delivery Economics Simulator</h3>
         <p>Adjust inputs to model real-time platform economics. All values in QAR.</p>
