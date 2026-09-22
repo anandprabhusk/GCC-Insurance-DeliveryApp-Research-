@@ -74,11 +74,22 @@
 
     body {
       font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #F0F2F5;
+      background: #EEF2F6;
       color: var(--s800);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      text-align: left;
+      text-rendering: optimizeLegibility;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Global text alignment & justification normalization */
+    h1, h2, h3, h4, h5, h6, p, span, li, td, th {
+      text-align: left;
+      overflow-wrap: break-word;
+      word-break: normal;
     }
 
     h1,
@@ -1302,7 +1313,7 @@
     }
 
     .foot-right {
-      text-align: right
+      text-align: right;
     }
 
     .foot-right .gold {
@@ -1317,163 +1328,279 @@
       margin-top: 3px
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== COMPREHENSIVE RESPONSIVE & ALIGNMENT SYSTEM (MOBILE & WEB) ===== */
     @media(max-width:1200px) {
       .kpi-bar-in {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
       }
-
-      .kpi:nth-child(3) {
-        border-right: none
+      .kpi:nth-child(3n) {
+        border-right: none;
       }
+      .kpi:nth-child(n+4) {
+        border-top: 1px solid var(--s200);
+      }
+    }
 
-      .kpi:nth-child(4) {
-        border-top: 1px solid var(--s200)
+    @media(max-width:900px) {
+      /* Mobile Sticky Architecture: Nav stays cleanly pinned, KPI bar scrolls naturally */
+      .kpi-bar {
+        position: relative;
+        top: auto;
+        box-shadow: none;
+      }
+      .nav-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+      .tabs {
+        gap: 6px;
+        padding: 4px 0;
+      }
+      .tab-btn {
+        padding: 10px 14px;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        border-bottom: none;
+      }
+      .tab-btn.active {
+        background: rgba(138, 21, 56, 0.1);
+        color: var(--qm);
+        font-weight: 700;
       }
     }
 
     @media(max-width:768px) {
       .hdr-in {
-        padding: 28px 16px 32px
+        padding: 24px 16px 28px;
       }
 
       .hdr h1 {
-        font-size: 1.5rem
+        font-size: clamp(1.4rem, 5vw, 1.85rem);
+        text-align: left;
+      }
+
+      .hdr-sub {
+        font-size: 0.8rem;
+        text-align: left;
       }
 
       .hdr-desc {
-        font-size: .9rem
+        font-size: 0.88rem;
+        line-height: 1.6;
+        text-align: left;
+        margin-bottom: 18px;
+      }
+
+      .hdr-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 16px;
       }
 
       .hdr-acts {
-        gap: 8px
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
       }
 
-      .btn {
-        padding: 9px 14px;
-        font-size: .82rem
+      .hdr-acts .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 16px;
+        font-size: 0.85rem;
+        text-align: center;
       }
 
       .kpi-bar-in {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .kpi:nth-child(2) {
-        border-right: none
-      }
-
-      .kpi:nth-child(3) {
-        border-top: 1px solid var(--s200)
-      }
-
-      .kpi:nth-child(4) {
-        border-right: none
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 12px;
       }
 
       .kpi {
-        padding: 12px 14px
+        padding: 12px 14px;
+        border-right: 1px solid var(--s200);
+      }
+
+      .kpi:nth-child(2n) {
+        border-right: none;
+      }
+
+      .kpi:nth-child(n+3) {
+        border-top: 1px solid var(--s200);
+      }
+
+      .kpi-lbl {
+        font-size: 0.65rem;
       }
 
       .kpi-val {
-        font-size: 1.2rem
+        font-size: 1.2rem;
       }
 
-      .nav-in {
-        padding: 0 8px
-      }
-
-      .tab-btn {
-        padding: 12px 12px;
-        font-size: .8rem
+      .kpi-sub {
+        font-size: 0.7rem;
       }
 
       .main {
-        padding: 20px 14px 60px
+        padding: 20px 14px 60px;
       }
 
-      .g2,
-      .g3,
-      .g4,
-      .gfeat,
-      .comp-grid {
-        grid-template-columns: 1fr
+      .g2, .g3, .g4, .gfeat, .comp-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .sh h2 {
-        font-size: 1.3rem
+        font-size: 1.3rem;
+        text-align: left;
+      }
+
+      .sh p {
+        font-size: 0.88rem;
+        text-align: left;
       }
 
       .card {
-        padding: 18px
+        padding: 18px 16px;
+        border-radius: 12px;
       }
 
       .calc-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .calc-res {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .cr-val {
+        font-size: 1.15rem;
+      }
+
+      .cw {
+        height: 250px;
+      }
+
+      .cwl {
+        height: 300px;
+      }
+
+      .cwxl {
+        height: 340px;
       }
 
       .mbar-lbl {
-        min-width: 130px;
-        font-size: .76rem
+        min-width: 120px;
+        font-size: .74rem;
       }
 
       .ue-lbl {
-        width: 140px;
-        font-size: .76rem
+        width: 130px;
+        font-size: .75rem;
       }
 
       .comp-head {
-        padding-right: 50px
+        padding-right: 20px;
       }
 
       table {
-        font-size: .75rem
+        font-size: .75rem;
       }
 
-      th,
-      td {
-        padding: 9px 10px
+      th, td {
+        padding: 9px 10px;
       }
 
       .funnel-sam {
-        margin-left: 10px
+        margin-left: 0;
       }
 
       .funnel-som {
-        margin-left: 20px
+        margin-left: 0;
+      }
+
+      .foot-in {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .foot-right {
+        text-align: left;
       }
     }
 
     @media(max-width:480px) {
+      .hdr-logo {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+
+      .hdr-pill {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
+
       .kpi-bar-in {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: 1fr;
       }
 
-      .kpi-val {
-        font-size: 1.1rem
+      .kpi {
+        border-right: none;
       }
 
-      .hdr-meta {
-        display: none
+      .kpi:nth-child(n+2) {
+        border-top: 1px solid var(--s200);
       }
 
       .calc-res {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: 1fr;
       }
 
-      .tab-btn .tab-icon {
-        display: none
+      .mbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 14px;
       }
 
-      .tab-btn {
-        padding: 12px 10px;
-        font-size: .78rem
+      .mbar-track {
+        width: 100%;
+      }
+
+      .mbar-val {
+        text-align: left;
+        width: 100%;
+      }
+
+      .ue-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        margin-bottom: 12px;
+      }
+
+      .ue-lbl {
+        width: 100%;
+        padding-right: 0;
+      }
+
+      .ue-bar-wrap {
+        width: 100%;
       }
     }
   </style>
 </head>
 
 <body>
-  ﻿<header class="hdr">
+  <header class="hdr">
     <div class="hdr-in">
       <div class="hdr-top">
         <div class="hdr-brand">
@@ -1825,7 +1952,7 @@
         </div>
       </div>
     </div>
-    ﻿<!-- ===== TAB 2: COMPETITOR INTELLIGENCE ===== -->
+    <!-- ===== TAB 2: COMPETITOR INTELLIGENCE ===== -->
     <div id="tab-competitors" class="tp">
       <div class="sh">
         <h2><span>&#9876;&#65039;</span> Competitor Intelligence &amp; Benchmarking</h2>
@@ -2108,7 +2235,7 @@
         </div>
       </div>
     </div>
-    ﻿<!-- ===== TAB 3: OPPORTUNITIES ===== -->
+    <!-- ===== TAB 3: OPPORTUNITIES ===== -->
     <div id="tab-opportunity" class="tp">
       <div class="sh">
         <h2><span>&#128269;</span> Market Gaps &amp; Prioritized Opportunities</h2>
@@ -2385,7 +2512,7 @@
         </div>
       </div>
     </div>
-    ﻿<!-- ===== TAB 5: FINANCIAL MODEL ===== -->
+    <!-- ===== TAB 5: FINANCIAL MODEL ===== -->
     <div id="tab-financials" class="tp">
       <div class="sh">
         <h2><span>&#128176;</span> Financial Model &amp; 5-Year Projections</h2>
@@ -2823,7 +2950,7 @@
       </div>
     </div>
   </footer>
-  <script>﻿function switchTab(e, id) {
+  <script>function switchTab(e, id) {
       document.querySelectorAll('.tp').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
