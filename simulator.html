@@ -15,74 +15,74 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <style>
     /* ===== RESET & MODERN EXECUTIVE FINTECH DESIGN SYSTEM ===== */
-    /* Executive Blue Light Theme (Default & Only) */
     :root {
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-      --bg-canvas: #F8FAFC;
-      --bg-surface: #FFFFFF;
-      --bg-surface-elevated: #F1F5F9;
-      --bg-card: #FFFFFF;
-      --bg-card-hover: #F8FAFC;
-      --bg-input: #F1F5F9;
-      --border-subtle: #E2E8F0;
-      --border-focus: #2563EB;
-      --border-blue: rgba(37, 99, 235, 0.25);
-      --border-gold: rgba(37, 99, 235, 0.35);
+      /* Dark Executive Blue Fintech Theme (Default) */
+      --bg-canvas: #060B16;
+      --bg-surface: #0C1424;
+      --bg-surface-elevated: #111D35;
+      --bg-card: rgba(14, 24, 44, 0.85);
+      --bg-card-hover: rgba(20, 35, 64, 0.95);
+      --bg-input: #090F1C;
+      --border-subtle: rgba(56, 189, 248, 0.12);
+      --border-focus: rgba(59, 130, 246, 0.65);
+      --border-blue: rgba(56, 189, 248, 0.35);
+      --border-gold: rgba(56, 189, 248, 0.35);
 
       /* Core Blue Brand Accents */
-      --qm-900: #1E3A8A;
-      --qm-800: #1E40AF;
-      --qm-700: #1D4ED8;
-      --qm-600: #2563EB;
-      --qm-500: #3B82F6;
-      --qm-glow: rgba(37, 99, 235, 0.25);
+      --qm-900: #060D1E;
+      --qm-800: #0B1938;
+      --qm-700: #122856;
+      --qm-600: #1D4ED8;
+      --qm-500: #2563EB;
+      --qm-glow: rgba(37, 99, 235, 0.45);
 
-      --blue-950: #0F172A;
-      --blue-900: #1E3A8A;
-      --blue-800: #1E40AF;
+      --blue-950: #060D1E;
+      --blue-900: #0B1938;
+      --blue-800: #122856;
       --blue-700: #1D4ED8;
       --blue-600: #2563EB;
       --blue-500: #3B82F6;
       --blue-400: #60A5FA;
       --blue-300: #93C5FD;
-      --blue-glow: rgba(37, 99, 235, 0.25);
+      --blue-glow: rgba(37, 99, 235, 0.45);
 
-      --gold-600: #1D4ED8;
-      --gold-500: #2563EB;
-      --gold-400: #3B82F6;
-      --gold-300: #60A5FA;
-      --gold-glow: rgba(37, 99, 235, 0.25);
+      --gold-600: #0284C7;
+      --gold-500: #0EA5E9;
+      --gold-400: #38BDF8;
+      --gold-300: #7DD3FC;
+      --gold-glow: rgba(56, 189, 248, 0.35);
 
       --cyan-600: #0284C7;
       --cyan-500: #0EA5E9;
       --cyan-400: #38BDF8;
       --cyan-300: #7DD3FC;
-      --cyan-glow: rgba(56, 189, 248, 0.25);
+      --cyan-glow: rgba(56, 189, 248, 0.35);
 
       /* Semantic Analytics Colors */
       --profit: #10B981;
-      --profit-glow: rgba(16, 185, 129, 0.2);
+      --profit-glow: rgba(16, 185, 129, 0.3);
       --profit-light: #D1FAE5;
-      --loss: #EF4444;
-      --loss-glow: rgba(239, 68, 68, 0.2);
-      --loss-light: #FEE2E2;
+      --loss: #F43F5E;
+      --loss-glow: rgba(244, 63, 94, 0.3);
+      --loss-light: #FFE4E6;
       --amber: #F59E0B;
-      --blue: #2563EB;
-      --purple: #6366F1;
+      --blue: #3B82F6;
+      --purple: #818CF8;
 
       /* Typography */
-      --text-main: #0F172A;
-      --text-secondary: #475569;
+      --text-main: #F8FAFC;
+      --text-secondary: #94A3B8;
       --text-muted: #64748B;
-      --text-inverse: #FFFFFF;
+      --text-inverse: #060B16;
 
       /* Shadows & Radii */
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
-      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
-      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
       --r-sm: 8px;
       --r-md: 12px;
       --r-lg: 16px;
@@ -91,7 +91,28 @@
     }
 
     /* Light Luxe Theme Override */
-    
+    [] {
+      --bg-canvas: #F0F4FA;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F8FAFD;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --bg-card-hover: #FFFFFF;
+      --bg-input: #E2E8F0;
+      --border-subtle: #CBD5E1;
+      --border-focus: #2563EB;
+      --border-gold: rgba(37, 99, 235, 0.35);
+
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-inverse: #FFFFFF;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.09);
+      --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -189,7 +210,7 @@
       transition: var(--transition);
     }
 
-    .app-header {
+    [] .app-header {
       background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid #E2E8F0;
     }
@@ -252,7 +273,7 @@
       font-weight: 900;
       font-size: 1.2rem;
       color: var(--qm-900);
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
       flex-shrink: 0;
     }
 
@@ -274,8 +295,8 @@
       font-size: 0.65rem;
       padding: 2px 6px;
       border-radius: 6px;
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(37, 99, 235, 0.4);
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
       color: var(--gold-400);
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -313,15 +334,29 @@
       color: #0A0E17;
       border-color: var(--gold-500);
       font-weight: 700;
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
     }
 
     .btn-gold-action:hover {
       background: linear-gradient(135deg, #E6BE58 0%, var(--gold-500) 100%);
       transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
     }
 
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
 
     /* ===== MOBILE APP NAVIGATION TABS ===== */
     .app-nav-bar {
@@ -377,7 +412,7 @@
     .app-tab-btn.active {
       color: var(--gold-400);
       border-bottom-color: var(--gold-400);
-      background: rgba(37, 99, 235, 0.08);
+      background: rgba(212, 175, 55, 0.08);
       font-weight: 700;
     }
 
@@ -413,11 +448,11 @@
 
     /* ===== HERO BANNER SECTION ===== */
     .simulator-hero {
-      background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #2563EB 100%);
-      border: 1.5px solid rgba(37, 99, 235, 0.35);
+      background: linear-gradient(135deg, rgba(84, 10, 35, 0.9) 0%, rgba(53, 8, 24, 0.95) 50%, rgba(17, 23, 38, 0.95) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
       border-radius: var(--r-xl);
       padding: 28px 32px 26px;
-      box-shadow: var(--shadow-lg), 0 0 30px rgba(30, 58, 138, 0.22);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(127, 15, 53, 0.22);
       position: relative;
       overflow: hidden;
       margin-bottom: 24px;
@@ -452,14 +487,14 @@
     }
 
     .hero-badge.badge-gold {
-      background: rgba(37, 99, 235, 0.18);
-      border: 1px solid rgba(37, 99, 235, 0.45);
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.45);
       color: var(--gold-300);
     }
 
     .hero-badge.badge-maroon {
       background: rgba(163, 20, 68, 0.3);
-      border: 1px solid rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.25);
       color: #FECDD3;
     }
 
@@ -522,7 +557,7 @@
     }
 
     .preset-pill:hover {
-      background: rgba(37, 99, 235, 0.22);
+      background: rgba(212, 175, 55, 0.22);
       border-color: var(--gold-500);
       color: var(--gold-300);
       transform: translateY(-1px);
@@ -532,7 +567,7 @@
       background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%);
       color: var(--qm-900);
       border-color: var(--gold-400);
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
       font-weight: 700;
     }
 
@@ -569,7 +604,7 @@
 
     .kpi-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(37, 99, 235, 0.35);
+      border-color: rgba(212, 175, 55, 0.35);
       box-shadow: var(--shadow-md);
     }
 
@@ -652,9 +687,9 @@
     }
 
     .status-gold {
-      background: rgba(37, 99, 235, 0.15);
+      background: rgba(212, 175, 55, 0.15);
       color: var(--gold-400);
-      border: 1px solid rgba(37, 99, 235, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.35);
     }
 
     /* ===== WORKSPACE GRID ===== */
@@ -781,7 +816,7 @@
     }
 
     .btn-step:hover {
-      background: rgba(37, 99, 235, 0.2);
+      background: rgba(212, 175, 55, 0.2);
       border-color: var(--gold-500);
       color: var(--gold-300);
     }
@@ -801,7 +836,7 @@
       cursor: pointer;
     }
 
-    input[type="range"] {
+    [] input[type="range"] {
       background: #CBD5E1;
     }
 
@@ -813,7 +848,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.5);
       border: 2px solid #FFFFFF;
       transition: transform 0.15s ease;
     }
@@ -967,14 +1002,14 @@
 
     .wf-divider {
       height: 2px;
-      background: linear-gradient(90deg, rgba(37, 99, 235, 0.2), var(--profit), rgba(37, 99, 235, 0.2));
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), var(--profit), rgba(212, 175, 55, 0.2));
       margin: 6px 0;
     }
 
     /* Dynamic Insights Box */
     .insights-box {
       background: linear-gradient(135deg, rgba(127, 15, 53, 0.16) 0%, rgba(17, 23, 38, 0.6) 100%);
-      border: 1px solid rgba(37, 99, 235, 0.3);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       border-radius: var(--r-md);
       padding: 16px 20px;
       margin-top: 16px;
@@ -1134,7 +1169,7 @@
       outline-offset: 2px;
       font-weight: 900;
       transform: scale(1.03);
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
     }
 
     /* ===== ENTERPRISE FOUNDER PITCH SUITE ===== */
@@ -1145,7 +1180,7 @@
     }
 
     .pitch-hero-card {
-      background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #2563EB 100%);
+      background: linear-gradient(135deg, rgba(84, 10, 35, 0.92) 0%, rgba(17, 23, 38, 0.96) 100%);
       border: 2px solid var(--gold-500);
       border-radius: var(--r-xl);
       padding: 32px 36px;
@@ -1185,7 +1220,7 @@
 
     .pitch-pillar-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(37, 99, 235, 0.4);
+      border-color: rgba(212, 175, 55, 0.4);
       box-shadow: var(--shadow-md);
     }
 
@@ -1194,7 +1229,7 @@
       height: 44px;
       border-radius: 12px;
       background: rgba(127, 15, 53, 0.25);
-      border: 1px solid rgba(37, 99, 235, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1487,6 +1522,9 @@
         background: #FFFFFF !important;
         color: #000000 !important;
       }
+      .app-header, .app-nav-bar, .ambient-bg, .presets-bar, .controls-panel, .theme-toggle-btn, .btn-header-act, .toast, .mobile-floating-ticker {
+        display: none !important;
+      }
       .sim-workspace {
         grid-template-columns: 1fr !important;
       }
@@ -1564,7 +1602,7 @@
       text-align: left;
     }
 
-    .tooltip-box {
+    [] .tooltip-box {
       background: #FFFFFF;
       border: 1px solid #BFDBFE;
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
@@ -1590,7 +1628,7 @@
       gap: 5px;
     }
 
-    .tooltip-title {
+    [] .tooltip-title {
       color: #1D4ED8;
     }
 
@@ -1711,9 +1749,401 @@
       color: var(--text-main);
     }
     
+
+    /* ===== EXECUTIVE HIGH-CONTRAST READABILITY SYSTEM ===== */
+    :root {
+      --bg-canvas: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --bg-input: #F1F5F9;
+      --border-subtle: #E2E8F0;
+      --border-focus: #2563EB;
+      --border-blue: rgba(37, 99, 235, 0.25);
+      --border-gold: rgba(37, 99, 235, 0.35);
+
+      --qm-900: #1E3A8A;
+      --qm-800: #1E40AF;
+      --qm-700: #1D4ED8;
+      --qm-600: #2563EB;
+      --qm-500: #3B82F6;
+
+      --blue-950: #0F172A;
+      --blue-900: #1E3A8A;
+      --blue-800: #1E40AF;
+      --blue-700: #1D4ED8;
+      --blue-600: #2563EB;
+      --blue-500: #3B82F6;
+
+      --gold-600: #1D4ED8;
+      --gold-500: #2563EB;
+      --gold-400: #1E40AF;
+      --gold-300: #1E3A8A;
+
+      --profit: #059669;
+      --profit-light: #D1FAE5;
+      --loss: #DC2626;
+      --loss-light: #FEE2E2;
+
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-inverse: #FFFFFF;
+    }
+
+    body {
+      color: #0F172A !important;
+      background-color: #F8FAFC !important;
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #0F172A !important;
+    }
+
+    /* Top Quick Settings Bar */
+    .quick-settings-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: var(--r-lg);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .qs-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .qs-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #1E3A8A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qs-label-comp {
+      color: #0369A1;
+    }
+
+    .qs-divider {
+      width: 1px;
+      height: 28px;
+      background: #CBD5E1;
+    }
+
+    /* Preset Pills */
+    .preset-pill {
+      background: #F1F5F9;
+      border: 1.5px solid #CBD5E1;
+      color: #1E293B;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .preset-pill:hover {
+      background: #EFF6FF;
+      border-color: #3B82F6;
+      color: #1D4ED8;
+      transform: translateY(-1px);
+    }
+
+    .preset-pill.active {
+      background: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      border-color: #1E40AF !important;
+      box-shadow: 0 2px 10px rgba(29, 78, 216, 0.35) !important;
+      font-weight: 800 !important;
+    }
+
+    .preset-pill-talabat.active {
+      background: #EA580C !important;
+      border-color: #C2410C !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(234, 88, 12, 0.35) !important;
+    }
+
+    .preset-pill-snoonu.active {
+      background: #CA8A04 !important;
+      border-color: #A16207 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(202, 138, 4, 0.35) !important;
+    }
+
+    .preset-pill-keeta.active {
+      background: #0284C7 !important;
+      border-color: #0369A1 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35) !important;
+    }
+
+    /* Control & Scaler Cards */
+    .control-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .control-card-title h3 {
+      color: #0F172A !important;
+      font-size: 1.15rem !important;
+      font-weight: 800 !important;
+    }
+
+    .slider-label {
+      color: #1E293B !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+    }
+
+    .slider-val-badge {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      border-radius: 8px !important;
+      padding: 3px 10px !important;
+    }
+
+    .btn-step {
+      background: #F1F5F9 !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      font-weight: 800 !important;
+    }
+
+    .btn-step:hover {
+      background: #DBEAFE !important;
+      border-color: #93C5FD !important;
+      color: #1D4ED8 !important;
+    }
+
+    /* KPI Cards */
+    .kpi-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .kpi-title {
+      color: #475569 !important;
+      font-weight: 800 !important;
+      font-size: 0.78rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    .kpi-val {
+      font-size: 1.85rem !important;
+      font-weight: 900 !important;
+      color: #0F172A !important;
+    }
+
+    .highlight-profit .kpi-val {
+      color: #059669 !important;
+    }
+
+    .highlight-gold .kpi-val {
+      color: #1D4ED8 !important;
+    }
+
+    .highlight-maroon .kpi-val {
+      color: #059669 !important;
+    }
+
+    .highlight-blue .kpi-val {
+      color: #0284C7 !important;
+    }
+
+    .kpi-sub {
+      color: #475569 !important;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* Status Badges */
+    .status-positive {
+      background: #DCFCE7 !important;
+      color: #065F46 !important;
+      border: 1px solid #86EFAC !important;
+      font-weight: 800 !important;
+    }
+
+    .status-negative {
+      background: #FEE2E2 !important;
+      color: #991B1B !important;
+      border: 1px solid #FCA5A5 !important;
+      font-weight: 800 !important;
+    }
+
+    .status-gold {
+      background: #DBEAFE !important;
+      color: #1E40AF !important;
+      border: 1px solid #93C5FD !important;
+      font-weight: 800 !important;
+    }
+
+    /* Waterfall Stack Readability */
+    .ue-waterfall-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .wf-label {
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+    }
+
+    .wf-label.is-rev {
+      color: #1E3A8A !important;
+    }
+
+    .wf-label.is-cost {
+      color: #991B1B !important;
+    }
+
+    .wf-label.is-net {
+      color: #065F46 !important;
+      font-weight: 800 !important;
+    }
+
+    .wf-val {
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+    }
+
+    .wf-val.is-rev {
+      color: #1E3A8A !important;
+    }
+
+    .wf-val.is-cost {
+      color: #991B1B !important;
+    }
+
+    .wf-val.is-net {
+      color: #065F46 !important;
+    }
+
+    /* Tooltip Readability */
+    .tooltip-icon {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #2563EB !important;
+      font-weight: 800 !important;
+    }
+
+    .tooltip-box {
+      background: #FFFFFF !important;
+      border: 1.5px solid #93C5FD !important;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15) !important;
+      color: #1E293B !important;
+    }
+
+    .tooltip-title {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.85rem !important;
+    }
+
+    .tooltip-desc {
+      color: #334155 !important;
+      font-size: 0.8rem !important;
+      line-height: 1.55 !important;
+    }
+
+    /* Chart Boxes */
+    .chart-box {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .chart-box-header h4 {
+      color: #0F172A !important;
+      font-weight: 800 !important;
+    }
+
+    .control-tag {
+      background: #EFF6FF !important;
+      color: #1D4ED8 !important;
+      border: 1px solid #BFDBFE !important;
+      font-weight: 700 !important;
+    }
+
+    /* Insights Box */
+    .insights-box {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1E293B !important;
+    }
+
+    .insights-box h4 {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+    }
+
+    .insights-box p {
+      color: #334155 !important;
+      font-size: 0.88rem !important;
+      line-height: 1.6 !important;
+    }
+
+    .insights-box strong {
+      color: #0F172A !important;
+    }
+
+    /* Mobile Floating Ticker */
+    .mobile-floating-ticker {
+      background: #FFFFFF !important;
+      border-top: 2px solid #CBD5E1 !important;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .ticker-lbl {
+      color: #64748B !important;
+      font-weight: 700 !important;
+      font-size: 0.72rem !important;
+    }
+
+    .ticker-val {
+      color: #0F172A !important;
+      font-weight: 900 !important;
+      font-size: 1.15rem !important;
+    }
+
+    #ticker-margin {
+      color: #059669 !important;
+    }
+
+    #ticker-ebitda {
+      color: #1D4ED8 !important;
+    }
+
   </style>
 </head>
-
 <body>
   <!-- Ambient Gradients -->
   <div class="ambient-bg">
@@ -1747,84 +2177,43 @@
         <button class="btn-header-act btn-gold-action" onclick="window.print()" title="Print or Save as PDF Report">
           <span>&#128438;&#65039;</span> Export Report
         </button>
+        <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Theme">
           &#127763;
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile App Navigation Tabs (Segmented Control) -->
-  <nav class="app-nav-bar">
-    <div class="app-nav-in">
-      <button class="app-tab-btn active" onclick="switchAppTab(event, 'view-simulator')">
-        <span>&#127915;</span> Simulator &amp; Waterfall
-      </button>
-      <button class="app-tab-btn" onclick="switchAppTab(event, 'view-analytics')">
-        <span>&#128202;</span> 5-Chart Analytics Suite
-      </button>
-      <button class="app-tab-btn" onclick="switchAppTab(event, 'view-stress')">
-        <span>&#129518;</span> 2D Sensitivity Matrix
-      </button>
-      <button class="app-tab-btn" onclick="switchAppTab(event, 'view-pitch')">
-        <span>&#128188;</span> Founder &amp; Investor Pitch
-      </button>
-    </div>
-  </nav>
 
-  <!-- Main Container -->
   <main class="container">
 
-    <!-- Global Hero Header with Presets (Shared across views) -->
-    <section class="simulator-hero">
-      <div class="hero-top-row">
-        <div>
-          <h1>Live Delivery Economics Simulator</h1>
-        </div>
+    <!-- Quick Scenario Levers & Competitor Benchmarks (Clean Strip) -->
+    <div class="quick-settings-strip">
+      <div class="qs-group">
+        <span class="qs-label">&#9889; Model Presets:</span>
+        <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Scale (18,500 daily orders, 14.5% commission)">
+          <span>&#127919;</span> Yr 3 (Base Plan)
+        </button>
+        <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="Year 1 Launch Phase (3,200 daily orders, 12.5% commission)">
+          <span>&#128640;</span> Yr 1 (Launch)
+        </button>
       </div>
 
-      <!-- 1-Click Interactive Scenarios & Competitor Benchmarks (Item 8) -->
-      <div class="presets-bar">
-        <div class="presets-group">
-          <span class="presets-label"><span>&#9889;</span> DeliverQ Scenarios:</span>
-          <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')">
-            <span>&#127919;</span> DeliverQ Base (Yr 3)
-          </button>
-          <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')">
-            <span>&#128640;</span> Yr 1 Launch
-          </button>
-          <button class="preset-pill" id="preset-dining" onclick="loadPreset('dining')">
-            <span>&#127869;&#65039;</span> Premium Dining
-          </button>
-          <button class="preset-pill" id="preset-grocery" onclick="loadPreset('grocery')">
-            <span>&#128722;</span> Fast Q-Commerce
-          </button>
-          <button class="preset-pill" id="preset-pricewar" onclick="loadPreset('pricewar')">
-            <span>&#9876;&#65039;</span> Zero-Fee War
-          </button>
-        </div>
-        <div class="presets-divider"></div>
-        <div class="presets-group">
-          <span class="presets-label presets-competitor-label"><span>&#128065;&#65039;</span> Competitor Quick Settings:</span>
-          <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Load Talabat Qatar 41.5% market share economics">
-            <span class="preset-brand-dot dot-talabat"></span> Talabat Qatar (41.5% Share)
-          </button>
-          <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Load Snoonu Qatar 31.8% market share economics">
-            <span class="preset-brand-dot dot-snoonu"></span> Snoonu Qatar (31.8% Share)
-          </button>
-          <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Load Keeta / Meituan Qatar scale-up economics">
-            <span class="preset-brand-dot dot-keeta"></span> Keeta Qatar (Meituan Scale)
-          </button>
-        </div>
+      <div class="qs-divider"></div>
+
+      <div class="qs-group">
+        <span class="qs-label qs-label-comp">&#128065;&#65039; Competitor Quick Settings:</span>
+        <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Load Talabat Qatar 41.5% market share economics">
+          <span class="preset-brand-dot dot-talabat"></span> Talabat Qatar (41.5% Share)
+        </button>
+        <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Load Snoonu Qatar 31.8% market share economics">
+          <span class="preset-brand-dot dot-snoonu"></span> Snoonu Qatar (31.8% Share)
+        </button>
+        <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Load Keeta / Meituan Qatar scale-up economics">
+          <span class="preset-brand-dot dot-keeta"></span> Keeta Qatar (Meituan Scale)
+        </button>
       </div>
-    </section>
-
-    
-
-        <!-- ========================================================================= -->
-    <!-- VIEW 1: SIMULATOR & WATERFALL WORKSPACE -->
-    <!-- ========================================================================= -->
-    <div id="view-simulator" class="app-view active">
-
+    </div>
       <!-- STEP 1: SIMULATOR SCALERS (Brought First per Request) -->
       <section class="simulator-scalers-deck">
           <!-- Panel 1: Revenue Levers -->
@@ -2088,7 +2477,6 @@
             </div>
           </div>
       </section>
-
       <!-- STEP 2: CHART BOX & KPI RESULTS (Net Margin, Monthly Gross Profit, EBITDA, and Charts) -->
       <section class="results-analytics-section">
         <div class="results-deck-title">
@@ -2172,72 +2560,72 @@
     <!-- Enterprise Valuation & Financial Efficiency Lab (Simulate & Value) -->
     <div class="valuation-efficiency-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 18px 0 24px;">
       <!-- Card A: Live Enterprise Valuation Engine -->
-      <div class="card" style="background:#FFFFFF; border: 1.5px solid var(--border-blue); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--shadow-sm); position:relative; overflow:hidden;">
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid #CBD5E1; border-radius: var(--r-lg); padding: 22px 24px; box-shadow: 0 2px 10px rgba(15,23,42,0.05); position:relative; overflow:hidden;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
           <div>
-            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:var(--blue-600);">Valuation Simulator</div>
-            <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin-top:2px; font-family:var(--font-display);">&#128142; Implied Enterprise Value (EV)</h3>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:#1D4ED8;">Valuation Simulator</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:#0F172A; margin-top:2px; font-family:var(--font-display);">&#128142; Implied Enterprise Value (EV)</h3>
           </div>
-          <span class="app-badge-pro" id="val-method-badge" style="background:rgba(37,99,235,0.1); color:var(--blue-700); border:1px solid rgba(37,99,235,0.3); font-weight:700; font-size:0.75rem; padding:4px 10px; border-radius:12px;">14.0x EBITDA</span>
+          <span class="app-badge-pro" id="val-method-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:12px;">14.0x EBITDA</span>
         </div>
 
         <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:12px;">
-          <div style="font-size:2.1rem; font-weight:800; color:var(--blue-700); font-family:var(--font-display);" id="val-ev-qar">QAR 285.4M</div>
-          <div style="font-size:1.05rem; font-weight:600; color:var(--text-muted);" id="val-ev-usd">($78.4M USD)</div>
+          <div style="font-size:2.1rem; font-weight:900; color:#1E3A8A; font-family:var(--font-display);" id="val-ev-qar">QAR 285.4M</div>
+          <div style="font-size:1.05rem; font-weight:700; color:#64748B;" id="val-ev-usd">($78.4M USD)</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:var(--bg-surface-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle); margin-bottom:12px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:#F8FAFC; border-radius:var(--r-md); border:1px solid #E2E8F0; margin-bottom:12px;">
           <div>
-            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">ARR Run-Rate Multiple</div>
-            <div style="font-size:1rem; font-weight:700; color:var(--text-main); font-family:var(--font-display);" id="val-arr-mult">4.8x Net Revenue</div>
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">ARR Run-Rate Multiple</div>
+            <div style="font-size:1rem; font-weight:800; color:#0F172A; font-family:var(--font-display);" id="val-arr-mult">4.8x Net Revenue</div>
           </div>
           <div>
-            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">EV / Daily Active Order</div>
-            <div style="font-size:1rem; font-weight:700; color:var(--text-main); font-family:var(--font-display);" id="val-per-order">QAR 15,420 / drop</div>
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">EV / Daily Active Order</div>
+            <div style="font-size:1rem; font-weight:800; color:#0F172A; font-family:var(--font-display);" id="val-per-order">QAR 15,420 / drop</div>
           </div>
         </div>
 
-        <div style="font-size:0.78rem; color:var(--text-secondary); line-height:1.5;">
-          <span style="color:var(--profit); font-weight:700;">&#10003; Investment Insight:</span> Live post-money valuation benchmarks against comparable GCC on-demand exits (HungerStation at $297M, Jahez at $2.4B peak market cap).
+        <div style="font-size:0.78rem; color:#334155; line-height:1.5;">
+          <strong style="color:#059669;">&#10003; Investment Insight:</strong> Live post-money valuation benchmarks against comparable GCC on-demand exits (HungerStation at $297M, Jahez at $2.4B peak market cap).
         </div>
       </div>
 
       <!-- Card B: Financial Efficiency & Capital Float Planning -->
-      <div class="card" style="background:#FFFFFF; border: 1.5px solid var(--border-blue); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid #CBD5E1; border-radius: var(--r-lg); padding: 22px 24px; box-shadow: 0 2px 10px rgba(15,23,42,0.05);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
           <div>
-            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:var(--profit);">Capital Efficiency Levers</div>
-            <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin-top:2px; font-family:var(--font-display);">&#9889; Working Capital &amp; Unit Payback</h3>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:#059669;">Capital Efficiency Levers</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:#0F172A; margin-top:2px; font-family:var(--font-display);">&#9889; Working Capital &amp; Unit Payback</h3>
           </div>
-          <span class="app-badge-pro" style="background:rgba(16,185,129,0.1); color:var(--profit); border:1px solid rgba(16,185,129,0.3); font-weight:700; font-size:0.75rem; padding:4px 10px; border-radius:12px;">Capital Light</span>
+          <span class="app-badge-pro" style="background:#DCFCE7; color:#065F46; border:1px solid #86EFAC; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:12px;">Capital Light</span>
         </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
-          <div style="background:var(--bg-surface-elevated); padding:12px; border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">7-Day Merchant Float</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--profit); font-family:var(--font-display);" id="val-float-qar">QAR 10.16M</div>
-            <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">Interest-free working cash</div>
+          <div style="background:#F8FAFC; padding:12px; border-radius:var(--r-md); border:1px solid #E2E8F0;">
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">7-Day Merchant Float</div>
+            <div style="font-size:1.25rem; font-weight:900; color:#059669; font-family:var(--font-display);" id="val-float-qar">QAR 10.16M</div>
+            <div style="font-size:0.7rem; color:#475569; margin-top:2px;">Interest-free working cash</div>
           </div>
-          <div style="background:var(--bg-surface-elevated); padding:12px; border-radius:var(--r-md); border:1px solid var(--border-subtle);">
-            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">CAC Payback Period</div>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--blue-600); font-family:var(--font-display);" id="val-cac-payback">2.9 Months</div>
-            <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">@ QAR 45 blended CAC</div>
+          <div style="background:#F8FAFC; padding:12px; border-radius:var(--r-md); border:1px solid #E2E8F0;">
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">CAC Payback Period</div>
+            <div style="font-size:1.25rem; font-weight:900; color:#1D4ED8; font-family:var(--font-display);" id="val-cac-payback">2.9 Months</div>
+            <div style="font-size:0.7rem; color:#475569; margin-top:2px;">@ QAR 45 blended CAC</div>
           </div>
         </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
           <div>
-            <span style="font-size:0.75rem; color:var(--text-muted);">24-Mo LTV / CAC Ratio:</span>
-            <strong style="color:var(--text-main); font-size:0.85rem; margin-left:4px;" id="val-ltv-ratio">5.4x (Healthy &gt; 3.0x)</strong>
+            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">24-Mo LTV / CAC:</span>
+            <strong style="color:#0F172A; font-size:0.85rem; margin-left:4px;" id="val-ltv-ratio">5.4x (Healthy &gt; 3.0x)</strong>
           </div>
           <div>
-            <span style="font-size:0.75rem; color:var(--text-muted);">Batching EBITDA Lift:</span>
-            <strong style="color:var(--text-main); font-size:0.85rem; margin-left:4px;" id="val-batch-lift">+QAR 840K / yr</strong>
+            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">Batching EBITDA Lift:</span>
+            <strong style="color:#0F172A; font-size:0.85rem; margin-left:4px;" id="val-batch-lift">+QAR 840K / yr</strong>
           </div>
         </div>
 
-        <div style="font-size:0.78rem; color:var(--text-secondary); line-height:1.5;">
-          <span style="color:var(--blue-600); font-weight:700;">&#9889; Strategic Planning:</span> Merchant payout float eliminates short-term debt requirements, while high AOV and take-rate yield a top-decile 2.9 month payback.
+        <div style="display:grid; grid-template-columns: 0.78rem; color:#334155; line-height:1.5;">
+          <strong style="color:#1D4ED8;">&#9889; Strategic Planning:</strong> Merchant payout float eliminates short-term debt requirements, while high AOV and take-rate yield a top-decile 2.9 month payback.
         </div>
       </div>
     </div>
@@ -2380,228 +2768,9 @@
         </div>
       </section>
     </div>
-    <!-- ========================================================================= -->
-    <!-- VIEW 2: 5-CHART VISUAL ANALYTICS SUITE -->
-    <!-- ========================================================================= -->
-    <div id="view-analytics" class="app-view">
-      <div style="margin-bottom: 20px;">
-        <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Visual Analytics &amp; Strategic Sizing Suite</h3>
-        <p style="color: var(--text-secondary); font-size: 0.9rem;">
-          Deep graphical modeling of DeliverQ's unit margins, operational break-even crossover, 5-year growth trajectory, and competitive benchmarking.
-        </p>
-      </div>
 
-      <div class="charts-grid-duo" style="margin-bottom: 20px;">
-        <div class="chart-box">
-          <div class="chart-box-header">
-            <h4><span>&#128200;</span> 5-Year Pro-Forma Trajectory (2026&ndash;2030)</h4>
-            <span class="control-tag">GMV vs Revenue vs EBITDA</span>
-          </div>
-          <div class="chart-wrapper">
-            <canvas id="chartProForma"></canvas>
-          </div>
-        </div>
 
-        <div class="chart-box">
-          <div class="chart-box-header">
-            <h4><span>&#9876;&#65039;</span> Competitor Take-Rate vs. Net Margin Benchmark</h4>
-            <span class="control-tag">DeliverQ vs Qatar Incumbents</span>
-          </div>
-          <div class="chart-wrapper">
-            <canvas id="chartCompetitorBenchmark"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <div class="charts-grid-duo">
-        <div class="chart-box">
-          <div class="chart-box-header">
-            <h4><span>&#128202;</span> Revenue Stream Diversification / Order</h4>
-            <span class="control-tag">Mix (%)</span>
-          </div>
-          <div class="chart-wrapper">
-            <canvas id="chartRevenueMix"></canvas>
-          </div>
-        </div>
-
-        <div class="chart-box">
-          <div class="chart-box-header">
-            <h4><span>&#128337;</span> Monthly EBITDA Sensitivity to Daily Order Volume</h4>
-            <span class="control-tag">Run-Rate Scale</span>
-          </div>
-          <div class="chart-wrapper">
-            <canvas id="chartEbitdaSensitivity"></canvas>
-          </div>
-        </div>
-      
-      <!-- Chart 5: Customer LTV, CAC Payback & Valuation Expansion -->
-      <div class="chart-box" style="margin-top: 20px;">
-        <div class="chart-box-header">
-          <h4><span>&#128185;</span> Customer Lifetime Value (LTV) vs. CAC Payback &amp; Valuation Expansion</h4>
-          <span class="control-tag">Unit Economics Scaling &amp; EV Trajectory (Years 1&ndash;5)</span>
-        </div>
-        <div class="chart-wrapper" style="height: 280px;">
-          <canvas id="chartLtvValuation"></canvas>
-        </div>
-      </div>
-</div>
-
-    <!-- ========================================================================= -->
-    <!-- VIEW 3: 2D SENSITIVITY STRESS-TEST MATRIX -->
-    <!-- ========================================================================= -->
-    <div id="view-stress" class="app-view">
-      <section class="sensitivity-card">
-        <div class="card-top-header">
-          <div class="card-title-group">
-            <h3><span>&#129518;</span> 2D Sensitivity Matrix: Monthly EBITDA (QAR)</h3>
-            <p>Stress-test platform profitability across merchant take-rates vs. daily delivery volumes</p>
-          </div>
-          <span class="hero-badge badge-gold">Live Stress Matrix</span>
-        </div>
-
-        <div class="table-responsive">
-          <table class="sens-table" id="sensTable">
-            <thead>
-              <tr>
-                <th class="col-header-corner">Commission &#8595; | Orders &#8594;</th>
-                <th>5,000 / day</th>
-                <th>10,000 / day</th>
-                <th>18,500 / day (Base)</th>
-                <th>28,500 / day</th>
-                <th>40,000 / day</th>
-              </tr>
-            </thead>
-            <tbody id="sensTableBody">
-              <!-- Dynamically generated by JS -->
-            </tbody>
-          </table>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:16px; margin-top:16px; flex-wrap:wrap; font-size:0.78rem;">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <div style="width:14px; height:14px; border-radius:4px; background:rgba(244,63,94,0.3); border:1px solid var(--loss);"></div>
-            <span style="color:var(--text-secondary);">Operating Loss (&gt; -QAR 500K)</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <div style="width:14px; height:14px; border-radius:4px; background:rgba(245,158,11,0.3); border:1px solid var(--amber);"></div>
-            <span style="color:var(--text-secondary);">Near Break-Even</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <div style="width:14px; height:14px; border-radius:4px; background:rgba(16,185,129,0.3); border:1px solid var(--profit);"></div>
-            <span style="color:var(--text-secondary);">Profitable Run-Rate</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <div style="width:14px; height:14px; border-radius:4px; background:rgba(16,185,129,0.5); border:1px solid #34D399;"></div>
-            <span style="color:var(--text-secondary);">High Cash Cow (&gt; QAR 1.5M/mo)</span>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ========================================================================= -->
-    <!-- VIEW 4: ENTERPRISE FOUNDER & INVESTOR PITCH SUITE -->
-    <!-- ========================================================================= -->
-    <div id="view-pitch" class="app-view">
-      <div class="pitch-container">
-
-        <!-- Executive Memo Header -->
-        <div class="pitch-hero-card">
-          <div class="hero-meta-badges">
-            <span class="hero-badge badge-gold">&#128188; Institutional Investment Memo</span>
-            <span class="hero-badge badge-green">Series A Thesis</span>
-            <span class="hero-badge badge-maroon">Doha, Qatar</span>
-          </div>
-          <h2>Why DeliverQ Dominates Qatar: The 5 Strategic Moats</h2>
-          <p class="pitch-lead">
-            Qatar is the world's most concentrated, high-AOV on-demand economy (QAR 78.50 average basket size, 99.4% urbanization, 88% expat density). By solving the 50&deg;C summer midday bike ban and introducing MoCI-compliant 12&ndash;16% fair commissions, DeliverQ unlocks unmatched merchant retention and structural profitability.
-          </p>
-        </div>
-
-        <!-- The 5 Strategic Pillars Grid -->
-        <div class="pitch-pillars-grid">
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#127978;</div>
-            <h3>1. MoCI Fair-Play Arbitrage</h3>
-            <p>
-              April 2026 Ministry of Commerce &amp; Industry pricing regulations penalize monopolistic 28%&ndash;32% commissions charged by Talabat and Deliveroo. DeliverQ's transparent <strong>12%&ndash;16% tiered commission</strong> provides immediate margin relief, locking in Qatar's top 500 F&amp;B and luxury retail brands.
-            </p>
-          </div>
-
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#9728;&#65039;</div>
-            <h3>2. Summer Climate Dual-Fleet</h3>
-            <p>
-              Qatar Ministry of Labour enforces an outdoor bike delivery ban between <strong>10:00 AM &ndash; 3:30 PM (June 1 &ndash; Sept 15)</strong>. While competitors suffer 50+ min delivery delays and heat penalties, DeliverQ seamlessly deploys air-conditioned mini-EV vans, maintaining an industry-leading <strong>28-minute SLA</strong>.
-            </p>
-          </div>
-
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#128176;</div>
-            <h3>3. World's Highest Delivery AOV</h3>
-            <p>
-              At <strong>QAR 78.50 per order</strong>, Qatar residents generate <strong>QAR 18.98 in gross platform take</strong> per drop. This allows DeliverQ to pay drivers premium WPS-compliant rates (QAR 9.60) while maintaining an exceptional <strong>+QAR 4.43 net contribution margin (23.3%)</strong>.
-            </p>
-          </div>
-
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#128250;</div>
-            <h3>4. High-Margin Retail Ad Network</h3>
-            <p>
-              DeliverQ Media Network monetizes search placements, sponsored dishes, and FMCG brand banners at <strong>80%+ gross margin</strong>. Adding QAR 1.10&ndash;2.20 in pure tech yield per order significantly reduces break-even volume to 11,400 orders/day.
-            </p>
-          </div>
-
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#128737;&#65039;</div>
-            <h3>5. SafeDrop™ Micro-Insurance</h3>
-            <p>
-              Embedded transit insurance for luxury perfumes, electronics, and catering protects merchants against heat spoilage and transit damage. QAR 0.40 pool reserve per drop creates a proprietary trust layer that legacy apps lack.
-            </p>
-          </div>
-
-          <div class="pitch-pillar-card">
-            <div class="pillar-icon-badge">&#128640;</div>
-            <h3>6. Disciplined Path to Break-Even</h3>
-            <p>
-              Operational break-even achieved at <strong>Month 22 (11,400 orders/day)</strong>. By Year 5 (2030), DeliverQ captures <strong>14.0% market share (42,000 orders/day)</strong>, generating <strong>QAR 1.002 Billion GMV</strong> and <strong>QAR 37.10 Million Net Profit</strong>.
-            </p>
-          </div>
-        </div>
-
-        <!-- Term Sheet & Capital Structure -->
-        <div class="term-sheet-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-            <div>
-              <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-main);">Capital Plan &amp; Round Structure (QAR 18.5M Total)</h3>
-              <p style="color:var(--text-secondary); font-size:0.85rem;">Funded in two tranches with full transparency into operational burn and milestones</p>
-            </div>
-            <button class="btn-header-act btn-gold-action" onclick="copySummary()">
-              <span>&#128203;</span> Copy Pitch Summary
-            </button>
-          </div>
-
-          <div class="term-grid">
-            <div class="round-box">
-              <h4><span>Seed Round (Closed)</span> <span class="app-badge-pro">Milestone 1</span></h4>
-              <div class="amount">QAR 6.50M <span style="font-size:0.85rem; color:var(--text-secondary); font-weight:500;">($1.79M USD)</span></div>
-              <p>
-                <strong>Allocation:</strong> Full tech platform build (iOS/Android/Merchant KDS), initial fleet of 120 climate-adaptive EV bikes and mini-vans, MoCI &amp; MOT regulatory licensing, commercial launch in West Bay, Lusail, and The Pearl. Scaled to 3,200 daily orders.
-              </p>
-            </div>
-
-            <div class="round-box">
-              <h4><span>Series A (Active / Open)</span> <span class="app-badge-pro">Growth Round</span></h4>
-              <div class="amount">QAR 12.00M <span style="font-size:0.85rem; color:var(--text-secondary); font-weight:500;">($3.30M USD)</span></div>
-              <p>
-                <strong>Allocation:</strong> Cross the Month 22 break-even threshold (11,400 daily orders), deploy 6 hyper-local micro-fulfillment dark stores across Al Rayyan and Al Wakrah, scale fleet to 450 vehicles, and initiate DeliverQ Media retail advertising network.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
+  </main>
     <!-- Footer -->
     <footer class="sim-footer">
       <div>
@@ -2718,10 +2887,24 @@
 
     // Theme Management
     function initTheme() {
+      var saved = localStorage.getItem('deliverq_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
       updateThemeButton(saved);
     }
 
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('deliverq_theme', next);
+      updateThemeButton(next);
+      runSimulation();
+    }
 
+    function updateThemeButton(theme) {
+      var btn = document.getElementById('themeToggle');
+      if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127763;';
+    }
 
     // App Navigation Tab Switcher
     function switchAppTab(e, viewId) {
@@ -2947,13 +3130,11 @@
       var impliedEV = 0;
       var valMethod = '';
       if (monthlyEbitda > 0) {
-        // Blended: 14x forward EBITDA + 4.8x Net Revenue
         var evEbitda = annEbitda * 13.5;
         var evRev = annNetRev * 4.6;
         impliedEV = (evEbitda * 0.6) + (evRev * 0.4);
         valMethod = (impliedEV / annEbitda).toFixed(1) + 'x EBITDA';
       } else {
-        // Growth-stage Net Revenue multiple: 3.2x Net Revenue
         impliedEV = Math.max(15000000, annNetRev * 3.2);
         valMethod = '3.2x Net ARR';
       }
@@ -3007,7 +3188,7 @@
       renderSimulatorCharts(fx, netContr, ord, adjRider, adjFuel, gw, adjIns);
 
       // 9. Update 2D Sensitivity Matrix
-      renderSensitivityMatrix(aov, fee, ad, rider, fuel, batch, ins, fx, cr, ord);
+      // 2D sensitivity matrix removed
     }
 
     function updateBar(barId, valId, text, val, maxScale) {
@@ -3043,8 +3224,8 @@
     // Simulator Tab Charts (Break-Even & Cost Donut)
     function renderSimulatorCharts(fx, netContr, curOrd, rider, fuel, gw, ins) {
       var isDark = false;
-      var textClr = isDark ? '#94A3B8' : '#475569';
-      var gridClr = isDark ? 'rgba(255, 255, 255, 0.06)' : '#E2E8F0';
+      var textClr = '#1E293B';
+      var gridClr = '#E2E8F0';
       var fontFamily = "'Outfit', sans-serif";
 
       // Chart 1: Break Even Curve
@@ -3153,8 +3334,8 @@
     // Analytics Tab 4 Additional Rich Charts
     function renderAnalyticsCharts() {
       var isDark = false;
-      var textClr = isDark ? '#94A3B8' : '#475569';
-      var gridClr = isDark ? 'rgba(255, 255, 255, 0.06)' : '#E2E8F0';
+      var textClr = '#1E293B';
+      var gridClr = '#E2E8F0';
       var fontFamily = "'Outfit', sans-serif";
 
       // Chart 3: 5-Year Pro-Forma Trajectory (2026-2030)
@@ -3336,83 +3517,6 @@
             scales: {
               x: { title: { display: true, text: 'Daily Orders', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } },
               y: { title: { display: true, text: 'QAR Millions / Month', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } }
-            }
-          }
-        });
-      }
-
-      // Chart 5: Customer LTV vs CAC Payback & Valuation Expansion (2026-2030)
-      var ctxLTV = document.getElementById('chartLtvValuation');
-      if (ctxLTV) {
-        if (window.chartLTV) window.chartLTV.destroy();
-        window.chartLTV = new Chart(ctxLTV.getContext('2d'), {
-          type: 'line',
-          data: {
-            labels: ['Year 1 (2026)', 'Year 2 (2027)', 'Year 3 (2028)', 'Year 4 (2029)', 'Year 5 (2030)'],
-            datasets: [
-              {
-                label: '24-Month Customer LTV (QAR)',
-                data: [185, 290, 385, 460, 525],
-                borderColor: '#10B981',
-                backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.35,
-                yAxisID: 'y'
-              },
-              {
-                label: 'Blended CAC (QAR)',
-                data: [68, 55, 45, 40, 38],
-                borderColor: '#EF4444',
-                borderDash: [5, 5],
-                borderWidth: 2,
-                pointRadius: 4,
-                tension: 0.2,
-                yAxisID: 'y'
-              },
-              {
-                label: 'Platform Enterprise Valuation (QAR Millions)',
-                data: [35, 95, 245, 480, 780],
-                borderColor: '#2563EB',
-                backgroundColor: 'rgba(37, 99, 235, 0.85)',
-                borderWidth: 2.5,
-                pointRadius: 5,
-                type: 'bar',
-                yAxisID: 'y1'
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: { position: 'top', labels: { color: textClr, font: { family: fontFamily, size: 11, weight: '600' } } },
-              tooltip: {
-                callbacks: {
-                  label: function (ctx) {
-                    if (ctx.dataset.yAxisID === 'y1') {
-                      return ctx.dataset.label + ': QAR ' + ctx.raw + 'M';
-                    }
-                    return ctx.dataset.label + ': QAR ' + ctx.raw;
-                  }
-                }
-              }
-            },
-            scales: {
-              x: { grid: { color: gridClr }, ticks: { color: textClr, font: { family: fontFamily } } },
-              y: {
-                type: 'linear',
-                position: 'left',
-                grid: { color: gridClr },
-                ticks: { color: textClr, font: { family: fontFamily }, callback: function(v){ return 'QAR ' + v; } }
-              },
-              y1: {
-                type: 'linear',
-                position: 'right',
-                grid: { drawOnChartArea: false },
-                ticks: { color: '#2563EB', font: { family: fontFamily }, callback: function(v){ return 'QAR ' + v + 'M'; } }
-              }
             }
           }
         });
