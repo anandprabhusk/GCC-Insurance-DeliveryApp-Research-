@@ -2601,62 +2601,46 @@
         </div>
       </div>
 
-      <!-- Dedicated Live Economics Simulator Suite Promo Card -->
-      <div class="card" style="background: linear-gradient(135deg, #3B0C1E 0%, #5C0E25 35%, #0F172A 100%); border: 2px solid var(--ga); border-radius: 16px; padding: 26px 28px; margin-bottom: 22px; color: #fff; box-shadow: 0 10px 30px rgba(138,21,56,0.3); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-        <div style="max-width: 820px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
-            <span style="background:rgba(212,175,55,0.25); border:1px solid rgba(212,175,55,0.5); color:var(--gl); font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:12px;">NEW DEDICATED SUITE</span>
-            <span style="background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.4); color:#A7F3D0; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:12px;">Interactive Financial Modeling Lab</span>
+      <!-- Dedicated Live Economics Simulator Gateway Hub -->
+      <div class="card card-accent" style="background: linear-gradient(135deg, rgba(92,14,37,0.95) 0%, rgba(59,12,30,0.98) 35%, rgba(15,23,42,0.98) 100%); border: 2px solid var(--ga); border-radius: 18px; padding: 28px 30px; margin-bottom: 24px; color: #fff; box-shadow: 0 12px 36px rgba(138,21,56,0.28);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+          <div style="max-width:820px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+              <span style="background:rgba(212,175,55,0.25); border:1px solid rgba(212,175,55,0.5); color:var(--gl); font-size:0.75rem; font-weight:800; padding:4px 12px; border-radius:14px; letter-spacing:0.04em;">DEDICATED FINANCIAL SUITE</span>
+              <span style="background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.4); color:#A7F3D0; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:14px;">Mobile &amp; Web App Experience</span>
+            </div>
+            <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 8px; font-family: Outfit, sans-serif;">Live Delivery Economics Simulator &amp; Enterprise Modeling Lab</h3>
+            <p style="font-size: 0.94rem; color: rgba(255,255,255,0.85); line-height: 1.65; max-width:780px;">
+              Dynamic multi-variable modeling engine engineered specifically for Qatar's market reality: summer midday bike ban vehicle transitions, April 2026 MoCI fair-play take-rates, batching density multipliers, 2D sensitivity stress-matrices, and 1-click market presets.
+            </p>
           </div>
-          <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; font-family: Outfit, sans-serif;">Looking for Deep-Dive Scenario Modeling &amp; Sensitivity Analysis?</h3>
-          <p style="font-size: 0.92rem; color: rgba(255,255,255,0.85); line-height: 1.6;">
-            Access the dedicated <strong>Live Delivery Economics Simulator</strong> featuring multi-variable unit economics (rider pay, summer van fuel, payment gateway tolls, ad yields), 2D sensitivity stress-matrices, 1-click market presets (Base Yr 3, Early Launch, West Bay Dining, Q-Commerce, Zero-Fee War), and print/PDF export.
-          </p>
+          <a href="simulator.html" class="btn btn-gold" style="font-size:1.02rem; padding:14px 26px; font-weight:800; border-radius:12px; display:inline-flex; align-items:center; gap:10px; text-decoration:none; white-space:nowrap; box-shadow: 0 4px 20px rgba(212,175,55,0.5);">
+            <span>Launch Live Simulator Suite</span>
+            <span style="font-size:1.25rem;">&#8599;</span>
+          </a>
         </div>
-        <a href="simulator.html" class="btn btn-gold" style="font-size:0.95rem; padding:13px 22px; font-weight:800; border-radius:10px; display:inline-flex; align-items:center; gap:8px; text-decoration:none; white-space:nowrap; box-shadow: 0 4px 16px rgba(212,175,55,0.4);">
-          <span>Launch Full Simulator Suite</span>
-          <span style="font-size:1.15rem;">&#8599;</span>
-        </a>
-      </div>
 
-      <!-- Interactive Calculator (Quick Preview) -->
-      <div class="calc-box">
-        <h3>&#9881;&#65039; Live Delivery Economics Simulator</h3>
-        <p>Adjust inputs to model real-time platform economics. All values in QAR.</p>
-        <div class="calc-grid">
-          <div class="calc-grp"><label><span>Average Order Value (AOV)</span><span id="lv-aov" class="cv">QAR
-                78.50</span></label><input type="range" id="sl-aov" min="40" max="180" step="2.5" value="78.5"
-              oninput="updateCalc()"></div>
-          <div class="calc-grp"><label><span>Commission Rate</span><span id="lv-cr"
-                class="cv">14.5%</span></label><input type="range" id="sl-cr" min="10" max="30" step="0.5" value="14.5"
-              oninput="updateCalc()"></div>
-          <div class="calc-grp"><label><span>Customer Delivery Fee</span><span id="lv-fee" class="cv">QAR
-                6.50</span></label><input type="range" id="sl-fee" min="0" max="15" step="0.5" value="6.5"
-              oninput="updateCalc()"></div>
-          <div class="calc-grp"><label><span>Daily Order Volume</span><span id="lv-ord"
-                class="cv">18,500</span></label><input type="range" id="sl-ord" min="1000" max="45000" step="500"
-              value="18500" oninput="updateCalc()"></div>
-        </div>
-        <div class="calc-res">
-          <div class="calc-ri">
-            <div class="cr-lbl">Net Margin / Order</div>
-            <div id="rv-nc" class="cr-val">QAR 4.43</div>
-            <div class="cr-sub">After fleet and gateway</div>
+        <!-- Validated Base Metrics Grid -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12);">
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; text-align:left;">
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">Net Margin / Order</div>
+            <div style="font-size:1.45rem; font-weight:800; color:#10B981; font-family:Outfit,sans-serif;">+QAR 4.43</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin-top:2px;">23.3% Contribution CM2</div>
           </div>
-          <div class="calc-ri">
-            <div class="cr-lbl">Monthly Gross Profit</div>
-            <div id="rv-mg" class="cr-val">QAR 2.46M</div>
-            <div class="cr-sub">30-day run rate</div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; text-align:left;">
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">Monthly Gross Profit</div>
+            <div style="font-size:1.45rem; font-weight:800; color:var(--gl); font-family:Outfit,sans-serif;">QAR 2.46M</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin-top:2px;">@ 18,500 base daily orders</div>
           </div>
-          <div class="calc-ri">
-            <div class="cr-lbl">Monthly EBITDA</div>
-            <div id="rv-eb" class="cr-val">+QAR 940K</div>
-            <div class="cr-sub">Net of HQ overhead</div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; text-align:left;">
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">Monthly EBITDA</div>
+            <div style="font-size:1.45rem; font-weight:800; color:var(--gl); font-family:Outfit,sans-serif;">+QAR 940K</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin-top:2px;">Net of QAR 1.52M HQ OPEX</div>
           </div>
-          <div class="calc-ri">
-            <div class="cr-lbl">Break-Even Volume</div>
-            <div id="rv-be" class="cr-val">11,400/day</div>
-            <div class="cr-sub">Cover QAR 1.52M OPEX</div>
+          <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; text-align:left;">
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.6); text-transform:uppercase; font-weight:700; letter-spacing:0.05em; margin-bottom:4px;">Operational Break-Even</div>
+            <div style="font-size:1.45rem; font-weight:800; color:#38BDF8; font-family:Outfit,sans-serif;">11,400 / day</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.7); margin-top:2px;">Month 22 Target Milestone</div>
           </div>
         </div>
       </div>
@@ -2958,22 +2942,6 @@
       window.scrollTo({ top: 140, behavior: 'smooth' });
       setTimeout(() => initTab(id), 120);
     }
-    function updateCalc() {
-      var aov = +document.getElementById('sl-aov').value, cr = +document.getElementById('sl-cr').value / 100;
-      var fee = +document.getElementById('sl-fee').value, ord = +document.getElementById('sl-ord').value;
-      document.getElementById('lv-aov').textContent = 'QAR ' + aov.toFixed(2);
-      document.getElementById('lv-cr').textContent = (cr * 100).toFixed(1) + '%';
-      document.getElementById('lv-fee').textContent = 'QAR ' + fee.toFixed(2);
-      document.getElementById('lv-ord').textContent = ord.toLocaleString();
-      var rev = aov * cr + fee + 1.10, cost = 12.35 + aov * 0.018, nc = rev - cost, mg = nc * ord * 30, fx = 1520000, eb = mg - fx;
-      var be = nc > 0 ? Math.round(fx / (nc * 30)) : 'n/a';
-      document.getElementById('rv-nc').textContent = 'QAR ' + nc.toFixed(2);
-      document.getElementById('rv-mg').textContent = 'QAR ' + (mg / 1e6).toFixed(2) + ' M';
-      var el = document.getElementById('rv-eb');
-      el.textContent = (eb >= 0 ? '+' : '') + 'QAR ' + Math.abs(Math.round(eb / 1000)).toLocaleString() + ' K';
-      el.style.color = eb >= 0 ? '#D4AF37' : '#F87171';
-      document.getElementById('rv-be').textContent = typeof be === 'number' ? be.toLocaleString() + ' / day' : 'Loss-Making';
-    }
     var CR = {}, done = new Set();
     function mk(id, cfg) {
       var c = document.getElementById(id);
@@ -3026,7 +2994,6 @@
       mk('vCom', { type: 'bar', data: { labels: ['Deliveroo', 'Talabat', 'Snoonu', 'Rafeeq', 'Keeta', 'DeliverQ'], datasets: [{ label: 'Min Commission', data: [25, 22, 18, 16, 12, 12], backgroundColor: 'rgba(225,29,72,.45)', borderRadius: 4 }, { label: 'Max Commission', data: [32, 30, 26, 22, 18, 16], backgroundColor: 'rgba(225,29,72,.85)', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: L }, scales: { y: { title: { display: true, text: 'Commission Rate (%)', font: { family: FF } }, grid: G, max: 38 }, x: { grid: { display: false } } } } });
     }
     document.addEventListener('DOMContentLoaded', function () {
-      updateCalc();
       setTimeout(function () { initTab('tab-overview'); }, 300);
     });</script>
 </body>
