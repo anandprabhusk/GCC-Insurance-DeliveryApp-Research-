@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -15,74 +15,74 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <style>
     /* ===== RESET & MODERN EXECUTIVE FINTECH DESIGN SYSTEM ===== */
+    /* Executive Blue Light Theme (Default & Only) */
     :root {
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-      /* Dark Executive Blue Fintech Theme (Default) */
-      --bg-canvas: #060B16;
-      --bg-surface: #0C1424;
-      --bg-surface-elevated: #111D35;
-      --bg-card: rgba(14, 24, 44, 0.85);
-      --bg-card-hover: rgba(20, 35, 64, 0.95);
-      --bg-input: #090F1C;
-      --border-subtle: rgba(56, 189, 248, 0.12);
-      --border-focus: rgba(59, 130, 246, 0.65);
-      --border-blue: rgba(56, 189, 248, 0.35);
-      --border-gold: rgba(56, 189, 248, 0.35);
+      --bg-canvas: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --bg-input: #F1F5F9;
+      --border-subtle: #E2E8F0;
+      --border-focus: #2563EB;
+      --border-blue: rgba(37, 99, 235, 0.25);
+      --border-gold: rgba(37, 99, 235, 0.35);
 
       /* Core Blue Brand Accents */
-      --qm-900: #060D1E;
-      --qm-800: #0B1938;
-      --qm-700: #122856;
-      --qm-600: #1D4ED8;
-      --qm-500: #2563EB;
-      --qm-glow: rgba(37, 99, 235, 0.45);
+      --qm-900: #1E3A8A;
+      --qm-800: #1E40AF;
+      --qm-700: #1D4ED8;
+      --qm-600: #2563EB;
+      --qm-500: #3B82F6;
+      --qm-glow: rgba(37, 99, 235, 0.25);
 
-      --blue-950: #060D1E;
-      --blue-900: #0B1938;
-      --blue-800: #122856;
+      --blue-950: #0F172A;
+      --blue-900: #1E3A8A;
+      --blue-800: #1E40AF;
       --blue-700: #1D4ED8;
       --blue-600: #2563EB;
       --blue-500: #3B82F6;
       --blue-400: #60A5FA;
       --blue-300: #93C5FD;
-      --blue-glow: rgba(37, 99, 235, 0.45);
+      --blue-glow: rgba(37, 99, 235, 0.25);
 
-      --gold-600: #0284C7;
-      --gold-500: #0EA5E9;
-      --gold-400: #38BDF8;
-      --gold-300: #7DD3FC;
-      --gold-glow: rgba(56, 189, 248, 0.35);
+      --gold-600: #1D4ED8;
+      --gold-500: #2563EB;
+      --gold-400: #3B82F6;
+      --gold-300: #60A5FA;
+      --gold-glow: rgba(37, 99, 235, 0.25);
 
       --cyan-600: #0284C7;
       --cyan-500: #0EA5E9;
       --cyan-400: #38BDF8;
       --cyan-300: #7DD3FC;
-      --cyan-glow: rgba(56, 189, 248, 0.35);
+      --cyan-glow: rgba(56, 189, 248, 0.25);
 
       /* Semantic Analytics Colors */
       --profit: #10B981;
-      --profit-glow: rgba(16, 185, 129, 0.3);
+      --profit-glow: rgba(16, 185, 129, 0.2);
       --profit-light: #D1FAE5;
-      --loss: #F43F5E;
-      --loss-glow: rgba(244, 63, 94, 0.3);
-      --loss-light: #FFE4E6;
+      --loss: #EF4444;
+      --loss-glow: rgba(239, 68, 68, 0.2);
+      --loss-light: #FEE2E2;
       --amber: #F59E0B;
-      --blue: #3B82F6;
-      --purple: #818CF8;
+      --blue: #2563EB;
+      --purple: #6366F1;
 
       /* Typography */
-      --text-main: #F8FAFC;
-      --text-secondary: #94A3B8;
+      --text-main: #0F172A;
+      --text-secondary: #475569;
       --text-muted: #64748B;
-      --text-inverse: #060B16;
+      --text-inverse: #FFFFFF;
 
       /* Shadows & Radii */
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
-      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
-      --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
       --r-sm: 8px;
       --r-md: 12px;
       --r-lg: 16px;
@@ -91,28 +91,7 @@
     }
 
     /* Light Luxe Theme Override */
-    [data-theme="light"] {
-      --bg-canvas: #F0F4FA;
-      --bg-surface: #FFFFFF;
-      --bg-surface-elevated: #F8FAFD;
-      --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-card-hover: #FFFFFF;
-      --bg-input: #E2E8F0;
-      --border-subtle: #CBD5E1;
-      --border-focus: #2563EB;
-      --border-gold: rgba(37, 99, 235, 0.35);
-
-      --text-main: #0F172A;
-      --text-secondary: #334155;
-      --text-muted: #64748B;
-      --text-inverse: #FFFFFF;
-
-      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.09);
-      --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
-      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
-    }
-
+    
     * {
       margin: 0;
       padding: 0;
@@ -210,7 +189,7 @@
       transition: var(--transition);
     }
 
-    [data-theme="light"] .app-header {
+    .app-header {
       background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid #E2E8F0;
     }
@@ -273,7 +252,7 @@
       font-weight: 900;
       font-size: 1.2rem;
       color: var(--qm-900);
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
       flex-shrink: 0;
     }
 
@@ -295,8 +274,8 @@
       font-size: 0.65rem;
       padding: 2px 6px;
       border-radius: 6px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.4);
       color: var(--gold-400);
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -334,29 +313,15 @@
       color: #0A0E17;
       border-color: var(--gold-500);
       font-weight: 700;
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
     }
 
     .btn-gold-action:hover {
       background: linear-gradient(135deg, #E6BE58 0%, var(--gold-500) 100%);
       transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
     }
 
-    .theme-toggle-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--r-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.95rem;
-    }
 
     /* ===== MOBILE APP NAVIGATION TABS ===== */
     .app-nav-bar {
@@ -412,7 +377,7 @@
     .app-tab-btn.active {
       color: var(--gold-400);
       border-bottom-color: var(--gold-400);
-      background: rgba(212, 175, 55, 0.08);
+      background: rgba(37, 99, 235, 0.08);
       font-weight: 700;
     }
 
@@ -448,11 +413,11 @@
 
     /* ===== HERO BANNER SECTION ===== */
     .simulator-hero {
-      background: linear-gradient(135deg, rgba(84, 10, 35, 0.9) 0%, rgba(53, 8, 24, 0.95) 50%, rgba(17, 23, 38, 0.95) 100%);
-      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #2563EB 100%);
+      border: 1.5px solid rgba(37, 99, 235, 0.35);
       border-radius: var(--r-xl);
       padding: 28px 32px 26px;
-      box-shadow: var(--shadow-lg), 0 0 30px rgba(127, 15, 53, 0.22);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(30, 58, 138, 0.22);
       position: relative;
       overflow: hidden;
       margin-bottom: 24px;
@@ -487,14 +452,14 @@
     }
 
     .hero-badge.badge-gold {
-      background: rgba(212, 175, 55, 0.18);
-      border: 1px solid rgba(212, 175, 55, 0.45);
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(37, 99, 235, 0.45);
       color: var(--gold-300);
     }
 
     .hero-badge.badge-maroon {
       background: rgba(163, 20, 68, 0.3);
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      border: 1px solid rgba(37, 99, 235, 0.25);
       color: #FECDD3;
     }
 
@@ -557,7 +522,7 @@
     }
 
     .preset-pill:hover {
-      background: rgba(212, 175, 55, 0.22);
+      background: rgba(37, 99, 235, 0.22);
       border-color: var(--gold-500);
       color: var(--gold-300);
       transform: translateY(-1px);
@@ -567,7 +532,7 @@
       background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%);
       color: var(--qm-900);
       border-color: var(--gold-400);
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
       font-weight: 700;
     }
 
@@ -604,7 +569,7 @@
 
     .kpi-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(212, 175, 55, 0.35);
+      border-color: rgba(37, 99, 235, 0.35);
       box-shadow: var(--shadow-md);
     }
 
@@ -687,9 +652,9 @@
     }
 
     .status-gold {
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(37, 99, 235, 0.15);
       color: var(--gold-400);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid rgba(37, 99, 235, 0.35);
     }
 
     /* ===== WORKSPACE GRID ===== */
@@ -816,7 +781,7 @@
     }
 
     .btn-step:hover {
-      background: rgba(212, 175, 55, 0.2);
+      background: rgba(37, 99, 235, 0.2);
       border-color: var(--gold-500);
       color: var(--gold-300);
     }
@@ -836,7 +801,7 @@
       cursor: pointer;
     }
 
-    [data-theme="light"] input[type="range"] {
+    input[type="range"] {
       background: #CBD5E1;
     }
 
@@ -848,7 +813,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(37, 99, 235, 0.5);
       border: 2px solid #FFFFFF;
       transition: transform 0.15s ease;
     }
@@ -1002,14 +967,14 @@
 
     .wf-divider {
       height: 2px;
-      background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), var(--profit), rgba(212, 175, 55, 0.2));
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.2), var(--profit), rgba(37, 99, 235, 0.2));
       margin: 6px 0;
     }
 
     /* Dynamic Insights Box */
     .insights-box {
       background: linear-gradient(135deg, rgba(127, 15, 53, 0.16) 0%, rgba(17, 23, 38, 0.6) 100%);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      border: 1px solid rgba(37, 99, 235, 0.3);
       border-radius: var(--r-md);
       padding: 16px 20px;
       margin-top: 16px;
@@ -1169,7 +1134,7 @@
       outline-offset: 2px;
       font-weight: 900;
       transform: scale(1.03);
-      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
     }
 
     /* ===== ENTERPRISE FOUNDER PITCH SUITE ===== */
@@ -1180,7 +1145,7 @@
     }
 
     .pitch-hero-card {
-      background: linear-gradient(135deg, rgba(84, 10, 35, 0.92) 0%, rgba(17, 23, 38, 0.96) 100%);
+      background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 50%, #2563EB 100%);
       border: 2px solid var(--gold-500);
       border-radius: var(--r-xl);
       padding: 32px 36px;
@@ -1220,7 +1185,7 @@
 
     .pitch-pillar-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(212, 175, 55, 0.4);
+      border-color: rgba(37, 99, 235, 0.4);
       box-shadow: var(--shadow-md);
     }
 
@@ -1229,7 +1194,7 @@
       height: 44px;
       border-radius: 12px;
       background: rgba(127, 15, 53, 0.25);
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(37, 99, 235, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1522,9 +1487,6 @@
         background: #FFFFFF !important;
         color: #000000 !important;
       }
-      .app-header, .app-nav-bar, .ambient-bg, .presets-bar, .controls-panel, .theme-toggle-btn, .btn-header-act, .toast, .mobile-floating-ticker {
-        display: none !important;
-      }
       .sim-workspace {
         grid-template-columns: 1fr !important;
       }
@@ -1602,7 +1564,7 @@
       text-align: left;
     }
 
-    [data-theme="light"] .tooltip-box {
+    .tooltip-box {
       background: #FFFFFF;
       border: 1px solid #BFDBFE;
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
@@ -1628,7 +1590,7 @@
       gap: 5px;
     }
 
-    [data-theme="light"] .tooltip-title {
+    .tooltip-title {
       color: #1D4ED8;
     }
 
@@ -1785,7 +1747,6 @@
         <button class="btn-header-act btn-gold-action" onclick="window.print()" title="Print or Save as PDF Report">
           <span>&#128438;&#65039;</span> Export Report
         </button>
-        <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Theme">
           &#127763;
         </button>
       </div>
@@ -2208,6 +2169,79 @@
       </div>
     </section>
 
+    <!-- Enterprise Valuation & Financial Efficiency Lab (Simulate & Value) -->
+    <div class="valuation-efficiency-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 18px 0 24px;">
+      <!-- Card A: Live Enterprise Valuation Engine -->
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid var(--border-blue); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--shadow-sm); position:relative; overflow:hidden;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:var(--blue-600);">Valuation Simulator</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin-top:2px; font-family:var(--font-display);">&#128142; Implied Enterprise Value (EV)</h3>
+          </div>
+          <span class="app-badge-pro" id="val-method-badge" style="background:rgba(37,99,235,0.1); color:var(--blue-700); border:1px solid rgba(37,99,235,0.3); font-weight:700; font-size:0.75rem; padding:4px 10px; border-radius:12px;">14.0x EBITDA</span>
+        </div>
+
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:12px;">
+          <div style="font-size:2.1rem; font-weight:800; color:var(--blue-700); font-family:var(--font-display);" id="val-ev-qar">QAR 285.4M</div>
+          <div style="font-size:1.05rem; font-weight:600; color:var(--text-muted);" id="val-ev-usd">($78.4M USD)</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:var(--bg-surface-elevated); border-radius:var(--r-md); border:1px solid var(--border-subtle); margin-bottom:12px;">
+          <div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">ARR Run-Rate Multiple</div>
+            <div style="font-size:1rem; font-weight:700; color:var(--text-main); font-family:var(--font-display);" id="val-arr-mult">4.8x Net Revenue</div>
+          </div>
+          <div>
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">EV / Daily Active Order</div>
+            <div style="font-size:1rem; font-weight:700; color:var(--text-main); font-family:var(--font-display);" id="val-per-order">QAR 15,420 / drop</div>
+          </div>
+        </div>
+
+        <div style="font-size:0.78rem; color:var(--text-secondary); line-height:1.5;">
+          <span style="color:var(--profit); font-weight:700;">&#10003; Investment Insight:</span> Live post-money valuation benchmarks against comparable GCC on-demand exits (HungerStation at $297M, Jahez at $2.4B peak market cap).
+        </div>
+      </div>
+
+      <!-- Card B: Financial Efficiency & Capital Float Planning -->
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid var(--border-blue); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:var(--profit);">Capital Efficiency Levers</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-main); margin-top:2px; font-family:var(--font-display);">&#9889; Working Capital &amp; Unit Payback</h3>
+          </div>
+          <span class="app-badge-pro" style="background:rgba(16,185,129,0.1); color:var(--profit); border:1px solid rgba(16,185,129,0.3); font-weight:700; font-size:0.75rem; padding:4px 10px; border-radius:12px;">Capital Light</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+          <div style="background:var(--bg-surface-elevated); padding:12px; border-radius:var(--r-md); border:1px solid var(--border-subtle);">
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">7-Day Merchant Float</div>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--profit); font-family:var(--font-display);" id="val-float-qar">QAR 10.16M</div>
+            <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">Interest-free working cash</div>
+          </div>
+          <div style="background:var(--bg-surface-elevated); padding:12px; border-radius:var(--r-md); border:1px solid var(--border-subtle);">
+            <div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">CAC Payback Period</div>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--blue-600); font-family:var(--font-display);" id="val-cac-payback">2.9 Months</div>
+            <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:2px;">@ QAR 45 blended CAC</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div>
+            <span style="font-size:0.75rem; color:var(--text-muted);">24-Mo LTV / CAC Ratio:</span>
+            <strong style="color:var(--text-main); font-size:0.85rem; margin-left:4px;" id="val-ltv-ratio">5.4x (Healthy &gt; 3.0x)</strong>
+          </div>
+          <div>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Batching EBITDA Lift:</span>
+            <strong style="color:var(--text-main); font-size:0.85rem; margin-left:4px;" id="val-batch-lift">+QAR 840K / yr</strong>
+          </div>
+        </div>
+
+        <div style="font-size:0.78rem; color:var(--text-secondary); line-height:1.5;">
+          <span style="color:var(--blue-600); font-weight:700;">&#9889; Strategic Planning:</span> Merchant payout float eliminates short-term debt requirements, while high AOV and take-rate yield a top-decile 2.9 month payback.
+        </div>
+      </div>
+    </div>
+
         <div class="display-panel" style="margin-top: 14px;">
 
           <!-- Per-Order Unit Economics Waterfall Card -->
@@ -2346,255 +2380,6 @@
         </div>
       </section>
     </div>
-
-          <!-- Panel 2: Direct Fulfillment Costs -->
-          <div class="control-card">
-            <div class="control-card-header">
-              <div class="control-card-title">
-                <span class="ctrl-icon">&#128693;</span>
-                <h3>Direct Fulfillment &amp; Fleet</h3>
-              </div>
-              <span class="control-tag">Cost to Serve (COGS)</span>
-            </div>
-
-            <!-- Rider Pay Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-rider">Rider Base Pay / Drop</label>
-                <span class="slider-val-badge" id="lbl-rider">QAR 9.60</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-rider', -0.2)">-</button>
-                <input type="range" id="sl-rider" min="6.0" max="16.0" step="0.2" value="9.6" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-rider', 0.2)">+</button>
-              </div>
-              <div class="slider-scale"><span>QAR 6.00</span><span>QAR 11.00</span><span>QAR 16.00</span></div>
-            </div>
-
-            <!-- Vehicle & Fuel Wear Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-fuel">Vehicle, Fuel &amp; Summer AC</label>
-                <span class="slider-val-badge" id="lbl-fuel">QAR 2.75</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-fuel', -0.25)">-</button>
-                <input type="range" id="sl-fuel" min="1.0" max="5.5" step="0.25" value="2.75" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-fuel', 0.25)">+</button>
-              </div>
-              <div class="slider-scale"><span>QAR 1.00</span><span>QAR 3.25</span><span>QAR 5.50</span></div>
-            </div>
-
-            <!-- Batching Density Multiplier -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-batch">Batching Density Multiplier</label>
-                <span class="slider-val-badge" id="lbl-batch">1.00&times; Solo</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-batch', -0.05)">-</button>
-                <input type="range" id="sl-batch" min="1.0" max="1.6" step="0.05" value="1.0" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-batch', 0.05)">+</button>
-              </div>
-              <div class="slider-scale"><span>1.00x Solo</span><span>1.30x Clustered</span><span>1.60x Ultra-Dense</span></div>
-            </div>
-
-            <!-- SafeDrop Insurance & Spoilage -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-ins">SafeDrop™ Insurance &amp; Defect</label>
-                <span class="slider-val-badge" id="lbl-ins">QAR 0.40</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-ins', -0.05)">-</button>
-                <input type="range" id="sl-ins" min="0.1" max="1.5" step="0.05" value="0.40" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-ins', 0.05)">+</button>
-              </div>
-              <div class="slider-scale"><span>QAR 0.10</span><span>QAR 0.80</span><span>QAR 1.50</span></div>
-            </div>
-          </div>
-
-          <!-- Panel 3: Scale & Operational Levers -->
-          <div class="control-card">
-            <div class="control-card-header">
-              <div class="control-card-title">
-                <span class="ctrl-icon">&#127970;</span>
-                <h3>Scale &amp; Overhead Levers</h3>
-              </div>
-              <span class="control-tag">Platform Scale</span>
-            </div>
-
-            <!-- Daily Orders Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-ord">Daily Order Volume</label>
-                <span class="slider-val-badge" id="lbl-ord">18,500</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-ord', -500)">-</button>
-                <input type="range" id="sl-ord" min="1000" max="45000" step="500" value="18500" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-ord', 500)">+</button>
-              </div>
-              <div class="slider-scale"><span>1,000</span><span>23,000</span><span>45,000</span></div>
-            </div>
-
-            <!-- Monthly OPEX Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label class="slider-label" for="sl-fx">Monthly Corporate Fixed OPEX</label>
-                <span class="slider-val-badge" id="lbl-fx">QAR 1.52M</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-fx', -40000)">-</button>
-                <input type="range" id="sl-fx" min="600000" max="3200000" step="40000" value="1520000" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-fx', 40000)">+</button>
-              </div>
-              <div class="slider-scale"><span>QAR 0.6M</span><span>QAR 1.9M</span><span>QAR 3.2M</span></div>
-            </div>
-          </div>
-
-        </aside>
-
-        <!-- Right Workspace: Waterfall Stack & Live Strategic Insights -->
-        <div class="display-panel">
-
-          <!-- Per-Order Unit Economics Waterfall Card -->
-          <section class="ue-waterfall-card">
-            <div class="card-top-header">
-              <div class="card-title-group">
-                <h3><span>&#128176;</span> Per-Order Unit Economics Breakdown</h3>
-                <p>Granular revenue components minus direct fulfillment expenses</p>
-              </div>
-              <div class="hero-badge badge-green" id="badge-gross-rev">
-                Gross Platform Rev: QAR 18.98
-              </div>
-            </div>
-
-            <div class="waterfall-stack">
-              <!-- Inflows -->
-              <div class="wf-row">
-                <div class="wf-label is-rev"><span>+</span> Merchant Commission</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-comm" style="width: 60%; background: linear-gradient(90deg, #D4AF37, #E6BE58);">
-                    QAR 11.38
-                  </div>
-                </div>
-                <div class="wf-val is-rev" id="val-comm">+QAR 11.38</div>
-              </div>
-
-              <div class="wf-row">
-                <div class="wf-label is-rev"><span>+</span> Customer Delivery Fee</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-fee" style="width: 34%; background: linear-gradient(90deg, #F59E0B, #FBBF24);">
-                    QAR 6.50
-                  </div>
-                </div>
-                <div class="wf-val is-rev" id="val-fee">+QAR 6.50</div>
-              </div>
-
-              <div class="wf-row">
-                <div class="wf-label is-rev"><span>+</span> Value-Add Tech &amp; Ads</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-ad" style="width: 8%; background: linear-gradient(90deg, #0EA5E9, #60A5FA);">
-                    QAR 1.10
-                  </div>
-                </div>
-                <div class="wf-val is-rev" id="val-ad">+QAR 1.10</div>
-              </div>
-
-              <div class="wf-divider"></div>
-
-              <!-- Outflows -->
-              <div class="wf-row">
-                <div class="wf-label is-cost"><span>&minus;</span> Rider Pay (Direct)</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-rider" style="width: 51%; background: linear-gradient(90deg, #E11D48, #F43F5E);">
-                    &minus;QAR 9.60
-                  </div>
-                </div>
-                <div class="wf-val is-cost" id="val-rider">&minus;QAR 9.60</div>
-              </div>
-
-              <div class="wf-row">
-                <div class="wf-label is-cost"><span>&minus;</span> Fleet, Fuel &amp; Summer AC</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-fuel" style="width: 15%; background: linear-gradient(90deg, #EA580C, #F97316);">
-                    &minus;QAR 2.75
-                  </div>
-                </div>
-                <div class="wf-val is-cost" id="val-fuel">&minus;QAR 2.75</div>
-              </div>
-
-              <div class="wf-row">
-                <div class="wf-label is-cost"><span>&minus;</span> Payment Gateway Toll</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-gw" style="width: 8%; background: linear-gradient(90deg, #64748B, #94A3B8);">
-                    &minus;QAR 1.41
-                  </div>
-                </div>
-                <div class="wf-val is-cost" id="val-gw">&minus;QAR 1.41</div>
-              </div>
-
-              <div class="wf-row">
-                <div class="wf-label is-cost"><span>&minus;</span> SafeDrop™ &amp; Spoilage</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-ins" style="width: 3%; background: linear-gradient(90deg, #9333EA, #A855F7);">
-                    &minus;QAR 0.40
-                  </div>
-                </div>
-                <div class="wf-val is-cost" id="val-ins">&minus;QAR 0.40</div>
-              </div>
-
-              <div class="wf-divider" style="background: var(--profit); height: 3px;"></div>
-
-              <!-- Net Contribution Result -->
-              <div class="wf-row">
-                <div class="wf-label is-net">Net Contribution (CM2)</div>
-                <div class="wf-bar-track">
-                  <div class="wf-bar-fill" id="bar-net" style="width: 23%; background: linear-gradient(90deg, #059669, #10B981);">
-                    +QAR 4.43
-                  </div>
-                </div>
-                <div class="wf-val is-net" id="val-net">+QAR 4.43</div>
-              </div>
-            </div>
-
-            <!-- Dynamic Real-time Insights Alert -->
-            <div class="insights-box" id="dynamicInsightBox">
-              <h4><span>&#10003;</span> Operational Analysis</h4>
-              <p id="dynamicInsightText">
-                Strong unit economics: Net Contribution of <strong>QAR 4.43 per order (23.3% net margin)</strong> yields <strong>QAR 2.46M monthly gross profit</strong>. Covering corporate OPEX of QAR 1.52M generates <strong>+QAR 940K monthly EBITDA</strong> with break-even achieved at 11,400 daily orders.
-              </p>
-            </div>
-          </section>
-
-          <!-- Quick Preview Charts (Break-even Curve & Donut) -->
-          <div class="charts-grid-duo">
-            <div class="chart-box">
-              <div class="chart-box-header">
-                <h4><span>&#128200;</span> Break-Even Volume Curve</h4>
-                <span class="control-tag">OPEX vs Margin</span>
-              </div>
-              <div class="chart-wrapper">
-                <canvas id="chartBreakEven"></canvas>
-              </div>
-            </div>
-
-            <div class="chart-box">
-              <div class="chart-box-header">
-                <h4><span>&#129684;</span> Cost to Serve / Drop</h4>
-                <span class="control-tag">COGS Split</span>
-              </div>
-              <div class="chart-wrapper">
-                <canvas id="chartCostDonut"></canvas>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
     <!-- ========================================================================= -->
     <!-- VIEW 2: 5-CHART VISUAL ANALYTICS SUITE -->
     <!-- ========================================================================= -->
@@ -2648,8 +2433,18 @@
             <canvas id="chartEbitdaSensitivity"></canvas>
           </div>
         </div>
+      
+      <!-- Chart 5: Customer LTV, CAC Payback & Valuation Expansion -->
+      <div class="chart-box" style="margin-top: 20px;">
+        <div class="chart-box-header">
+          <h4><span>&#128185;</span> Customer Lifetime Value (LTV) vs. CAC Payback &amp; Valuation Expansion</h4>
+          <span class="control-tag">Unit Economics Scaling &amp; EV Trajectory (Years 1&ndash;5)</span>
+        </div>
+        <div class="chart-wrapper" style="height: 280px;">
+          <canvas id="chartLtvValuation"></canvas>
+        </div>
       </div>
-    </div>
+</div>
 
     <!-- ========================================================================= -->
     <!-- VIEW 3: 2D SENSITIVITY STRESS-TEST MATRIX -->
@@ -2777,7 +2572,7 @@
         <div class="term-sheet-card">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
             <div>
-              <h3 style="font-size:1.25rem; font-weight:800; color:#fff;">Capital Plan &amp; Round Structure (QAR 18.5M Total)</h3>
+              <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-main);">Capital Plan &amp; Round Structure (QAR 18.5M Total)</h3>
               <p style="color:var(--text-secondary); font-size:0.85rem;">Funded in two tranches with full transparency into operational burn and milestones</p>
             </div>
             <button class="btn-header-act btn-gold-action" onclick="copySummary()">
@@ -2923,24 +2718,10 @@
 
     // Theme Management
     function initTheme() {
-      var saved = localStorage.getItem('deliverq_theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', saved);
       updateThemeButton(saved);
     }
 
-    function toggleTheme() {
-      var cur = document.documentElement.getAttribute('data-theme');
-      var next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('deliverq_theme', next);
-      updateThemeButton(next);
-      runSimulation();
-    }
 
-    function updateThemeButton(theme) {
-      var btn = document.getElementById('themeToggle');
-      if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127763;';
-    }
 
     // App Navigation Tab Switcher
     function switchAppTab(e, viewId) {
@@ -3156,6 +2937,69 @@
 
       updateBar('bar-net', 'val-net', (netContr >= 0 ? '+' : '') + 'QAR ' + netContr.toFixed(2), Math.abs(netContr), maxScale);
 
+
+      // Valuation Simulator & Financial Planning Calculations
+      var annNetRev = ord * 30 * grossRev * 12; // Annual Net Platform Revenue
+      var annGmv = ord * 30 * aov * 12; // Annual Gross Merchandise Value
+      var annEbitda = monthlyEbitda * 12; // Annualized EBITDA
+
+      // Dynamic Implied Enterprise Valuation
+      var impliedEV = 0;
+      var valMethod = '';
+      if (monthlyEbitda > 0) {
+        // Blended: 14x forward EBITDA + 4.8x Net Revenue
+        var evEbitda = annEbitda * 13.5;
+        var evRev = annNetRev * 4.6;
+        impliedEV = (evEbitda * 0.6) + (evRev * 0.4);
+        valMethod = (impliedEV / annEbitda).toFixed(1) + 'x EBITDA';
+      } else {
+        // Growth-stage Net Revenue multiple: 3.2x Net Revenue
+        impliedEV = Math.max(15000000, annNetRev * 3.2);
+        valMethod = '3.2x Net ARR';
+      }
+
+      var evUsd = impliedEV / 3.64;
+      var arrMultiple = (impliedEV / Math.max(1, annNetRev)).toFixed(1);
+      var evPerDailyOrder = Math.round(impliedEV / Math.max(1, ord));
+
+      var evQarEl = document.getElementById('val-ev-qar');
+      var evUsdEl = document.getElementById('val-ev-usd');
+      var valBadgeEl = document.getElementById('val-method-badge');
+      var arrMultEl = document.getElementById('val-arr-mult');
+      var perOrderEl = document.getElementById('val-per-order');
+
+      if (evQarEl) evQarEl.textContent = 'QAR ' + (impliedEV / 1e6).toFixed(1) + 'M';
+      if (evUsdEl) evUsdEl.textContent = '($' + (evUsd / 1e6).toFixed(1) + 'M USD)';
+      if (valBadgeEl) valBadgeEl.textContent = valMethod;
+      if (arrMultEl) arrMultEl.textContent = arrMultiple + 'x Net Revenue';
+      if (perOrderEl) perOrderEl.textContent = 'QAR ' + evPerDailyOrder.toLocaleString() + ' / drop';
+
+      // Financial Planning: Merchant Float & CAC Payback
+      var monthlyGmv = ord * 30 * aov;
+      var sevenDayFloat = (monthlyGmv / 30) * 7;
+      var blendedCac = 45.0; // QAR 45 blended CAC in Qatar
+      var ordersPerUserPerMo = 3.6; // Average Qatar frequency
+      var userMarginPerMo = Math.max(0.5, ordersPerUserPerMo * netContr);
+      var cacPaybackMonths = netContr > 0 ? (blendedCac / userMarginPerMo).toFixed(1) : 'N/A';
+      var ltv24Mo = userMarginPerMo * 24;
+      var ltvCacRatio = (ltv24Mo / blendedCac).toFixed(1);
+
+      // Batching Lift: Annual savings vs 1.0x baseline
+      var baseRiderDrop = (rider + fuel) / 1.00;
+      var curRiderDrop = (rider + fuel) / batch;
+      var batchSavingsPerDrop = Math.max(0, baseRiderDrop - curRiderDrop);
+      var annBatchSavings = ord * 30 * 12 * batchSavingsPerDrop;
+
+      var floatEl = document.getElementById('val-float-qar');
+      var paybackEl = document.getElementById('val-cac-payback');
+      var ltvRatioEl = document.getElementById('val-ltv-ratio');
+      var batchLiftEl = document.getElementById('val-batch-lift');
+
+      if (floatEl) floatEl.textContent = 'QAR ' + (sevenDayFloat / 1e6).toFixed(2) + 'M';
+      if (paybackEl) paybackEl.textContent = cacPaybackMonths + (cacPaybackMonths !== 'N/A' ? ' Months' : '');
+      if (ltvRatioEl) ltvRatioEl.textContent = ltvCacRatio + 'x (24-Mo LTV)';
+      if (batchLiftEl) batchLiftEl.textContent = '+QAR ' + (annBatchSavings / 1e3).toFixed(0) + 'K / yr';
+
       // 7. Update Dynamic Operational Insights
       updateDynamicInsights(netContr, netMarginPct, grossRev, adjRider, monthlyEbitda, beOrders, ord, batch);
 
@@ -3198,7 +3042,7 @@
 
     // Simulator Tab Charts (Break-Even & Cost Donut)
     function renderSimulatorCharts(fx, netContr, curOrd, rider, fuel, gw, ins) {
-      var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      var isDark = false;
       var textClr = isDark ? '#94A3B8' : '#475569';
       var gridClr = isDark ? 'rgba(255, 255, 255, 0.06)' : '#E2E8F0';
       var fontFamily = "'Outfit', sans-serif";
@@ -3308,7 +3152,7 @@
 
     // Analytics Tab 4 Additional Rich Charts
     function renderAnalyticsCharts() {
-      var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      var isDark = false;
       var textClr = isDark ? '#94A3B8' : '#475569';
       var gridClr = isDark ? 'rgba(255, 255, 255, 0.06)' : '#E2E8F0';
       var fontFamily = "'Outfit', sans-serif";
@@ -3492,6 +3336,83 @@
             scales: {
               x: { title: { display: true, text: 'Daily Orders', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } },
               y: { title: { display: true, text: 'QAR Millions / Month', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } }
+            }
+          }
+        });
+      }
+
+      // Chart 5: Customer LTV vs CAC Payback & Valuation Expansion (2026-2030)
+      var ctxLTV = document.getElementById('chartLtvValuation');
+      if (ctxLTV) {
+        if (window.chartLTV) window.chartLTV.destroy();
+        window.chartLTV = new Chart(ctxLTV.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: ['Year 1 (2026)', 'Year 2 (2027)', 'Year 3 (2028)', 'Year 4 (2029)', 'Year 5 (2030)'],
+            datasets: [
+              {
+                label: '24-Month Customer LTV (QAR)',
+                data: [185, 290, 385, 460, 525],
+                borderColor: '#10B981',
+                backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.35,
+                yAxisID: 'y'
+              },
+              {
+                label: 'Blended CAC (QAR)',
+                data: [68, 55, 45, 40, 38],
+                borderColor: '#EF4444',
+                borderDash: [5, 5],
+                borderWidth: 2,
+                pointRadius: 4,
+                tension: 0.2,
+                yAxisID: 'y'
+              },
+              {
+                label: 'Platform Enterprise Valuation (QAR Millions)',
+                data: [35, 95, 245, 480, 780],
+                borderColor: '#2563EB',
+                backgroundColor: 'rgba(37, 99, 235, 0.85)',
+                borderWidth: 2.5,
+                pointRadius: 5,
+                type: 'bar',
+                yAxisID: 'y1'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { position: 'top', labels: { color: textClr, font: { family: fontFamily, size: 11, weight: '600' } } },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    if (ctx.dataset.yAxisID === 'y1') {
+                      return ctx.dataset.label + ': QAR ' + ctx.raw + 'M';
+                    }
+                    return ctx.dataset.label + ': QAR ' + ctx.raw;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { grid: { color: gridClr }, ticks: { color: textClr, font: { family: fontFamily } } },
+              y: {
+                type: 'linear',
+                position: 'left',
+                grid: { color: gridClr },
+                ticks: { color: textClr, font: { family: fontFamily }, callback: function(v){ return 'QAR ' + v; } }
+              },
+              y1: {
+                type: 'linear',
+                position: 'right',
+                grid: { drawOnChartArea: false },
+                ticks: { color: '#2563EB', font: { family: fontFamily }, callback: function(v){ return 'QAR ' + v + 'M'; } }
+              }
             }
           }
         });
