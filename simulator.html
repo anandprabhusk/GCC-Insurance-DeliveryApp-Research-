@@ -2614,6 +2614,121 @@
       transform: translateY(-1px) !important;
     }
 
+  
+    /* ===== ENHANCED LAYOUT, SPACING & WATERFALL READABILITY ===== */
+    .quick-settings-strip {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 16px !important;
+      flex-wrap: wrap !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 12px !important;
+      padding: 10px 18px !important;
+      margin-bottom: 24px !important;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .qs-group {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-label {
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      color: #1E3A8A !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+    }
+
+    .qs-label-comp {
+      color: #0369A1 !important;
+    }
+
+    .qs-divider-v {
+      width: 1px !important;
+      height: 24px !important;
+      background: #E2E8F0 !important;
+    }
+
+    .qs-share-tag {
+      font-size: 0.68rem !important;
+      font-weight: 800 !important;
+      padding: 1px 5px !important;
+      border-radius: 4px !important;
+      background: rgba(0, 0, 0, 0.08) !important;
+      margin-left: 2px !important;
+    }
+
+    .preset-pill {
+      padding: 6px 13px !important;
+      font-size: 0.78rem !important;
+    }
+
+    /* Live Financial Results Section Spacing */
+    .results-analytics-section {
+      margin-top: 38px !important;
+      padding-top: 8px !important;
+    }
+
+    .results-deck-title {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin-bottom: 22px !important;
+      padding-bottom: 12px !important;
+      border-bottom: 1.5px solid #CBD5E1 !important;
+    }
+
+    .results-deck-title h3 {
+      font-size: 1.25rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      margin: 0 !important;
+    }
+
+    /* Waterfall Card Distinct Background & Text Legibility */
+    .ue-waterfall-card {
+      background: #F8FAFC !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: var(--r-lg) !important;
+      padding: 24px 26px !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .wf-bar-track {
+      height: 26px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      overflow: hidden !important;
+      position: relative !important;
+      border: 1px solid #CBD5E1 !important;
+    }
+
+    .wf-bar-fill {
+      height: 100% !important;
+      border-radius: 5px !important;
+      transition: width 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      padding-left: 10px !important;
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      color: #FFFFFF !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+      white-space: nowrap !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2643,12 +2758,6 @@
         <button class="btn-header-act" onclick="resetDefaults()" title="Reset inputs to DeliverQ Year 3 Plan">
           <span>&#8634;</span> Reset Base
         </button>
-        <button class="btn-header-act" onclick="copySummary()" title="Copy executive summary to clipboard">
-          <span>&#128203;</span> Copy Summary
-        </button>
-        <button class="btn-header-act btn-gold-action" onclick="window.print()" title="Print or Save as PDF Report">
-          <span>&#128438;&#65039;</span> Export Report
-        </button>
       </div>
     </div>
   </header>
@@ -2657,40 +2766,58 @@
   <main class="container">
 
     <!-- Quick Scenario Levers & Competitor Benchmarks (Clean Strip) -->
+    <!-- Compact Single-Line Quick Settings Toolbar -->
     <div class="quick-settings-strip">
-      <div class="qs-col">
-        <div class="qs-heading-wrap">
-          <span class="qs-tag qs-tag-model">&#9889; MODEL SCENARIOS</span>
-        </div>
-        <div class="qs-buttons-row">
-          <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Scale (18,500 daily orders, 14.5% commission)">
-            <span>&#127919;</span> <strong>Yr 3</strong> (Base Plan)
-          </button>
-          <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="Year 1 Launch Phase (3,200 daily orders, 12.5% commission)">
-            <span>&#128640;</span> <strong>Yr 1</strong> (Launch Phase)
-          </button>
-        </div>
+      <div class="qs-group">
+        <span class="qs-label">&#9889; Model:</span>
+        <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Plan: 18,500 orders/day, 14.5% commission, QAR 78.50 AOV">
+          <span>&#127919;</span> <strong>Yr 3</strong> (Base)
+        </button>
+        <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="DeliverQ Year 1 Launch Phase: 3,200 orders/day, 12.5% commission, acquisition focus">
+          <span>&#128640;</span> <strong>Yr 1</strong> (Launch)
+        </button>
       </div>
 
       <div class="qs-divider-v"></div>
 
-      <div class="qs-col">
-        <div class="qs-heading-wrap">
-          <span class="qs-tag qs-tag-comp">&#128065;&#65039; MARKET BENCHMARKS</span>
-        </div>
-        <div class="qs-buttons-row">
-          <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Load Talabat Qatar 41.5% market share economics">
-            <span class="preset-brand-dot dot-talabat"></span> Talabat Qatar (41.5% Share)
-          </button>
-          <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Load Snoonu Qatar 31.8% market share economics">
-            <span class="preset-brand-dot dot-snoonu"></span> Snoonu Qatar (31.8% Share)
-          </button>
-          <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Load Keeta / Meituan Qatar scale-up economics">
-            <span class="preset-brand-dot dot-keeta"></span> Keeta Qatar (Meituan Scale)
-          </button>
-        </div>
+      <div class="qs-group">
+        <span class="qs-label qs-label-comp">&#128065;&#65039; Competitor Benchmarks:</span>
+        <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Talabat Qatar: 41.5% Market Share | 26.0% Commission | QAR 8.00 Delivery Fee | 45k Orders/Day">
+          <span class="preset-brand-dot dot-talabat"></span> <strong>Talabat</strong> <span class="qs-share-tag">41.5%</span>
+        </button>
+        <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Snoonu Qatar: 31.8% Market Share | 22.0% Commission | QAR 7.00 Delivery Fee | 35k Orders/Day">
+          <span class="preset-brand-dot dot-snoonu"></span> <strong>Snoonu</strong> <span class="qs-share-tag">31.8%</span>
+        </button>
+        <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Keeta / Meituan Qatar: Aggressive Scale-Up | 14.5% Commission | Subsidized QAR 3.00 Fee | 8k Orders/Day">
+          <span class="preset-brand-dot dot-keeta"></span> <strong>Keeta</strong> <span class="qs-share-tag">Meituan</span>
+        </button>
       </div>
     </div>
+
+      <!-- STEP 1: SIMULATOR SCALERS -->
+      <section class="simulator-scalers-deck">
+        <!-- Panel 1: Revenue Levers -->
+          <div class="control-card scaler-card">
+            <div class="control-card-header">
+              <div class="control-card-title">
+                <span class="ctrl-icon">&#128179;</span>
+                <h3>Revenue Levers</h3>
+              </div>
+              <span class="control-tag">Platform Inflow</span>
+            </div>
+
+            <!-- AOV Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-aov">Average Order Value (AOV)</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="AOV Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Average Order Value (AOV)</div>
+                      <div class="tooltip-desc">Customer checkout basket size in Qatar (market avg QAR 65&ndash;85; fine dining QAR 110+). Every +QAR 10 expands commission take without increasing driver route miles.</div>
+                    </div>
+                  </div>
                 </div>
                 <span class="slider-val-badge" id="lbl-aov">QAR 78.50</span>
               </div>
@@ -2771,7 +2898,65 @@
               <div class="slider-scale"><span>QAR 0.00</span><span>QAR 2.00</span><span>QAR 4.00</span></div>
             </div>
           </div>
-          <!-- Panel 2: Direct Fulfillment Costs -->
+
+        <!-- Panel 3: Scale & Operational Levers -->
+          <div class="control-card scaler-card">
+            <div class="control-card-header">
+              <div class="control-card-title">
+                <span class="ctrl-icon">&#127970;</span>
+                <h3>Scale &amp; Overhead Levers</h3>
+              </div>
+              <span class="control-tag">Platform Scale</span>
+            </div>
+
+            <!-- Daily Orders Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-ord">Daily Order Volume</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Daily Orders Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Daily Completed Order Volume</div>
+                      <div class="tooltip-desc">Total orders fulfilled platform-wide across Qatar daily. Amortizes headquarters fixed OPEX over wider order volume (Talabat ~45k/day, Snoonu ~35k/day).</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-ord">18,500</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-ord', -500)">-</button>
+                <input type="range" id="sl-ord" min="1000" max="45000" step="500" value="18500" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-ord', 500)">+</button>
+              </div>
+              <div class="slider-scale"><span>1,000</span><span>23,000</span><span>45,000</span></div>
+            </div>
+
+            <!-- Monthly OPEX Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-fx">Monthly Corporate Fixed OPEX</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Fixed OPEX Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Monthly Corporate Fixed OPEX</div>
+                      <div class="tooltip-desc">Headquarters non-variable costs: executive leadership, software engineering, cloud hosting, legal compliance, and office rent in Lusail/West Bay.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-fx">QAR 1.52M</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-fx', -40000)">-</button>
+                <input type="range" id="sl-fx" min="600000" max="3200000" step="40000" value="1520000" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-fx', 40000)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 0.6M</span><span>QAR 1.9M</span><span>QAR 3.2M</span></div>
+            </div>
+          </div>
+
+        <!-- Panel 2: Direct Fulfillment Costs -->
           <div class="control-card scaler-card">
             <div class="control-card-header">
               <div class="control-card-title">
@@ -2873,63 +3058,8 @@
               <div class="slider-scale"><span>QAR 0.10</span><span>QAR 0.80</span><span>QAR 1.50</span></div>
             </div>
           </div>
-          <!-- Panel 3: Scale & Operational Levers -->
-          <div class="control-card scaler-card">
-            <div class="control-card-header">
-              <div class="control-card-title">
-                <span class="ctrl-icon">&#127970;</span>
-                <h3>Scale &amp; Overhead Levers</h3>
-              </div>
-              <span class="control-tag">Platform Scale</span>
-            </div>
-
-            <!-- Daily Orders Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <div class="slider-label-wrap">
-                  <label class="slider-label" for="sl-ord">Daily Order Volume</label>
-                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Daily Orders Info">
-                    <span class="tooltip-icon">&#9432;</span>
-                    <div class="tooltip-box">
-                      <div class="tooltip-title">Daily Completed Order Volume</div>
-                      <div class="tooltip-desc">Total orders fulfilled platform-wide across Qatar daily. Amortizes headquarters fixed OPEX over wider order volume (Talabat ~45k/day, Snoonu ~35k/day).</div>
-                    </div>
-                  </div>
-                </div>
-                <span class="slider-val-badge" id="lbl-ord">18,500</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-ord', -500)">-</button>
-                <input type="range" id="sl-ord" min="1000" max="45000" step="500" value="18500" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-ord', 500)">+</button>
-              </div>
-              <div class="slider-scale"><span>1,000</span><span>23,000</span><span>45,000</span></div>
-            </div>
-
-            <!-- Monthly OPEX Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <div class="slider-label-wrap">
-                  <label class="slider-label" for="sl-fx">Monthly Corporate Fixed OPEX</label>
-                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Fixed OPEX Info">
-                    <span class="tooltip-icon">&#9432;</span>
-                    <div class="tooltip-box">
-                      <div class="tooltip-title">Monthly Corporate Fixed OPEX</div>
-                      <div class="tooltip-desc">Headquarters non-variable costs: executive leadership, software engineering, cloud hosting, legal compliance, and office rent in Lusail/West Bay.</div>
-                    </div>
-                  </div>
-                </div>
-                <span class="slider-val-badge" id="lbl-fx">QAR 1.52M</span>
-              </div>
-              <div class="slider-touch-row">
-                <button class="btn-step" onclick="stepVal('sl-fx', -40000)">-</button>
-                <input type="range" id="sl-fx" min="600000" max="3200000" step="40000" value="1520000" oninput="runSimulation()">
-                <button class="btn-step" onclick="stepVal('sl-fx', 40000)">+</button>
-              </div>
-              <div class="slider-scale"><span>QAR 0.6M</span><span>QAR 1.9M</span><span>QAR 3.2M</span></div>
-            </div>
-          </div>
       </section>
+
       <!-- STEP 2: CHART BOX & KPI RESULTS (Net Margin, Monthly Gross Profit, EBITDA, and Charts) -->
       <section class="results-analytics-section">
         <div class="results-deck-title">
