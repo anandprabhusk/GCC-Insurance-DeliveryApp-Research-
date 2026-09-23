@@ -2142,6 +2142,478 @@
       color: #1D4ED8 !important;
     }
 
+  
+    /* ===== ENTERPRISE LIGHT THEME HEADER ===== */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: #FFFFFF !important;
+      border-bottom: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+      transition: var(--transition);
+    }
+
+    .header-in {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-app-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--r-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-app-back:hover {
+      background: #DBEAFE !important;
+      border-color: #93C5FD !important;
+      color: #1E40AF !important;
+      transform: translateX(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35) !important;
+      flex-shrink: 0;
+    }
+
+    .app-brand-info h2 {
+      font-size: 1.05rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .app-brand-info p {
+      font-size: 0.76rem !important;
+      color: #475569 !important;
+      font-weight: 600 !important;
+      margin: 2px 0 0 0;
+    }
+
+    .app-badge-pro {
+      font-size: 0.7rem !important;
+      padding: 3px 8px !important;
+      border-radius: 8px !important;
+      background: #EFF6FF !important;
+      border: 1px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1.5px solid #CBD5E1 !important;
+      background: #F8FAFC !important;
+      color: #1E293B !important;
+      white-space: nowrap;
+    }
+
+    .btn-header-act:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px);
+    }
+
+    .btn-header-act.btn-gold-action {
+      background: #2563EB !important;
+      border-color: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3) !important;
+    }
+
+    .btn-header-act.btn-gold-action:hover {
+      background: #1D4ED8 !important;
+      border-color: #1E40AF !important;
+      color: #FFFFFF !important;
+    }
+
+    /* ===== ENTERPRISE RANGE SLIDER SYSTEM (CRISP VISIBILITY) ===== */
+    .slider-touch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      flex: 1 !important;
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border: 1px solid #CBD5E1 !important;
+      border-radius: 6px !important;
+      outline: none !important;
+      cursor: pointer !important;
+      margin: 10px 0 !important;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      border: none !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+      cursor: grab !important;
+      border: 2.5px solid #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+      margin-top: -8px !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.18) !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5), 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing !important;
+      transform: scale(1.1) !important;
+    }
+
+    input[type="range"]::-moz-range-track {
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      border: 1px solid #CBD5E1 !important;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+      cursor: grab !important;
+      border: 2.5px solid #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4) !important;
+    }
+
+    .slider-val-badge {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      font-family: var(--font-display) !important;
+      border-radius: 8px !important;
+      padding: 4px 12px !important;
+      min-width: 90px !important;
+      text-align: right !important;
+      display: inline-block !important;
+    }
+
+    /* ===== ENTERPRISE MODEL PRESETS & BENCHMARKS STRIP ===== */
+    .quick-settings-strip {
+      display: grid !important;
+      grid-template-columns: auto 1px 1fr !important;
+      align-items: center !important;
+      gap: 20px !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 14px !important;
+      padding: 16px 22px !important;
+      margin-bottom: 24px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    @media (max-width: 960px) {
+      .quick-settings-strip {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      .qs-divider-v {
+        display: none !important;
+      }
+    }
+
+    .qs-col {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-heading-wrap {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .qs-tag {
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+      white-space: nowrap !important;
+    }
+
+    .qs-tag-model {
+      background: #EFF6FF !important;
+      color: #1D4ED8 !important;
+      border: 1px solid #BFDBFE !important;
+    }
+
+    .qs-tag-comp {
+      background: #F0FDF4 !important;
+      color: #15803D !important;
+      border: 1px solid #BBF7D0 !important;
+    }
+
+    .qs-buttons-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-divider-v {
+      width: 1px !important;
+      height: 36px !important;
+      background: #CBD5E1 !important;
+    }
+
+    .preset-pill {
+      background: #F8FAFC !important;
+      border: 1.5px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      padding: 8px 16px !important;
+      border-radius: 20px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      transition: var(--transition) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      white-space: nowrap !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .preset-pill:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .preset-pill.active {
+      background: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      border-color: #1E40AF !important;
+      box-shadow: 0 2px 10px rgba(29, 78, 216, 0.35) !important;
+      font-weight: 800 !important;
+    }
+
+    .preset-pill-talabat.active {
+      background: #EA580C !important;
+      border-color: #C2410C !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(234, 88, 12, 0.35) !important;
+    }
+
+    .preset-pill-snoonu.active {
+      background: #CA8A04 !important;
+      border-color: #A16207 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(202, 138, 4, 0.35) !important;
+    }
+
+    .preset-pill-keeta.active {
+      background: #0284C7 !important;
+      border-color: #0369A1 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35) !important;
+    }
+
+    /* ===== TEXT ALIGNMENT, JUSTIFICATION & READABILITY ===== */
+    .strategic-insight-text {
+      font-size: 0.84rem !important;
+      color: #334155 !important;
+      line-height: 1.65 !important;
+      padding-top: 12px !important;
+      border-top: 1px solid #E2E8F0 !important;
+      text-align: justify !important;
+    }
+
+    .strategic-insight-text strong {
+      color: #1D4ED8 !important;
+    }
+
+    .strategic-insight-text.valuation-insight strong {
+      color: #059669 !important;
+    }
+
+    .insights-box {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      border-radius: var(--r-md) !important;
+      padding: 16px 20px !important;
+      margin-top: 16px !important;
+    }
+
+    .insights-box h4 {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      margin-bottom: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .insights-box p {
+      color: #334155 !important;
+      font-size: 0.88rem !important;
+      line-height: 1.65 !important;
+      text-align: justify !important;
+      margin: 0 !important;
+    }
+
+    .insights-box strong {
+      color: #0F172A !important;
+    }
+
+    /* ===== ENTERPRISE FOOTER SYSTEM ===== */
+    .sim-footer {
+      margin-top: 48px !important;
+      margin-bottom: 84px !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 14px !important;
+      padding: 22px 28px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      flex-wrap: wrap !important;
+      gap: 20px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .footer-brand {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+
+    .footer-brand-title {
+      font-size: 0.92rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .footer-brand-sub {
+      font-size: 0.78rem !important;
+      color: #64748B !important;
+      font-weight: 600 !important;
+    }
+
+    .footer-links {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .footer-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 8px 14px !important;
+      border-radius: 8px !important;
+      background: #F8FAFC !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      font-size: 0.8rem !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      transition: var(--transition) !important;
+    }
+
+    .footer-link:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2177,9 +2649,6 @@
         <button class="btn-header-act btn-gold-action" onclick="window.print()" title="Print or Save as PDF Report">
           <span>&#128438;&#65039;</span> Export Report
         </button>
-        <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Theme">
-          &#127763;
-        </button>
       </div>
     </div>
   </header>
@@ -2189,55 +2658,39 @@
 
     <!-- Quick Scenario Levers & Competitor Benchmarks (Clean Strip) -->
     <div class="quick-settings-strip">
-      <div class="qs-group">
-        <span class="qs-label">&#9889; Model Presets:</span>
-        <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Scale (18,500 daily orders, 14.5% commission)">
-          <span>&#127919;</span> Yr 3 (Base Plan)
-        </button>
-        <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="Year 1 Launch Phase (3,200 daily orders, 12.5% commission)">
-          <span>&#128640;</span> Yr 1 (Launch)
-        </button>
+      <div class="qs-col">
+        <div class="qs-heading-wrap">
+          <span class="qs-tag qs-tag-model">&#9889; MODEL SCENARIOS</span>
+        </div>
+        <div class="qs-buttons-row">
+          <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Scale (18,500 daily orders, 14.5% commission)">
+            <span>&#127919;</span> <strong>Yr 3</strong> (Base Plan)
+          </button>
+          <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="Year 1 Launch Phase (3,200 daily orders, 12.5% commission)">
+            <span>&#128640;</span> <strong>Yr 1</strong> (Launch Phase)
+          </button>
+        </div>
       </div>
 
-      <div class="qs-divider"></div>
+      <div class="qs-divider-v"></div>
 
-      <div class="qs-group">
-        <span class="qs-label qs-label-comp">&#128065;&#65039; Competitor Quick Settings:</span>
-        <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Load Talabat Qatar 41.5% market share economics">
-          <span class="preset-brand-dot dot-talabat"></span> Talabat Qatar (41.5% Share)
-        </button>
-        <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Load Snoonu Qatar 31.8% market share economics">
-          <span class="preset-brand-dot dot-snoonu"></span> Snoonu Qatar (31.8% Share)
-        </button>
-        <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Load Keeta / Meituan Qatar scale-up economics">
-          <span class="preset-brand-dot dot-keeta"></span> Keeta Qatar (Meituan Scale)
-        </button>
+      <div class="qs-col">
+        <div class="qs-heading-wrap">
+          <span class="qs-tag qs-tag-comp">&#128065;&#65039; MARKET BENCHMARKS</span>
+        </div>
+        <div class="qs-buttons-row">
+          <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Load Talabat Qatar 41.5% market share economics">
+            <span class="preset-brand-dot dot-talabat"></span> Talabat Qatar (41.5% Share)
+          </button>
+          <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Load Snoonu Qatar 31.8% market share economics">
+            <span class="preset-brand-dot dot-snoonu"></span> Snoonu Qatar (31.8% Share)
+          </button>
+          <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Load Keeta / Meituan Qatar scale-up economics">
+            <span class="preset-brand-dot dot-keeta"></span> Keeta Qatar (Meituan Scale)
+          </button>
+        </div>
       </div>
     </div>
-      <!-- STEP 1: SIMULATOR SCALERS (Brought First per Request) -->
-      <section class="simulator-scalers-deck">
-          <!-- Panel 1: Revenue Levers -->
-          <div class="control-card scaler-card">
-            <div class="control-card-header">
-              <div class="control-card-title">
-                <span class="ctrl-icon">&#128179;</span>
-                <h3>Revenue Levers</h3>
-              </div>
-              <span class="control-tag">Platform Inflow</span>
-            </div>
-
-            <!-- AOV Slider -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <div class="slider-label-wrap">
-                  <label class="slider-label" for="sl-aov">Average Order Value (AOV)</label>
-                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="AOV Info">
-                    <span class="tooltip-icon">&#9432;</span>
-                    <div class="tooltip-box">
-                      <div class="tooltip-title">Average Order Value (AOV)</div>
-                      <div class="tooltip-desc">Customer checkout basket size in Qatar (market avg QAR 65&ndash;85; fine dining QAR 110+). Every +QAR 10 expands commission take without increasing driver route miles.</div>
-                    </div>
-                  </div>
                 </div>
                 <span class="slider-val-badge" id="lbl-aov">QAR 78.50</span>
               </div>
@@ -2574,7 +3027,7 @@
           <div style="font-size:1.05rem; font-weight:700; color:#64748B;" id="val-ev-usd">($78.4M USD)</div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:#F8FAFC; border-radius:var(--r-md); border:1px solid #E2E8F0; margin-bottom:12px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:#F8FAFC; border-radius:var(--r-md); border:1px solid #E2E8F0; margin-bottom:14px;">
           <div>
             <div style="font-size:0.72rem; color:#64748B; font-weight:700;">ARR Run-Rate Multiple</div>
             <div style="font-size:1rem; font-weight:800; color:#0F172A; font-family:var(--font-display);" id="val-arr-mult">4.8x Net Revenue</div>
@@ -2585,8 +3038,8 @@
           </div>
         </div>
 
-        <div style="font-size:0.78rem; color:#334155; line-height:1.5;">
-          <strong style="color:#059669;">&#10003; Investment Insight:</strong> Live post-money valuation benchmarks against comparable GCC on-demand exits (HungerStation at $297M, Jahez at $2.4B peak market cap).
+        <div class="strategic-insight-text valuation-insight">
+          <strong>&#10003; Investment Valuation Insight:</strong> Enterprise valuation is modeled dynamically using blended forward multiples (13.5x forward EBITDA and 4.6x Net Revenue run-rate). Benchmarked against regional GCC on-demand delivery precedents, this pro-forma trajectory supports a post-money valuation of QAR 285.4M ($78.4M USD) at Month 36 target capacity.
         </div>
       </div>
 
@@ -2613,7 +3066,7 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:12px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
           <div>
             <span style="font-size:0.75rem; color:#64748B; font-weight:600;">24-Mo LTV / CAC:</span>
             <strong style="color:#0F172A; font-size:0.85rem; margin-left:4px;" id="val-ltv-ratio">5.4x (Healthy &gt; 3.0x)</strong>
@@ -2624,15 +3077,13 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 0.78rem; color:#334155; line-height:1.5;">
-          <strong style="color:#1D4ED8;">&#9889; Strategic Planning:</strong> Merchant payout float eliminates short-term debt requirements, while high AOV and take-rate yield a top-decile 2.9 month payback.
+        <div class="strategic-insight-text">
+          <strong>&#9889; Strategic Planning Insight:</strong> Merchant payout float provides non-debt operational liquidity, eliminating short-term revolving credit requirements. Combined with premium Qatar basket sizes (QAR 78.50 AOV) and tiered 14.5% fair take-rates, customer acquisition costs are recouped in a top-decile 2.9 month horizon.
         </div>
       </div>
     </div>
 
-        <div class="display-panel" style="margin-top: 14px;">
-
-          <!-- Per-Order Unit Economics Waterfall Card -->
+    <!-- Per-Order Unit Economics Waterfall Card -->
           <section class="ue-waterfall-card">
             <div class="card-top-header">
               <div class="card-title-group">
@@ -2773,8 +3224,13 @@
   </main>
     <!-- Footer -->
     <footer class="sim-footer">
-      <div>
-        <strong>DeliverQ Enterprise Financial Modeling Lab</strong> &bull; State of Qatar 2026&ndash;2032
+      <div class="footer-brand">
+        <div class="footer-brand-title">
+          <span>&#128722;</span> DeliverQ Financial Intelligence Lab
+        </div>
+        <div class="footer-brand-sub">
+          Enterprise Unit Economics &amp; Break-Even Modeler &bull; State of Qatar 2026&ndash;2032
+        </div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-link">&#128202; Market Overview</a>
