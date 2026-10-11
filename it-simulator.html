@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeliverQ | IT &amp; Cloud Infrastructure Sizing Simulator (Cloud, Apps, Security &amp; Sizing)</title>
+  <meta name="description"
+    content="Enterprise IT infrastructure, cloud hosting, app ecosystem, cybersecurity, and engineering headcount simulator for Qatar on-demand delivery platforms. Interactive sliders, 5 dynamic charts, PDPPL compliance sizing, and unit cost per order analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    /* ===== RESET & ROOT DESIGN SYSTEM ===== */
+    :root {
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Dark Executive Slate & Electric Cyan Theme */
+      --bg-canvas: #060B16;
+      --bg-surface: #0C1424;
+      --bg-surface-elevated: #111D35;
+      --bg-card: rgba(14, 24, 44, 0.88);
+      --bg-card-hover: rgba(20, 35, 64, 0.98);
+      --bg-input: #090F1C;
+      --border-subtle: rgba(56, 189, 248, 0.14);
+      --border-focus: rgba(59, 130, 246, 0.65);
+      --border-cyan: rgba(6, 182, 212, 0.35);
+
+      /* Accent Brand Colors */
+      --qm-900: #060D1E;
+      --qm-800: #0B1938;
+      --qm-700: #122856;
+      --qm-600: #1D4ED8;
+      --qm-500: #2563EB;
+      --qm-glow: rgba(37, 99, 235, 0.45);
+
+      --cyan-500: #06B6D4;
+      --cyan-400: #22D3EE;
+      --cyan-glow: rgba(6, 182, 212, 0.35);
+
+      --gold-500: #F59E0B;
+      --gold-400: #FBBF24;
+      --emerald-500: #10B981;
+      --emerald-400: #34D399;
+      --rose-500: #F43F5E;
+      --rose-400: #FB7185;
+      --purple-500: #8B5CF6;
+
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+
+      --profit: #10B981;
+      --loss: #F43F5E;
+      --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.2);
+
+      --r-sm: 6px;
+      --r-md: 10px;
+      --r-lg: 16px;
+      --r-xl: 22px;
+      --tr: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Light Theme Overrides */
+    body.light-theme {
+      --bg-canvas: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F1F5F9;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #FFFFFF;
+      --bg-input: #F8FAFC;
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --border-focus: #2563EB;
+      --border-cyan: rgba(6, 182, 212, 0.45);
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-subtle: #64748B;
+      --shadow-card: 0 4px 18px rgba(15, 23, 42, 0.08);
+      --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-bottom: 90px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Sticky App Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 11, 22, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.25s ease;
+    }
+
+    body.light-theme .app-header {
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .header-in {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-app-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--r-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      transition: var(--tr);
+    }
+
+    .btn-app-back:hover {
+      color: var(--text-main);
+      border-color: var(--border-focus);
+      transform: translateX(-2px);
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #1D4ED8, #06B6D4);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(6, 182, 212, 0.35);
+      font-family: var(--font-display);
+    }
+
+    .app-brand-info h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: var(--font-display);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .app-brand-info p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .app-badge-pro {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan-400);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-header-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 7px 12px;
+      border-radius: var(--r-md);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--tr);
+      text-decoration: none;
+    }
+
+    .btn-header-act:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-focus);
+    }
+
+    .btn-header-primary {
+      background: linear-gradient(135deg, var(--qm-600), var(--cyan-500));
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 12px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-header-primary:hover {
+      box-shadow: 0 4px 18px rgba(6, 182, 212, 0.45);
+      transform: translateY(-1px);
+    }
+
+    /* Quick Toolbar / Presets Strip */
+    .quick-settings-strip {
+      max-width: 1440px;
+      margin: 12px auto 0;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 6px;
+    }
+
+    .qs-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--text-subtle);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+
+    .qs-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qs-divider-v {
+      width: 1px;
+      height: 22px;
+      background: var(--border-subtle);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .preset-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--tr);
+    }
+
+    .preset-pill:hover {
+      color: var(--text-main);
+      border-color: var(--cyan-400);
+      background: var(--bg-surface-elevated);
+    }
+
+    .preset-pill.active {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan-400);
+      border-color: var(--cyan-500);
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+
+    body.light-theme .preset-pill.active {
+      background: #E0F2FE;
+      color: #0369A1;
+      border-color: #0284C7;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 16px 20px 40px;
+    }
+
+    /* Executive Deck Header */
+    .sim-hero-banner {
+      background: linear-gradient(135deg, rgba(12, 20, 36, 0.95), rgba(17, 29, 53, 0.85));
+      border: 1px solid var(--border-cyan);
+      border-radius: var(--r-xl);
+      padding: 24px 28px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    body.light-theme .sim-hero-banner {
+      background: linear-gradient(135deg, #EFF6FF, #E0F2FE);
+      border-color: #BAE6FD;
+    }
+
+    .sim-hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .tag-blue {
+      background: rgba(37, 99, 235, 0.2);
+      color: #60A5FA;
+      border: 1px solid rgba(37, 99, 235, 0.4);
+    }
+
+    .tag-cyan {
+      background: rgba(6, 182, 212, 0.2);
+      color: #22D3EE;
+      border: 1px solid rgba(6, 182, 212, 0.4);
+    }
+
+    .tag-gold {
+      background: rgba(245, 158, 11, 0.2);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .sim-hero-banner h1 {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .sim-hero-banner p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 980px;
+      line-height: 1.55;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: var(--tr);
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-cyan);
+    }
+
+    .kpi-card.highlight-cyan {
+      border-color: rgba(6, 182, 212, 0.4);
+      background: linear-gradient(180deg, rgba(6, 182, 212, 0.08), var(--bg-card));
+    }
+
+    .kpi-card.highlight-emerald {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08), var(--bg-card));
+    }
+
+    .kpi-card.highlight-gold {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), var(--bg-card));
+    }
+
+    .kpi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .kpi-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-icon {
+      font-size: 1.1rem;
+    }
+
+    .kpi-val {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .kpi-sub {
+      font-size: 0.74rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kpi-badge {
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .kpi-badge.positive {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .kpi-badge.cyan {
+      background: rgba(6, 182, 212, 0.15);
+      color: #22D3EE;
+      border: 1px solid rgba(6, 182, 212, 0.35);
+    }
+
+    /* Cockpit 2-Column Grid Layout */
+    .cockpit-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1180px) {
+      .cockpit-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Levers Panel */
+    .levers-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .control-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-card);
+      transition: var(--tr);
+    }
+
+    .control-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .control-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .control-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ctrl-icon {
+      font-size: 1.2rem;
+    }
+
+    .control-card-title h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .control-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Sliders and Touch Inputs */
+    .slider-group {
+      margin-bottom: 16px;
+    }
+
+    .slider-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .slider-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slider-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .slider-val-badge {
+      font-family: var(--font-display);
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.28);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    body.light-theme .slider-val-badge {
+      background: #E0F2FE;
+      color: #0369A1;
+      border-color: #BAE6FD;
+    }
+
+    .slider-touch-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-step {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--tr);
+    }
+
+    .btn-step:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--cyan-400);
+      color: var(--cyan-400);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: var(--bg-surface-elevated);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--cyan-500);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
+      border: 2px solid #fff;
+      transition: transform 0.15s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .slider-scale {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    /* Select Dropdown */
+    .select-touch {
+      width: 100%;
+      padding: 9px 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      border-radius: var(--r-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      transition: var(--tr);
+    }
+
+    .select-touch:focus {
+      border-color: var(--cyan-400);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+
+    /* Analytics Results & Charts View */
+    .analytics-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .charts-grid-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .charts-grid-duo {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .chart-box-header h4 {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 250px;
+      width: 100%;
+    }
+
+    /* Operational Strategy Box */
+    .insights-box {
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      position: relative;
+    }
+
+    body.light-theme .insights-box {
+      background: #F0FDFA;
+      border-color: #99F6E4;
+    }
+
+    .insights-box h4 {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--cyan-400);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    body.light-theme .insights-box h4 {
+      color: #0F766E;
+    }
+
+    .insights-box p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Sensitivity Table */
+    .matrix-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      margin-top: 14px;
+    }
+
+    .sens-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 6px;
+      font-size: 0.82rem;
+      min-width: 600px;
+    }
+
+    .sens-table th {
+      padding: 8px 10px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      font-weight: 700;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.74rem;
+    }
+
+    .sens-table td.row-header {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .sens-cell {
+      padding: 10px 8px;
+      text-align: center;
+      font-weight: 800;
+      border-radius: 6px;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      transition: var(--tr);
+    }
+
+    .sens-cell.cell-tier1 {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .sens-cell.cell-tier2 {
+      background: rgba(6, 182, 212, 0.2);
+      color: #22D3EE;
+      border: 1px solid rgba(6, 182, 212, 0.4);
+    }
+
+    .sens-cell.cell-tier3 {
+      background: rgba(245, 158, 11, 0.2);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .sens-cell.cell-tier4 {
+      background: rgba(244, 63, 94, 0.2);
+      color: #FB7185;
+      border: 1px solid rgba(244, 63, 94, 0.4);
+    }
+
+    .sens-cell.is-current {
+      outline: 2px solid #38BDF8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    }
+
+    /* Mobile Floating Ticker */
+    .mobile-floating-ticker {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: rgba(6, 11, 22, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-cyan);
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    body.light-theme .mobile-floating-ticker {
+      background: rgba(255, 255, 255, 0.95);
+      border-top-color: #BAE6FD;
+    }
+
+    .ticker-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ticker-lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-subtle);
+    }
+
+    .ticker-val {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--cyan-400);
+      line-height: 1.1;
+    }
+
+    .ticker-btn {
+      background: linear-gradient(135deg, var(--qm-600), var(--cyan-500));
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: var(--r-md);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(6, 182, 212, 0.3);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 1000;
+      background: #0F172A;
+      color: #fff;
+      border: 1px solid var(--cyan-500);
+      padding: 12px 18px;
+      border-radius: var(--r-md);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Footer */
+    .sim-footer {
+      max-width: 1440px;
+      margin: 40px auto 0;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-subtle);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: var(--tr);
+    }
+
+    .footer-link:hover {
+      color: var(--cyan-400);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sticky Top App Header -->
+  <header class="app-header">
+    <div class="header-in">
+      <div class="header-left">
+        <a href="index.html" class="btn-app-back" title="Return to Market Intelligence Dashboard">
+          <span>&#8592;</span> Market Intel
+        </a>
+        <a href="simulator.html" class="btn-app-back" title="Switch to Delivery Economics Simulator">
+          <span>&#9881;&#65039;</span> Delivery Simulator
+        </a>
+        <div class="app-brand">
+          <div class="app-logo">&#9729;&#65039;</div>
+          <div class="app-brand-info">
+            <h2>DeliverQ Tech Lab <span class="app-badge-pro">IT &amp; Cloud Sizing Suite v2.0</span></h2>
+            <p>Qatar Cloud, Apps, Security, PDPPL &amp; Headcount Modeler</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="themeToggle" class="btn-header-act" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span id="themeIcon">&#127763;</span>
+        </button>
+        <button class="btn-header-act" onclick="copyCTOSummary()" title="Copy CTO Executive Summary to Clipboard">
+          <span>&#128203;</span> Copy CTO Brief
+        </button>
+        <button class="btn-header-act btn-header-primary" onclick="exportConfigJSON()" title="Export IT Architecture Config to JSON">
+          <span>&#128190;</span> Export JSON
+        </button>
+        <button class="btn-header-act" onclick="resetDefaults()" title="Reset to DeliverQ Year 3 Base Plan">
+          <span>&#8634;</span> Reset Base
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick Scenario Presets Toolbar -->
+  <div class="quick-settings-strip">
+    <span class="qs-label">&#9889; Sizing Tier:</span>
+    <div class="qs-group">
+      <button class="preset-pill" id="preset-mvp" onclick="loadPreset('mvp')" title="Year 1 Launch MVP: 96k orders/mo, 15 engineers, GCP Doha lean compute">
+        <span>&#128640;</span> <strong>Yr 1 MVP</strong> (96k/mo)
+      </button>
+      <button class="preset-pill" id="preset-growth" onclick="loadPreset('growth')" title="Year 2 Rapid Growth: 255k orders/mo, 28 engineers, Multi-AZ Kubernetes">
+        <span>&#128200;</span> <strong>Yr 2 Growth</strong> (255k/mo)
+      </button>
+      <button class="preset-pill active" id="preset-base" onclick="loadPreset('deliverq_base')" title="Year 3 DeliverQ Target: 555k orders/mo, 42 engineers, Sovereign PDPPL + AI Dispatch">
+        <span>&#127919;</span> <strong>Yr 3 Base</strong> (555k/mo)
+      </button>
+      <button class="preset-pill" id="preset-enterprise" onclick="loadPreset('enterprise')" title="Year 5 Hyper-Scale: 1.26M orders/mo, 68 engineers, Multi-Region &amp; Custom Routing">
+        <span>&#127970;</span> <strong>Yr 5 Scale</strong> (1.26M/mo)
+      </button>
+    </div>
+
+    <div class="qs-divider-v"></div>
+
+    <span class="qs-label">&#128293; Stress Preset:</span>
+    <div class="qs-group">
+      <button class="preset-pill" id="preset-ramadan" onclick="loadPreset('ramadan_surge')" title="Peak Ramadan Evening Surge: 3.5x Concurrency Spike, Auto-Scaling &amp; OTP Blast">
+        <span>&#127769;</span> <strong>Ramadan Peak Surge</strong> (3.5x RPS)
+      </button>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- Executive Hero Banner -->
+    <section class="sim-hero-banner">
+      <div class="hero-badge-row">
+        <span class="hero-tag tag-cyan">Sovereign Cloud &bull; GCP Doha me-central2</span>
+        <span class="hero-tag tag-blue">Qatar PDPPL Law No. 13 of 2016 Compliant</span>
+        <span class="hero-tag tag-gold">IT Unit Cost Modeling</span>
+      </div>
+      <h1>Enterprise IT, Cloud &amp; Platform Architecture Sizing Lab</h1>
+      <p>
+        Institutional financial and engineering simulator for sizing Qatar&rsquo;s next-generation delivery super-platform. Dynamically simulate monthly cloud hosting (GCP Doha / Azure Qatar), mobile app runtime, Google Maps / Mapbox routing, Twilio/Infobip SMS OTPs, Cloudflare WAF, Qatar PDPPL compliance, and 6 specialized engineering squads to compute the exact <strong>IT cost per delivery drop</strong>.
+      </p>
+    </section>
+
+    <!-- Key Performance Indicators (6 Live Cards) -->
+    <section class="kpi-grid">
+      <div class="kpi-card highlight-cyan">
+        <div class="kpi-top">
+          <span class="kpi-title">Monthly IT OPEX</span>
+          <span class="kpi-icon">&#128187;</span>
+        </div>
+        <div class="kpi-val" id="kpi-total-it-qar">QAR 288.4K</div>
+        <div class="kpi-sub">
+          <span id="kpi-total-it-usd">$79.2K USD / month</span>
+          <span class="kpi-badge cyan" id="kpi-runrate-annual">QAR 3.46M ARR</span>
+        </div>
+      </div>
+
+      <div class="kpi-card highlight-emerald">
+        <div class="kpi-top">
+          <span class="kpi-title">IT Cost / Delivery</span>
+          <span class="kpi-icon">&#128666;</span>
+        </div>
+        <div class="kpi-val" id="kpi-cost-per-order" style="color:var(--emerald-400);">QAR 0.52</div>
+        <div class="kpi-sub">
+          <span id="kpi-cost-order-usd">$0.14 USD / drop</span>
+          <span class="kpi-badge positive" id="kpi-margin-impact">2.7% of Take-Rate</span>
+        </div>
+      </div>
+
+      <div class="kpi-card highlight-gold">
+        <div class="kpi-top">
+          <span class="kpi-title">Cloud &amp; Hosting OPEX</span>
+          <span class="kpi-icon">&#9729;&#65039;</span>
+        </div>
+        <div class="kpi-val" id="kpi-cloud-spend">QAR 84.6K</div>
+        <div class="kpi-sub">
+          <span id="kpi-cloud-region">GCP Doha (me-central2)</span>
+          <span class="kpi-badge" style="background:rgba(245,158,11,0.15);color:#FBBF24;">Compute &amp; DB</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <span class="kpi-title">APIs, Maps &amp; SMS OTP</span>
+          <span class="kpi-icon">&#128241;</span>
+        </div>
+        <div class="kpi-val" id="kpi-apis-spend">QAR 72.8K</div>
+        <div class="kpi-sub">
+          <span>Maps, Infobip &amp; APM</span>
+          <span id="kpi-otp-count">~185K SMS/mo</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <span class="kpi-title">Cybersecurity &amp; PDPPL</span>
+          <span class="kpi-icon">&#128274;</span>
+        </div>
+        <div class="kpi-val" id="kpi-sec-spend">QAR 36.5K</div>
+        <div class="kpi-sub">
+          <span>WAF, SIEM &amp; Pentest</span>
+          <span class="kpi-badge" style="background:rgba(139,92,246,0.15);color:#A78BFA;">PDPPL Law 13</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <span class="kpi-title">Tech Team Payroll</span>
+          <span class="kpi-icon">&#128101;</span>
+        </div>
+        <div class="kpi-val" id="kpi-payroll-spend">QAR 794.5K</div>
+        <div class="kpi-sub">
+          <span id="kpi-headcount-badge">42 Engineers</span>
+          <span id="kpi-nearshore-ratio">35% HQ / 65% Hub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cockpit 2-Column Grid -->
+    <div class="cockpit-layout">
+
+      <!-- COLUMN 1: CONTROL LEVERS -->
+      <section class="levers-panel" id="it-scalers-deck">
+
+        <!-- Panel 1: Platform Scale & Concurrency Drivers -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-card-title">
+              <span class="ctrl-icon">&#128200;</span>
+              <h3>Traffic &amp; Scale Drivers</h3>
+            </div>
+            <span class="control-tag">Workload</span>
+          </div>
+
+          <!-- Monthly Orders -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <div class="slider-label-wrap">
+                <label class="slider-label" for="sl-orders">Monthly Order Volume</label>
+              </div>
+              <span class="slider-val-badge" id="lbl-orders">555,000 / mo</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-orders', -25000)">-</button>
+              <input type="range" id="sl-orders" min="50000" max="2000000" step="25000" value="555000" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-orders', 25000)">+</button>
+            </div>
+            <div class="slider-scale"><span>50k (Launch)</span><span>555k (Yr 3)</span><span>2.0M (Scale)</span></div>
+          </div>
+
+          <!-- Peak RPS Concurrency -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <div class="slider-label-wrap">
+                <label class="slider-label" for="sl-rps">Peak Concurrency (RPS)</label>
+              </div>
+              <span class="slider-val-badge" id="lbl-rps">850 RPS</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-rps', -50)">-</button>
+              <input type="range" id="sl-rps" min="50" max="5000" step="50" value="850" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-rps', 50)">+</button>
+            </div>
+            <div class="slider-scale"><span>50 RPS</span><span>1,200 RPS</span><span>5,000 RPS</span></div>
+          </div>
+
+          <!-- Active Delivery Fleet -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <div class="slider-label-wrap">
+                <label class="slider-label" for="sl-fleet">Active Telemetry Fleet</label>
+              </div>
+              <span class="slider-val-badge" id="lbl-fleet">1,850 Riders</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-fleet', -100)">-</button>
+              <input type="range" id="sl-fleet" min="150" max="8000" step="50" value="1850" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-fleet', 100)">+</button>
+            </div>
+            <div class="slider-scale"><span>150 Riders</span><span>2,000</span><span>8,000 Riders</span></div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Cloud Infrastructure & Sovereign Hosting -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-card-title">
+              <span class="ctrl-icon">&#9729;&#65039;</span>
+              <h3>Cloud &amp; Sovereign Hosting</h3>
+            </div>
+            <span class="control-tag">Compute &amp; DB</span>
+          </div>
+
+          <!-- Cloud Provider Selection -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sel-cloud-provider">Cloud Region &amp; Hosting</label>
+              <span class="slider-val-badge" id="lbl-provider-tag">Doha Region</span>
+            </div>
+            <select id="sel-cloud-provider" class="select-touch" onchange="runITSimulation()">
+              <option value="gcp_doha" selected>Google Cloud Platform (GCP Doha - me-central2)</option>
+              <option value="azure_qatar">Microsoft Azure (Qatar Central - Doha)</option>
+              <option value="aws_me">AWS Middle East (Bahrain / UAE)</option>
+              <option value="hybrid_multi">Hybrid Multi-Cloud (GCP Doha + Azure Failover)</option>
+            </select>
+          </div>
+
+          <!-- Kubernetes Microservices Cluster -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sl-k8s-nodes">Kubernetes EKS/GKE Nodes</label>
+              <span class="slider-val-badge" id="lbl-k8s-nodes">18 Nodes</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-k8s-nodes', -2)">-</button>
+              <input type="range" id="sl-k8s-nodes" min="4" max="80" step="2" value="18" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-k8s-nodes', 2)">+</button>
+            </div>
+            <div class="slider-scale"><span>4 Nodes</span><span>30 Nodes</span><span>80 Nodes</span></div>
+          </div>
+
+          <!-- Database & Redis HA Cluster -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sl-db-tier">Database Tier (PostgreSQL + Redis)</label>
+              <span class="slider-val-badge" id="lbl-db-tier">Enterprise HA</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-db-tier', -1)">-</button>
+              <input type="range" id="sl-db-tier" min="1" max="4" step="1" value="3" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-db-tier', 1)">+</button>
+            </div>
+            <div class="slider-scale"><span>Dev Multi-AZ</span><span>Standard HA</span><span>Enterprise HA</span><span>Clustered Sharded</span></div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Mobile Apps, APIs & Telecommunications -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-card-title">
+              <span class="ctrl-icon">&#128242;</span>
+              <h3>Mobile Apps, Maps &amp; SMS</h3>
+            </div>
+            <span class="control-tag">APIs &amp; Comms</span>
+          </div>
+
+          <!-- Maps & Geolocation API Tier -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sel-maps-tier">Routing &amp; Geocoding Provider</label>
+              <span class="slider-val-badge" id="lbl-maps-badge">Hybrid Optimized</span>
+            </div>
+            <select id="sel-maps-tier" class="select-touch" onchange="runITSimulation()">
+              <option value="google_pure">Google Maps Platform Exclusive (QAR 0.28 / order)</option>
+              <option value="hybrid" selected>Hybrid: Google Autocomplete + Mapbox Matrix (QAR 0.16 / order)</option>
+              <option value="custom_osrm">Proprietary OSRM + OpenStreetMap Tiles (QAR 0.07 / order)</option>
+            </select>
+          </div>
+
+          <!-- SMS OTP Verification Gateway -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sl-sms-ratio">SMS OTP per 10 Orders</label>
+              <span class="slider-val-badge" id="lbl-sms-ratio">3.5 SMS</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-sms-ratio', -0.5)">-</button>
+              <input type="range" id="sl-sms-ratio" min="1.0" max="6.0" step="0.5" value="3.5" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-sms-ratio', 0.5)">+</button>
+            </div>
+            <div class="slider-scale"><span>1.0 (WhatsApp first)</span><span>3.5 (Standard)</span><span>6.0 (High SMS)</span></div>
+          </div>
+
+          <!-- Mobile APM & Monitoring (Datadog/Sentry) -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sel-apm-tier">APM &amp; Crash Reporting Tier</label>
+              <span class="slider-val-badge" id="lbl-apm-badge">Datadog Full</span>
+            </div>
+            <select id="sel-apm-tier" class="select-touch" onchange="runITSimulation()">
+              <option value="starter">Sentry Basic + CloudWatch Logs</option>
+              <option value="pro" selected>Datadog APM + Sentry Mobile + Mixpanel</option>
+              <option value="enterprise">Full Dynatrace / Datadog Suite + Real User Monitoring</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Panel 4: Cybersecurity & Qatar PDPPL Compliance -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-card-title">
+              <span class="ctrl-icon">&#128274;</span>
+              <h3>Security &amp; Qatar PDPPL</h3>
+            </div>
+            <span class="control-tag">Governance</span>
+          </div>
+
+          <!-- Security Tier -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sel-sec-tier">Cybersecurity &amp; WAF Tier</label>
+              <span class="slider-val-badge" id="lbl-sec-badge">Enterprise WAF</span>
+            </div>
+            <select id="sel-sec-tier" class="select-touch" onchange="runITSimulation()">
+              <option value="standard">Cloudflare Pro + AWS Shield Standard</option>
+              <option value="enterprise" selected>Cloudflare Enterprise WAF + Bot Management + SIEM</option>
+              <option value="financial_grade">Financial-Grade: Cloudflare Ent + Crowdsourced Pentest + 24/7 SOC</option>
+            </select>
+          </div>
+
+          <!-- Qatar PDPPL Data Residency -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sel-pdppl-compliance">Qatar PDPPL Data Residency Law</label>
+              <span class="slider-val-badge" id="lbl-pdppl-badge">Full Sovereign</span>
+            </div>
+            <select id="sel-pdppl-compliance" class="select-touch" onchange="runITSimulation()">
+              <option value="strict_sovereign" selected>Strict Sovereign: 100% Data In-Country (GCP Doha) + Local Key Vault</option>
+              <option value="hybrid_gcc">GCC Regional Data Residency (Doha + UAE)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Panel 5: Engineering & IT Human Resources -->
+        <div class="control-card">
+          <div class="control-card-header">
+            <div class="control-card-title">
+              <span class="ctrl-icon">&#128101;</span>
+              <h3>Engineering Squad Headcount</h3>
+            </div>
+            <span class="control-tag">Talent &amp; Hubs</span>
+          </div>
+
+          <!-- Total Engineers -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sl-headcount">Total Engineering Headcount</label>
+              <span class="slider-val-badge" id="lbl-headcount">42 Engineers</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-headcount', -2)">-</button>
+              <input type="range" id="sl-headcount" min="12" max="100" step="2" value="42" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-headcount', 2)">+</button>
+            </div>
+            <div class="slider-scale"><span>12 (MVP)</span><span>42 (Yr 3)</span><span>100 (Scale)</span></div>
+          </div>
+
+          <!-- Qatar HQ vs Nearshore Blend Ratio -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label class="slider-label" for="sl-hq-ratio">Qatar HQ Tech Lead Ratio</label>
+              <span class="slider-val-badge" id="lbl-hq-ratio">35% Doha HQ</span>
+            </div>
+            <div class="slider-touch-row">
+              <button class="btn-step" onclick="stepVal('sl-hq-ratio', -5)">-</button>
+              <input type="range" id="sl-hq-ratio" min="15" max="70" step="5" value="35" oninput="runITSimulation()">
+              <button class="btn-step" onclick="stepVal('sl-hq-ratio', 5)">+</button>
+            </div>
+            <div class="slider-scale"><span>15% HQ (Hub heavy)</span><span>35% Balanced</span><span>70% HQ Centric</span></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- COLUMN 2: ANALYTICS RESULTS & CHARTS -->
+      <section class="analytics-panel">
+
+        <!-- Dynamic Insights Executive Summary Box -->
+        <div class="insights-box" id="itInsightBox">
+          <h4><span>&#10003;</span> Technology Economics &amp; Infrastructure Synthesis</h4>
+          <p id="itInsightText">
+            At 555,000 monthly deliveries (18,500 orders/day), total monthly IT operational expenditure is <strong>QAR 288.4K ($79.2K USD)</strong>. This delivers an outstanding unit cost efficiency of <strong>QAR 0.52 per order ($0.14 USD)</strong>, consuming just <strong>2.7% of DeliverQ&rsquo;s QAR 18.98 gross platform revenue</strong>.
+          </p>
+        </div>
+
+        <!-- Duo Charts Row 1: Spend Distribution & Unit Cost Compression -->
+        <div class="charts-grid-duo">
+          <div class="chart-box">
+            <div class="chart-box-header">
+              <h4><span>&#129684;</span> Monthly IT Spend Allocation</h4>
+              <span class="control-tag">OPEX Split</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chartITSpendDonut"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <div class="chart-box-header">
+              <h4><span>&#128200;</span> IT Cost / Order Scaling Curve</h4>
+              <span class="control-tag">Economies of Scale</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chartITScaleCurve"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duo Charts Row 2: Cloud Tier Breakdown & Engineering Headcount -->
+        <div class="charts-grid-duo">
+          <div class="chart-box">
+            <div class="chart-box-header">
+              <h4><span>&#9729;&#65039;</span> Cloud Infra Spend by Tier</h4>
+              <span class="control-tag">Compute vs DB vs CDN</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chartCloudTierBar"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <div class="chart-box-header">
+              <h4><span>&#128101;</span> Engineering Squad Distribution</h4>
+              <span class="control-tag">Technical Roles</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chartHeadcountBar"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart Row 3: Sovereign Cloud Provider Comparison -->
+        <div class="chart-box">
+          <div class="chart-box-header">
+            <h4><span>&#127757;</span> Qatar Sovereign Cloud &amp; Hosting Benchmark (GCP Doha vs Azure Qatar vs AWS ME)</h4>
+            <span class="control-tag">Region Comparison</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartProviderBenchmark"></canvas>
+          </div>
+        </div>
+
+        <!-- 2D Concurrency & Telemetry Stress-Test Matrix -->
+        <div class="matrix-card">
+          <div class="chart-box-header" style="margin-bottom:8px;">
+            <h4><span>&#9889;</span> Concurrency (RPS) vs Fleet Telemetry Stress-Matrix</h4>
+            <span class="control-tag">Cloud OPEX (QAR / Month)</span>
+          </div>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
+            Simulated cloud hosting expenditure (Kubernetes auto-scaling compute, Redis geospatial cache, and egress bandwidth) across peak requests per second (RPS) and concurrent active riders streaming GPS pings.
+          </p>
+
+          <div class="table-responsive">
+            <table class="sens-table">
+              <thead>
+                <tr>
+                  <th>Concurrency \\ Fleet</th>
+                  <th>500 Riders</th>
+                  <th>1,200 Riders</th>
+                  <th>1,850 Riders (Base)</th>
+                  <th>3,500 Riders</th>
+                  <th>6,000 Riders (Peak)</th>
+                </tr>
+              </thead>
+              <tbody id="itSensTableBody">
+                <!-- Dynamically generated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Mobile Floating Quick Ticker (Bottom Bar) -->
+  <div class="mobile-floating-ticker">
+    <div class="ticker-col">
+      <span class="ticker-lbl">IT Cost / Delivery</span>
+      <span class="ticker-val" id="ticker-it-order">QAR 0.52</span>
+    </div>
+    <div class="ticker-col">
+      <span class="ticker-lbl">Monthly IT OPEX</span>
+      <span class="ticker-val" id="ticker-it-monthly" style="color:var(--gold-400);">QAR 288.4K</span>
+    </div>
+    <button class="ticker-btn" onclick="document.getElementById('it-scalers-deck').scrollIntoView({behavior:'smooth'})">
+      Adjust Levers &#8593;
+    </button>
+  </div>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast" id="itToast">
+    <span>&#10003;</span>
+    <span id="itToastMsg">CTO Executive Brief copied to clipboard!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="sim-footer">
+    <div class="footer-brand">
+      <div style="font-weight:700; color:var(--text-main); margin-bottom:4px;">
+        <span>&#9729;&#65039;</span> DeliverQ Technology &amp; Infrastructure Intelligence
+      </div>
+      <div>
+        Sovereign Qatar Cloud Architecture &bull; PDPPL Compliance &bull; 2026&ndash;2032 Feasibility
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">&#128202; Market Overview</a>
+      <a href="simulator.html" class="footer-link">&#9881;&#65039; Delivery Economics Simulator</a>
+      <a href="index.html#tab-services" class="footer-link">&#128640; Platform Architecture</a>
+      <a href="index.html#tab-financials" class="footer-link">&#128176; 5-Year Financials</a>
+      <a href="index.html#tab-operations" class="footer-link">&#9878;&#65039; Regulatory Roadmap</a>
+    </div>
+  </footer>
+
+  <!-- Simulation Engine & Chart.js Visualizations Script -->
+  <script>
+    // ===== SCENARIO PRESETS =====
+    var IT_PRESETS = {
+      mvp: {
+        name: 'Year 1 Launch MVP',
+        orders: 96000, rps: 220, fleet: 400,
+        provider: 'gcp_doha', k8s: 8, dbTier: 1,
+        mapsTier: 'hybrid', smsRatio: 4.5, apmTier: 'starter',
+        secTier: 'standard', pdppl: 'strict_sovereign',
+        headcount: 15, hqRatio: 40
+      },
+      growth: {
+        name: 'Year 2 Scale-Up',
+        orders: 255000, rps: 450, fleet: 950,
+        provider: 'gcp_doha', k8s: 12, dbTier: 2,
+        mapsTier: 'hybrid', smsRatio: 3.8, apmTier: 'pro',
+        secTier: 'enterprise', pdppl: 'strict_sovereign',
+        headcount: 28, hqRatio: 35
+      },
+      deliverq_base: {
+        name: 'Year 3 DeliverQ Base Plan',
+        orders: 555000, rps: 850, fleet: 1850,
+        provider: 'gcp_doha', k8s: 18, dbTier: 3,
+        mapsTier: 'hybrid', smsRatio: 3.5, apmTier: 'pro',
+        secTier: 'enterprise', pdppl: 'strict_sovereign',
+        headcount: 42, hqRatio: 35
+      },
+      enterprise: {
+        name: 'Year 5 Hyper-Scale',
+        orders: 1260000, rps: 2200, fleet: 4200,
+        provider: 'gcp_doha', k8s: 36, dbTier: 4,
+        mapsTier: 'custom_osrm', smsRatio: 2.2, apmTier: 'enterprise',
+        secTier: 'financial_grade', pdppl: 'strict_sovereign',
+        headcount: 68, hqRatio: 30
+      },
+      ramadan_surge: {
+        name: 'Ramadan Evening Peak Surge',
+        orders: 850000, rps: 3200, fleet: 2800,
+        provider: 'gcp_doha', k8s: 48, dbTier: 4,
+        mapsTier: 'hybrid', smsRatio: 5.0, apmTier: 'pro',
+        secTier: 'enterprise', pdppl: 'strict_sovereign',
+        headcount: 46, hqRatio: 35
+      }
+    };
+
+    var currentPreset = 'deliverq_base';
+    var charts = {};
+
+    // Theme Management
+    function initTheme() {
+      var saved = localStorage.getItem('deliverq_theme') || 'dark';
+      if (saved === 'light') {
+        document.body.classList.add('light-theme');
+      }
+      updateThemeButton();
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      var isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('deliverq_theme', isLight ? 'light' : 'dark');
+      updateThemeButton();
+      renderAllITCharts();
+    }
+
+    function updateThemeButton() {
+      var isLight = document.body.classList.contains('light-theme');
+      var icon = document.getElementById('themeIcon');
+      if (icon) icon.innerHTML = isLight ? '&#9728;&#65039;' : '&#127763;';
+    }
+
+    function stepVal(id, step) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var cur = parseFloat(el.value);
+      var min = parseFloat(el.min);
+      var max = parseFloat(el.max);
+      var next = Math.max(min, Math.min(max, cur + step));
+      el.value = next;
+      runITSimulation();
+    }
+
+    function loadPreset(key) {
+      var p = IT_PRESETS[key];
+      if (!p) return;
+      currentPreset = key;
+
+      document.querySelectorAll('.preset-pill').forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      var activeBtn = document.getElementById('preset-' + (key === 'deliverq_base' ? 'base' : key));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('sl-orders').value = p.orders;
+      document.getElementById('sl-rps').value = p.rps;
+      document.getElementById('sl-fleet').value = p.fleet;
+      document.getElementById('sel-cloud-provider').value = p.provider;
+      document.getElementById('sl-k8s-nodes').value = p.k8s;
+      document.getElementById('sl-db-tier').value = p.dbTier;
+      document.getElementById('sel-maps-tier').value = p.mapsTier;
+      document.getElementById('sl-sms-ratio').value = p.smsRatio;
+      document.getElementById('sel-apm-tier').value = p.apmTier;
+      document.getElementById('sel-sec-tier').value = p.secTier;
+      document.getElementById('sel-pdppl-compliance').value = p.pdppl;
+      document.getElementById('sl-headcount').value = p.headcount;
+      document.getElementById('sl-hq-ratio').value = p.hqRatio;
+
+      runITSimulation();
+      showToast('Loaded ' + p.name + ' Sizing Preset');
+    }
+
+    function resetDefaults() {
+      loadPreset('deliverq_base');
+    }
+
+    // MAIN SIMULATION CALCULATION ENGINE
+    function runITSimulation() {
+      var orders = parseInt(document.getElementById('sl-orders').value, 10);
+      var rps = parseInt(document.getElementById('sl-rps').value, 10);
+      var fleet = parseInt(document.getElementById('sl-fleet').value, 10);
+
+      var cloudProvider = document.getElementById('sel-cloud-provider').value;
+      var k8sNodes = parseInt(document.getElementById('sl-k8s-nodes').value, 10);
+      var dbTier = parseInt(document.getElementById('sl-db-tier').value, 10);
+
+      var mapsTier = document.getElementById('sel-maps-tier').value;
+      var smsRatio = parseFloat(document.getElementById('sl-sms-ratio').value);
+      var apmTier = document.getElementById('sel-apm-tier').value;
+
+      var secTier = document.getElementById('sel-sec-tier').value;
+      var pdpplMode = document.getElementById('sel-pdppl-compliance').value;
+
+      var headcount = parseInt(document.getElementById('sl-headcount').value, 10);
+      var hqRatio = parseFloat(document.getElementById('sl-hq-ratio').value) / 100;
+
+      // Update Labels
+      document.getElementById('lbl-orders').textContent = orders.toLocaleString() + ' / mo';
+      document.getElementById('lbl-rps').textContent = rps.toLocaleString() + ' RPS';
+      document.getElementById('lbl-fleet').textContent = fleet.toLocaleString() + ' Riders';
+      document.getElementById('lbl-k8s-nodes').textContent = k8sNodes + ' Nodes';
+
+      var dbNames = ['Dev Multi-AZ', 'Standard HA', 'Enterprise HA', 'Clustered Sharded'];
+      document.getElementById('lbl-db-tier').textContent = dbNames[dbTier - 1] || 'HA Tier';
+
+      document.getElementById('lbl-sms-ratio').textContent = smsRatio.toFixed(1) + ' SMS / 10 ord';
+      document.getElementById('lbl-headcount').textContent = headcount + ' Engineers';
+      document.getElementById('lbl-hq-ratio').textContent = (hqRatio * 100).toFixed(0) + '% Doha HQ';
+
+      // 1. Cloud Infrastructure Sizing (Compute, DB, Redis, Storage, Egress)
+      // Node cost benchmark in GCP Doha / Azure Qatar: ~QAR 1,450 / node / mo (c2d-standard-8 or Standard_D8s_v5)
+      var providerMultiplier = (cloudProvider === 'gcp_doha') ? 1.00 :
+                                (cloudProvider === 'azure_qatar') ? 1.03 :
+                                (cloudProvider === 'aws_me') ? 0.94 : 1.12; // Hybrid multi-cloud slight egress overhead
+
+      var computeSpend = k8sNodes * 1450 * providerMultiplier;
+      var dbBaseCosts = [5500, 11500, 22000, 38000];
+      var dbSpend = dbBaseCosts[dbTier - 1] * providerMultiplier;
+
+      // Redis caching + Kafka event streaming based on telemetry fleet and RPS
+      var redisKafkaSpend = (fleet * 3.8 + rps * 6.5) * providerMultiplier;
+      // Storage & CDN: menu photos, driver KYC, order slips (~0.04 QAR per order)
+      var storageCdnSpend = Math.max(3500, orders * 0.028);
+      // Egress bandwidth: rider telemetry pings every 3s + customer app refreshes
+      var egressSpend = Math.max(2800, (fleet * 5.2 + orders * 0.015) * providerMultiplier);
+
+      var totalCloudSpend = computeSpend + dbSpend + redisKafkaSpend + storageCdnSpend + egressSpend;
+
+      // 2. Third-Party APIs, Maps, Messaging & APM
+      var mapsCostPerOrder = (mapsTier === 'google_pure') ? 0.28 :
+                             (mapsTier === 'hybrid') ? 0.16 : 0.07;
+      var mapsSpend = orders * mapsCostPerOrder;
+
+      // SMS OTP: QAR 0.14 per SMS (Twilio / Infobip / Ooredoo bulk)
+      var totalSMSCount = Math.round(orders * (smsRatio / 10));
+      var smsSpend = totalSMSCount * 0.14;
+
+      var apmBaseCosts = { starter: 4200, pro: 14500, enterprise: 31000 };
+      var apmSpend = apmBaseCosts[apmTier] || 14500;
+
+      var totalApisSpend = mapsSpend + smsSpend + apmSpend;
+
+      // 3. Cybersecurity, WAF & Qatar PDPPL Compliance
+      var secBaseCosts = { standard: 8500, enterprise: 24500, financial_grade: 48000 };
+      var secSpend = secBaseCosts[secTier] || 24500;
+      var pdpplOverhead = (pdpplMode === 'strict_sovereign') ? 12000 : 6000; // In-country audit logs, dedicated HSM key vault
+      var totalSecSpend = secSpend + pdpplOverhead;
+
+      // 4. Platform SaaS, Payment Tooling & IT Collaboration
+      // Payment orchestration gateway fees (QPay / NAPS / Apple Pay tokenization platform maintenance): QAR 0.025 / order
+      var paymentPlatformSpend = Math.max(4500, orders * 0.025);
+      // Customer support AI triage seats (Zendesk / Intercom): ~QAR 180 / agent seat
+      var supportSeats = Math.max(10, Math.round(orders / 22000));
+      var supportSaaSSpend = supportSeats * 180;
+      // Google Workspace, Slack, Jira, GitHub Enterprise, 1Password: QAR 220 / engineer
+      var internalToolingSpend = headcount * 220;
+
+      var totalSaaSSpend = paymentPlatformSpend + supportSaaSSpend + internalToolingSpend;
+
+      // 5. Total Non-Personnel IT OPEX
+      var totalITNonLabor = totalCloudSpend + totalApisSpend + totalSecSpend + totalSaaSSpend;
+
+      // 6. Engineering & IT Team Payroll Sizing
+      // Qatar HQ Tech Lead / Sr Engineer blended: QAR 32,000 / month
+      // Nearshore Engineering Hub (Amman / Cairo / Bangalore) blended: QAR 13,500 / month
+      var hqEngineers = Math.round(headcount * hqRatio);
+      var nearshoreEngineers = headcount - hqEngineers;
+      var totalPayrollSpend = (hqEngineers * 32000) + (nearshoreEngineers * 13500);
+
+      // Total IT OPEX (Infrastructure + SaaS + Security + APIs)
+      var costPerOrderInfra = totalITNonLabor / orders;
+      var costPerOrderFullyLoaded = (totalITNonLabor + totalPayrollSpend) / orders;
+
+      // Update KPI Displays
+      document.getElementById('kpi-total-it-qar').textContent = 'QAR ' + (totalITNonLabor / 1000).toFixed(1) + 'K';
+      document.getElementById('kpi-total-it-usd').textContent = '$' + ((totalITNonLabor / 3.64) / 1000).toFixed(1) + 'K USD / mo';
+      document.getElementById('kpi-runrate-annual').textContent = 'QAR ' + ((totalITNonLabor * 12) / 1e6).toFixed(2) + 'M ARR';
+
+      document.getElementById('kpi-cost-per-order').textContent = 'QAR ' + costPerOrderInfra.toFixed(2);
+      document.getElementById('kpi-cost-order-usd').textContent = '$' + (costPerOrderInfra / 3.64).toFixed(2) + ' USD / drop';
+
+      // Compare against DeliverQ Year 3 Take Rate (~QAR 18.98)
+      var takeRatePct = (costPerOrderInfra / 18.98) * 100;
+      document.getElementById('kpi-margin-impact').textContent = takeRatePct.toFixed(1) + '% of Take-Rate';
+
+      document.getElementById('kpi-cloud-spend').textContent = 'QAR ' + (totalCloudSpend / 1000).toFixed(1) + 'K';
+      var regionNames = {
+        gcp_doha: 'GCP Doha (me-central2)',
+        azure_qatar: 'Azure Qatar Central',
+        aws_me: 'AWS Middle East',
+        hybrid_multi: 'Hybrid Sovereign'
+      };
+      document.getElementById('kpi-cloud-region').textContent = regionNames[cloudProvider] || 'Doha Region';
+
+      document.getElementById('kpi-apis-spend').textContent = 'QAR ' + (totalApisSpend / 1000).toFixed(1) + 'K';
+      document.getElementById('kpi-otp-count').textContent = '~' + Math.round(totalSMSCount / 1000) + 'K SMS / mo';
+
+      document.getElementById('kpi-sec-spend').textContent = 'QAR ' + (totalSecSpend / 1000).toFixed(1) + 'K';
+
+      document.getElementById('kpi-payroll-spend').textContent = 'QAR ' + (totalPayrollSpend / 1000).toFixed(1) + 'K';
+      document.getElementById('kpi-headcount-badge').textContent = headcount + ' Engineers';
+      document.getElementById('kpi-nearshore-ratio').textContent = (hqRatio * 100).toFixed(0) + '% HQ / ' + ((1 - hqRatio) * 100).toFixed(0) + '% Hub';
+
+      // Mobile Bottom Bar Ticker
+      document.getElementById('ticker-it-order').textContent = 'QAR ' + costPerOrderInfra.toFixed(2);
+      document.getElementById('ticker-it-monthly').textContent = 'QAR ' + (totalITNonLabor / 1000).toFixed(1) + 'K';
+
+      // Dynamic Synthesis Insight
+      var insightEl = document.getElementById('itInsightText');
+      if (insightEl) {
+        insightEl.innerHTML =
+          'At <strong>' + orders.toLocaleString() + ' monthly deliveries</strong> (' + Math.round(orders / 30).toLocaleString() + ' drops/day), technology infrastructure OPEX is <strong>QAR ' + (totalITNonLabor / 1000).toFixed(1) + 'K/mo</strong> ($' + ((totalITNonLabor / 3.64) / 1000).toFixed(1) + 'K USD). ' +
+          'Unit efficiency achieves <strong>QAR ' + costPerOrderInfra.toFixed(2) + ' per order</strong> (' + takeRatePct.toFixed(1) + '% of platform take). ' +
+          'Combined with an engineering organization of <strong>' + headcount + ' software engineers</strong> (' + hqEngineers + ' Doha HQ + ' + nearshoreEngineers + ' Nearshore hub) at QAR ' + (totalPayrollSpend / 1000).toFixed(1) + 'K/mo payroll, fully loaded technology unit cost is <strong>QAR ' + costPerOrderFullyLoaded.toFixed(2) + ' per drop</strong>.';
+      }
+
+      // Render Visual Charts
+      renderAllITCharts({
+        cloud: totalCloudSpend,
+        apis: totalApisSpend,
+        security: totalSecSpend,
+        saas: totalSaaSSpend,
+        compute: computeSpend,
+        db: dbSpend,
+        redisKafka: redisKafkaSpend,
+        storageCdn: storageCdnSpend,
+        egress: egressSpend,
+        orders: orders,
+        headcount: headcount,
+        hqEngineers: hqEngineers,
+        nearshoreEngineers: nearshoreEngineers,
+        cloudProvider: cloudProvider
+      });
+
+      // Render Stress Matrix
+      renderITStressMatrix(fleet, rps, cloudProvider);
+    }
+
+    // CHARTS RENDERING ENGINE
+    function renderAllITCharts(data) {
+      if (!data) return;
+      var isLight = document.body.classList.contains('light-theme');
+      var textClr = isLight ? '#0F172A' : '#F1F5F9';
+      var gridClr = isLight ? '#E2E8F0' : '#1E293B';
+      var fontFam = "'Outfit', sans-serif";
+
+      // Chart 1: Donut Spend Allocation
+      var ctxDonut = document.getElementById('chartITSpendDonut');
+      if (ctxDonut) {
+        if (charts.donut) charts.donut.destroy();
+        charts.donut = new Chart(ctxDonut.getContext('2d'), {
+          type: 'doughnut',
+          data: {
+            labels: ['Cloud & Hosting', 'Maps, SMS & Comms', 'Security & PDPPL', 'Payment & IT SaaS'],
+            datasets: [{
+              data: [
+                Math.round(data.cloud),
+                Math.round(data.apis),
+                Math.round(data.security),
+                Math.round(data.saas)
+              ],
+              backgroundColor: ['#06B6D4', '#2563EB', '#8B5CF6', '#F59E0B'],
+              borderWidth: 2,
+              borderColor: isLight ? '#FFFFFF' : '#0C1424'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: { color: textClr, font: { family: fontFam, size: 10, weight: '600' } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    var total = ctx.dataset.data.reduce(function(a, b) { return a + b; }, 0);
+                    var val = ctx.raw;
+                    var pct = ((val / total) * 100).toFixed(1);
+                    return ctx.label + ': QAR ' + (val / 1000).toFixed(1) + 'K (' + pct + '%)';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Unit Cost Scaling Curve vs Volume
+      var ctxCurve = document.getElementById('chartITScaleCurve');
+      if (ctxCurve) {
+        if (charts.curve) charts.curve.destroy();
+        var vols = [50000, 100000, 250000, 555000, 1000000, 1500000, 2000000];
+        var unitCosts = vols.map(function(v) {
+          var fixedInfra = 38000;
+          var varInfra = v * 0.44;
+          return (fixedInfra + varInfra) / v;
+        });
+
+        charts.curve = new Chart(ctxCurve.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: ['50k', '100k', '250k', '555k (Base)', '1.0M', '1.5M', '2.0M'],
+            datasets: [{
+              label: 'IT Cost / Order (QAR)',
+              data: unitCosts,
+              borderColor: '#06B6D4',
+              backgroundColor: 'rgba(6, 182, 212, 0.15)',
+              fill: true,
+              tension: 0.35,
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              borderWidth: 2.5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    return 'IT Cost: QAR ' + ctx.raw.toFixed(2) + ' per drop';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr }, grid: { display: false } },
+              y: {
+                ticks: {
+                  color: textClr,
+                  callback: function(v) { return 'QAR ' + v.toFixed(2); }
+                },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 3: Cloud Infrastructure Sizing by Tier
+      var ctxCloud = document.getElementById('chartCloudTierBar');
+      if (ctxCloud) {
+        if (charts.cloud) charts.cloud.destroy();
+        charts.cloud = new Chart(ctxCloud.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['K8s Compute', 'Managed DB', 'Redis & Kafka', 'Storage & CDN', 'Network Egress'],
+            datasets: [{
+              label: 'Monthly Cloud OPEX (QAR)',
+              data: [
+                Math.round(data.compute),
+                Math.round(data.db),
+                Math.round(data.redisKafka),
+                Math.round(data.storageCdn),
+                Math.round(data.egress)
+              ],
+              backgroundColor: [
+                'rgba(37, 99, 235, 0.85)',
+                'rgba(6, 182, 212, 0.85)',
+                'rgba(139, 92, 246, 0.85)',
+                'rgba(245, 158, 11, 0.85)',
+                'rgba(16, 185, 129, 0.85)'
+              ],
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    return ctx.label + ': QAR ' + (ctx.raw / 1000).toFixed(1) + 'K';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr }, grid: { display: false } },
+              y: {
+                ticks: {
+                  color: textClr,
+                  callback: function(v) { return 'QAR ' + (v / 1000) + 'K'; }
+                },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 4: Engineering Headcount by Technical Squad
+      var ctxHC = document.getElementById('chartHeadcountBar');
+      if (ctxHC) {
+        if (charts.hc) charts.hc.destroy();
+        var totalHC = data.headcount;
+        var squads = [
+          Math.max(2, Math.round(totalHC * 0.28)),
+          Math.max(3, Math.round(totalHC * 0.32)),
+          Math.max(2, Math.round(totalHC * 0.14)),
+          Math.max(2, Math.round(totalHC * 0.12)),
+          Math.max(2, Math.round(totalHC * 0.14))
+        ];
+
+        charts.hc = new Chart(ctxHC.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Mobile Apps', 'Backend & Go', 'DevOps & SRE', 'Data & AI Dispatch', 'Sec & QA SDET'],
+            datasets: [{
+              label: 'Engineers',
+              data: squads,
+              backgroundColor: 'rgba(56, 189, 248, 0.85)',
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    return ctx.label + ': ' + ctx.raw + ' Engineers';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr }, grid: { display: false } },
+              y: {
+                ticks: { color: textClr, stepSize: 2 },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 5: Sovereign Cloud Provider Sizing Comparison
+      var ctxProv = document.getElementById('chartProviderBenchmark');
+      if (ctxProv) {
+        if (charts.prov) charts.prov.destroy();
+        var baseCloud = data.cloud;
+        var compData = [
+          Math.round(baseCloud * 1.00), // GCP Doha
+          Math.round(baseCloud * 1.03), // Azure Qatar
+          Math.round(baseCloud * 0.94), // AWS ME
+          Math.round(baseCloud * 1.12)  // Hybrid Multi-Cloud
+        ];
+
+        charts.prov = new Chart(ctxProv.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['GCP Doha (me-central2)', 'Azure Qatar Central (Doha)', 'AWS ME (Bahrain/UAE)', 'Hybrid Sovereign Multi-Cloud'],
+            datasets: [{
+              label: 'Monthly Cloud Infrastructure OPEX (QAR)',
+              data: compData,
+              backgroundColor: [
+                '#06B6D4',
+                '#2563EB',
+                '#F59E0B',
+                '#8B5CF6'
+              ],
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(ctx) {
+                    return ctx.label + ': QAR ' + (ctx.raw / 1000).toFixed(1) + 'K / month';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr, font: { family: fontFam, size: 10 } }, grid: { display: false } },
+              y: {
+                ticks: {
+                  color: textClr,
+                  callback: function(v) { return 'QAR ' + (v / 1000) + 'K'; }
+                },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // 2D STRESS MATRIX GENERATOR
+    function renderITStressMatrix(currentFleet, currentRPS, provider) {
+      var tbody = document.getElementById('itSensTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      var rpsTiers = [200, 500, 850, 1500, 3000];
+      var fleetTiers = [500, 1200, 1850, 3500, 6000];
+
+      rpsTiers.forEach(function(r) {
+        var tr = document.createElement('tr');
+        var th = document.createElement('td');
+        th.className = 'row-header';
+        th.textContent = r + ' Peak RPS';
+        tr.appendChild(th);
+
+        fleetTiers.forEach(function(fl) {
+          var td = document.createElement('td');
+          td.className = 'sens-cell';
+
+          var simNodes = Math.max(6, Math.round(r / 50));
+          var simCompute = simNodes * 1450;
+          var simRedisKafka = (fl * 3.8) + (r * 6.5);
+          var simEgress = (fl * 5.2) + (r * 8.0);
+          var simCloud = simCompute + 22000 + simRedisKafka + simEgress;
+
+          if (simCloud < 60000) {
+            td.classList.add('cell-tier1');
+          } else if (simCloud < 110000) {
+            td.classList.add('cell-tier2');
+          } else if (simCloud < 180000) {
+            td.classList.add('cell-tier3');
+          } else {
+            td.classList.add('cell-tier4');
+          }
+
+          var isCurrent = (Math.abs(r - currentRPS) <= 250) && (Math.abs(fl - currentFleet) <= 500);
+          if (isCurrent) td.classList.add('is-current');
+
+          td.textContent = 'QAR ' + Math.round(simCloud / 1000) + 'K';
+          td.title = 'RPS: ' + r + ' | Fleet: ' + fl + ' | Cloud OPEX: QAR ' + (simCloud / 1000).toFixed(1) + 'K';
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // COPY CTO EXECUTIVE SUMMARY
+    function copyCTOSummary() {
+      var orders = document.getElementById('lbl-orders').textContent;
+      var itOpex = document.getElementById('kpi-total-it-qar').textContent;
+      var itPerDrop = document.getElementById('kpi-cost-per-order').textContent;
+      var cloudSpend = document.getElementById('kpi-cloud-spend').textContent;
+      var apisSpend = document.getElementById('kpi-apis-spend').textContent;
+      var secSpend = document.getElementById('kpi-sec-spend').textContent;
+      var payroll = document.getElementById('kpi-payroll-spend').textContent;
+      var hc = document.getElementById('lbl-headcount').textContent;
+
+      var text =
+        'DELIVERQ QATAR - CTO & TECHNOLOGY INFRASTRUCTURE SIZING BRIEF\n' +
+        '==============================================================\n' +
+        'Monthly Delivery Volume: ' + orders + '\n' +
+        'Technology Infrastructure OPEX: ' + itOpex + ' / month\n' +
+        'IT Unit Cost Per Delivery: ' + itPerDrop + ' per drop (Sovereign Cloud & Comms)\n' +
+        '--------------------------------------------------------------\n' +
+        'Breakdown by Infrastructure Domain:\n' +
+        '  - Cloud Hosting (GCP Doha me-central2): ' + cloudSpend + ' / mo\n' +
+        '  - Maps, SMS OTP & APM: ' + apisSpend + ' / mo\n' +
+        '  - Cybersecurity & Qatar PDPPL: ' + secSpend + ' / mo\n' +
+        '--------------------------------------------------------------\n' +
+        'Engineering Organization & Headcount:\n' +
+        '  - Total Headcount: ' + hc + ' (Doha HQ Tech Leads + Nearshore Hubs)\n' +
+        '  - Engineering Monthly Payroll: ' + payroll + ' / mo\n' +
+        '==============================================================\n' +
+        'State of Qatar Sovereign Cloud & PDPPL Law No. 13 of 2016 Compliant.';
+
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('CTO Executive Brief copied to clipboard!');
+      }).catch(function() {
+        showToast('Brief copied!');
+      });
+    }
+
+    // EXPORT JSON CONFIG
+    function exportConfigJSON() {
+      var config = {
+        platform: 'DeliverQ Qatar',
+        module: 'IT & Cloud Infrastructure Sizing',
+        timestamp: new Date().toISOString(),
+        parameters: {
+          monthlyOrders: parseInt(document.getElementById('sl-orders').value, 10),
+          peakRPS: parseInt(document.getElementById('sl-rps').value, 10),
+          activeFleet: parseInt(document.getElementById('sl-fleet').value, 10),
+          cloudProvider: document.getElementById('sel-cloud-provider').value,
+          k8sNodes: parseInt(document.getElementById('sl-k8s-nodes').value, 10),
+          dbTier: parseInt(document.getElementById('sl-db-tier').value, 10),
+          mapsTier: document.getElementById('sel-maps-tier').value,
+          smsRatio: parseFloat(document.getElementById('sl-sms-ratio').value),
+          apmTier: document.getElementById('sel-apm-tier').value,
+          secTier: document.getElementById('sel-sec-tier').value,
+          pdpplMode: document.getElementById('sel-pdppl-compliance').value,
+          headcount: parseInt(document.getElementById('sl-headcount').value, 10),
+          hqRatio: parseFloat(document.getElementById('sl-hq-ratio').value)
+        },
+        outputs: {
+          totalMonthlyITOPEX_QAR: document.getElementById('kpi-total-it-qar').textContent,
+          costPerOrder_QAR: document.getElementById('kpi-cost-per-order').textContent,
+          cloudHosting_QAR: document.getElementById('kpi-cloud-spend').textContent,
+          apisAndSMS_QAR: document.getElementById('kpi-apis-spend').textContent,
+          cybersecurity_QAR: document.getElementById('kpi-sec-spend').textContent,
+          engineeringPayroll_QAR: document.getElementById('kpi-payroll-spend').textContent
+        }
+      };
+
+      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(config, null, 2));
+      var dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute('href', dataStr);
+      dlAnchor.setAttribute('download', 'deliverq_it_sizing_config.json');
+      dlAnchor.click();
+      showToast('Exported deliverq_it_sizing_config.json');
+    }
+
+    function showToast(msg) {
+      var t = document.getElementById('itToast');
+      var m = document.getElementById('itToastMsg');
+      if (!t || !m) return;
+      m.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() {
+        t.classList.remove('show');
+      }, 3000);
+    }
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      runITSimulation();
+    });
+  </script>
+</body>
+</html>

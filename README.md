@@ -46,9 +46,9 @@ The entire market research and operational blueprint is codified into a self-con
    - Ministry of Municipality (Baladiya) food hygiene health cards.
    - Qatar Central Bank (QCB) NAPS, Himyan, and Apple Pay payment processing.
    - Personal Data Privacy Protection Law (PDPPL - Law No. 13 of 2016).
-7. **Interactive Visual Dashboard & Simulator:**
-   - Real-time **Delivery Economics Simulator** (dynamic sliders for AOV, Commission %, Delivery Fee, and Orders).
-   - Embedded interactive **Chart.js** charts (Market Growth, Competitor Shares, 5-Year Projections, Operational Curves, Revenue Mix, and Sensitivity Scenarios).
+7. **Interactive Visual Dashboard & Dual Simulator Suites:**
+   - **Delivery Economics Simulator (`simulator.html`):** Wall-Street grade financial modeler featuring live sliders for AOV (QAR 78.50), Fair-Play Commission (14.5%), Delivery Fee (QAR 6.50), batching factor, break-even curves, and 2D sensitivity stress-matrices against Talabat, Snoonu, and Keeta.
+   - **Enterprise IT & Sovereign Cloud Infrastructure Simulator (`it-simulator.html`):** Technology architecture and headcount sizing engine simulating Google Cloud Platform (GCP Doha region `me-central2`), Microsoft Azure Qatar Central, Kubernetes microservice clusters, Redis/Kafka event telemetry, Google Maps / Mapbox APIs, Twilio/Infobip SMS OTPs, Cloudflare Enterprise WAF, Qatar PDPPL (Law No. 13 of 2016) sovereign encryption, and 6 technical engineering squads to compute the exact IT cost per delivery drop.
 
 ---
 

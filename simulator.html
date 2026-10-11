@@ -1,0 +1,4311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeliverQ | Live Delivery Economics Simulator & Enterprise Strategy Suite</title>
+  <meta name="description"
+    content="Institutional-grade unit economics simulator & investment thesis for Qatar's QAR 11.59B delivery market. Interactive sliders, 5 dynamic charts, 2D sensitivity stress-matrices, and 5-year pro-forma financials.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    /* ===== RESET & MODERN EXECUTIVE FINTECH DESIGN SYSTEM ===== */
+    :root {
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Dark Executive Blue Fintech Theme (Default) */
+      --bg-canvas: #060B16;
+      --bg-surface: #0C1424;
+      --bg-surface-elevated: #111D35;
+      --bg-card: rgba(14, 24, 44, 0.85);
+      --bg-card-hover: rgba(20, 35, 64, 0.95);
+      --bg-input: #090F1C;
+      --border-subtle: rgba(56, 189, 248, 0.12);
+      --border-focus: rgba(59, 130, 246, 0.65);
+      --border-blue: rgba(56, 189, 248, 0.35);
+      --border-gold: rgba(56, 189, 248, 0.35);
+
+      /* Core Blue Brand Accents */
+      --qm-900: #060D1E;
+      --qm-800: #0B1938;
+      --qm-700: #122856;
+      --qm-600: #1D4ED8;
+      --qm-500: #2563EB;
+      --qm-glow: rgba(37, 99, 235, 0.45);
+
+      --blue-950: #060D1E;
+      --blue-900: #0B1938;
+      --blue-800: #122856;
+      --blue-700: #1D4ED8;
+      --blue-600: #2563EB;
+      --blue-500: #3B82F6;
+      --blue-400: #60A5FA;
+      --blue-300: #93C5FD;
+      --blue-glow: rgba(37, 99, 235, 0.45);
+
+      --gold-600: #0284C7;
+      --gold-500: #0EA5E9;
+      --gold-400: #38BDF8;
+      --gold-300: #7DD3FC;
+      --gold-glow: rgba(56, 189, 248, 0.35);
+
+      --cyan-600: #0284C7;
+      --cyan-500: #0EA5E9;
+      --cyan-400: #38BDF8;
+      --cyan-300: #7DD3FC;
+      --cyan-glow: rgba(56, 189, 248, 0.35);
+
+      /* Semantic Analytics Colors */
+      --profit: #10B981;
+      --profit-glow: rgba(16, 185, 129, 0.3);
+      --profit-light: #D1FAE5;
+      --loss: #F43F5E;
+      --loss-glow: rgba(244, 63, 94, 0.3);
+      --loss-light: #FFE4E6;
+      --amber: #F59E0B;
+      --blue: #3B82F6;
+      --purple: #818CF8;
+
+      /* Typography */
+      --text-main: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --text-inverse: #060B16;
+
+      /* Shadows & Radii */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 22px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Light Luxe Theme Override */
+    [] {
+      --bg-canvas: #F0F4FA;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F8FAFD;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --bg-card-hover: #FFFFFF;
+      --bg-input: #E2E8F0;
+      --border-subtle: #CBD5E1;
+      --border-focus: #2563EB;
+      --border-gold: rgba(37, 99, 235, 0.35);
+
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-inverse: #FFFFFF;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.09);
+      --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      text-align: left;
+      text-rendering: optimizeLegibility;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Global text alignment & typography */
+    h1, h2, h3, h4, h5, h6, p, span, label, td, th {
+      text-align: left;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Ambient Gradients */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-blob-1 {
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, var(--qm-glow) 0%, transparent 70%);
+      filter: blur(85px);
+      opacity: 0.65;
+    }
+
+    .ambient-blob-2 {
+      position: absolute;
+      top: 450px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+      filter: blur(95px);
+      opacity: 0.4;
+    }
+
+    .ambient-blob-3 {
+      position: absolute;
+      bottom: -100px;
+      right: 15%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+      filter: blur(90px);
+      opacity: 0.35;
+    }
+
+    /* ===== STICKY TOP APP HEADER ===== */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(10, 14, 23, 0.88);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    [] .app-header {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .header-in {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-app-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-app-back:hover {
+      background: var(--qm-700);
+      border-color: var(--qm-500);
+      color: #FFFFFF;
+      transform: translateX(-2px);
+      box-shadow: 0 4px 12px var(--qm-glow);
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--qm-900);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+      flex-shrink: 0;
+    }
+
+    .app-brand-info h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-brand-info p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .app-badge-pro {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-400);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-header-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .btn-header-act:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-gold-action {
+      background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%);
+      color: #0A0E17;
+      border-color: var(--gold-500);
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-gold-action:hover {
+      background: linear-gradient(135deg, #E6BE58 0%, var(--gold-500) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+    }
+
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+
+    /* ===== MOBILE APP NAVIGATION TABS ===== */
+    .app-nav-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 61px;
+      z-index: 99;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .app-nav-in {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .app-nav-in::-webkit-scrollbar {
+      display: none;
+    }
+
+    .app-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 16px;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      white-space: nowrap;
+      outline: none;
+      margin-bottom: -1px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .app-tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .app-tab-btn.active {
+      color: var(--gold-400);
+      border-bottom-color: var(--gold-400);
+      background: rgba(212, 175, 55, 0.08);
+      font-weight: 700;
+    }
+
+    /* ===== MAIN LAYOUT CONTAINER ===== */
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* App Tab Content Panels */
+    .app-view {
+      display: none;
+      animation: tabFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .app-view.active {
+      display: block;
+    }
+
+    @keyframes tabFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== HERO BANNER SECTION ===== */
+    .simulator-hero {
+      background: linear-gradient(135deg, rgba(84, 10, 35, 0.9) 0%, rgba(53, 8, 24, 0.95) 50%, rgba(17, 23, 38, 0.95) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: var(--r-xl);
+      padding: 28px 32px 26px;
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(127, 15, 53, 0.22);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .hero-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .hero-meta-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 16px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-badge.badge-gold {
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-300);
+    }
+
+    .hero-badge.badge-maroon {
+      background: rgba(163, 20, 68, 0.3);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: #FECDD3;
+    }
+
+    .hero-badge.badge-green {
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #A7F3D0;
+    }
+
+    .simulator-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: #FFFFFF;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .simulator-hero p.hero-subtitle {
+      font-size: 0.96rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 860px;
+      line-height: 1.6;
+    }
+
+    /* Quick Preset Selector Buttons */
+    .presets-bar {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .presets-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-300);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preset-pill {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      padding: 6px 13px;
+      border-radius: 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .preset-pill:hover {
+      background: rgba(212, 175, 55, 0.22);
+      border-color: var(--gold-500);
+      color: var(--gold-300);
+      transform: translateY(-1px);
+    }
+
+    .preset-pill.active {
+      background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%);
+      color: var(--qm-900);
+      border-color: var(--gold-400);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
+      font-weight: 700;
+    }
+
+    /* ===== KPI HERO DASHBOARD GRID ===== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 175, 55, 0.35);
+      box-shadow: var(--shadow-md);
+    }
+
+    .kpi-card.highlight-profit::before {
+      background: linear-gradient(90deg, var(--profit), #34D399);
+    }
+
+    .kpi-card.highlight-gold::before {
+      background: linear-gradient(90deg, var(--gold-500), #FDE047);
+    }
+
+    .kpi-card.highlight-maroon::before {
+      background: linear-gradient(90deg, var(--qm-600), #F43F5E);
+    }
+
+    .kpi-card.highlight-blue::before {
+      background: linear-gradient(90deg, var(--blue), #60A5FA);
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .kpi-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-icon {
+      font-size: 1.1rem;
+    }
+
+    .kpi-val {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      line-height: 1.1;
+      text-align: left;
+    }
+
+    .kpi-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .kpi-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .status-positive {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--profit);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-negative {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--loss);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .status-gold {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-400);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    /* ===== WORKSPACE GRID ===== */
+    .sim-workspace {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 1100px) {
+      .sim-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .control-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .control-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .control-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-card-title h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .control-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-secondary);
+    }
+
+    /* Slider Group with Touch Stepper */
+    .slider-group {
+      margin-bottom: 18px;
+    }
+
+    .slider-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .slider-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
+
+    .slider-label {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .slider-val-badge {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-400);
+      min-width: 82px;
+      text-align: right;
+    }
+
+    /* Touch Controls Row (Slider + Stepper Buttons) */
+    .slider-touch-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-step {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .btn-step:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-500);
+      color: var(--gold-300);
+    }
+
+    .btn-step:active {
+      transform: scale(0.92);
+    }
+
+    /* Modern Styled Range Slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    [] input[type="range"] {
+      background: #CBD5E1;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.5);
+      border: 2px solid #FFFFFF;
+      transition: transform 0.15s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      border: 2px solid #FFFFFF;
+    }
+
+    .slider-scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Right Display Panel */
+    .display-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Unit Economics Waterfall Card */
+    .ue-waterfall-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 24px 26px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title-group h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-group p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Waterfall Stack Layout */
+    .waterfall-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+
+    .wf-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 105px;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .wf-label {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .wf-label.is-cost {
+      color: var(--loss);
+    }
+
+    .wf-label.is-rev {
+      color: var(--gold-400);
+    }
+
+    .wf-label.is-net {
+      color: var(--profit);
+      font-weight: 800;
+      font-size: 0.94rem;
+    }
+
+    .wf-bar-track {
+      height: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .wf-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    .wf-val {
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-align: right;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .wf-val.is-cost {
+      color: var(--loss);
+    }
+
+    .wf-val.is-rev {
+      color: var(--gold-400);
+    }
+
+    .wf-val.is-net {
+      color: var(--profit);
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .wf-divider {
+      height: 2px;
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), var(--profit), rgba(212, 175, 55, 0.2));
+      margin: 6px 0;
+    }
+
+    /* Dynamic Insights Box */
+    .insights-box {
+      background: linear-gradient(135deg, rgba(127, 15, 53, 0.16) 0%, rgba(17, 23, 38, 0.6) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--r-md);
+      padding: 16px 20px;
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .insights-box h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--gold-300);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .insights-box p {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .insights-box strong {
+      color: #FFFFFF;
+    }
+
+    /* Visual Analytics 5-Chart Grid */
+    .charts-grid-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .charts-grid-duo {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 22px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .chart-box-header h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 270px;
+      width: 100%;
+    }
+
+    /* Sensitivity Matrix Card */
+    .sensitivity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 24px 26px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sens-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 6px;
+      font-size: 0.84rem;
+      min-width: 620px;
+    }
+
+    .sens-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--gold-400);
+      font-weight: 700;
+      padding: 10px 12px;
+      text-align: center;
+      border-radius: var(--r-sm);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .sens-table th.col-header-corner {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      text-align: left;
+      font-size: 0.76rem;
+    }
+
+    .sens-table td {
+      padding: 11px 10px;
+      text-align: center;
+      border-radius: var(--r-sm);
+      font-family: var(--font-display);
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .sens-table td.row-header {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      text-align: left;
+      padding-left: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .cell-loss {
+      background: rgba(244, 63, 94, 0.15);
+      color: #FECDD3;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .cell-breakeven {
+      background: rgba(245, 158, 11, 0.15);
+      color: #FDE68A;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .cell-profit {
+      background: rgba(16, 185, 129, 0.15);
+      color: #A7F3D0;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .cell-high-profit {
+      background: rgba(16, 185, 129, 0.3);
+      color: #FFFFFF;
+      border: 1px solid var(--profit);
+      box-shadow: 0 0 10px var(--profit-glow);
+    }
+
+    .sens-cell.is-current {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 2px;
+      font-weight: 900;
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
+    }
+
+    /* ===== ENTERPRISE FOUNDER PITCH SUITE ===== */
+    .pitch-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .pitch-hero-card {
+      background: linear-gradient(135deg, rgba(84, 10, 35, 0.92) 0%, rgba(17, 23, 38, 0.96) 100%);
+      border: 2px solid var(--gold-500);
+      border-radius: var(--r-xl);
+      padding: 32px 36px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pitch-hero-card h2 {
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .pitch-hero-card p.pitch-lead {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 920px;
+      line-height: 1.65;
+    }
+
+    .pitch-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .pitch-pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .pitch-pillar-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: var(--shadow-md);
+    }
+
+    .pillar-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(127, 15, 53, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    .pitch-pillar-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      margin-bottom: 8px;
+    }
+
+    .pitch-pillar-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Term Sheet & Capital Structure */
+    .term-sheet-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--r-lg);
+      padding: 26px 28px;
+      backdrop-filter: blur(12px);
+    }
+
+    .term-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .term-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .round-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 20px;
+    }
+
+    .round-box h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .round-box .amount {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--gold-400);
+      margin-bottom: 8px;
+    }
+
+    .round-box p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Mobile Floating Quick Ticker */
+    .mobile-floating-ticker {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 14, 23, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1.5px solid var(--gold-500);
+      padding: 10px 18px;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-floating-ticker {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .ticker-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ticker-lbl {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ticker-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--profit);
+      line-height: 1;
+    }
+
+    .ticker-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: var(--gold-500);
+      color: #0A0E17;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--gold-500);
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--r-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Footer */
+    .sim-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .footer-link:hover {
+      color: var(--gold-400);
+    }
+
+    /* ===== RESPONSIVE OPTIMIZATIONS (MOBILE & WEB) ===== */
+    @media (max-width: 900px) {
+      .container {
+        padding: 18px 14px 60px;
+      }
+      .simulator-hero {
+        padding: 22px 18px 20px;
+      }
+      .simulator-hero h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .header-in {
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .header-left {
+        justify-content: space-between;
+      }
+      .header-right {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        overflow-x: auto;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .kpi-card {
+        padding: 14px 14px;
+      }
+      .kpi-val {
+        font-size: 1.35rem;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .waterfall-stack {
+        gap: 12px;
+      }
+      /* Mobile Stacked Waterfall: Row 1 = Label & Val, Row 2 = Full Bar */
+      .wf-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 5px 10px;
+      }
+      .wf-label {
+        grid-column: 1 / 2;
+        grid-row: 1;
+      }
+      .wf-val {
+        grid-column: 2 / 3;
+        grid-row: 1;
+        text-align: right;
+      }
+      .wf-bar-track {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        width: 100%;
+        height: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 14px 10px 80px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .hero-meta-badges {
+        gap: 5px;
+      }
+      .hero-badge {
+        font-size: 0.68rem;
+        padding: 3px 8px;
+      }
+      .simulator-hero {
+        padding: 18px 14px 16px;
+        border-radius: 14px;
+      }
+      .app-brand-info p {
+        display: none;
+      }
+      .control-card {
+        padding: 16px 14px;
+      }
+      .ue-waterfall-card, .sensitivity-card, .chart-box {
+        padding: 16px 14px;
+      }
+    }
+
+    /* Print Stylesheet */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+      }
+      .app-header, .app-nav-bar, .ambient-bg, .presets-bar, .controls-panel, .theme-toggle-btn, .btn-header-act, .toast, .mobile-floating-ticker {
+        display: none !important;
+      }
+      .sim-workspace {
+        grid-template-columns: 1fr !important;
+      }
+      .app-view {
+        display: block !important;
+      }
+      .ue-waterfall-card, .chart-box, .sensitivity-card, .simulator-hero, .term-sheet-card {
+        border: 1px solid #DDD !important;
+        background: #FFF !important;
+        color: #000 !important;
+        box-shadow: none !important;
+      }
+    }
+  
+    /* ===== TOOLTIP SYSTEM (Interactive & Mobile Friendly) ===== */
+    .slider-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+    }
+
+    .tooltip-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .tooltip-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--cyan-400);
+      font-size: 11px;
+      font-weight: 700;
+      transition: var(--transition);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .tooltip-wrap:hover .tooltip-icon,
+    .tooltip-wrap:focus .tooltip-icon {
+      background: var(--blue-600);
+      color: #FFFFFF;
+      border-color: var(--cyan-300);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    }
+
+    .tooltip-box {
+      position: absolute;
+      bottom: calc(100% + 9px);
+      left: 0;
+      width: 260px;
+      background: #0B1426;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: var(--r-md);
+      padding: 10px 12px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(37, 99, 235, 0.25);
+      backdrop-filter: blur(16px);
+      color: var(--text-main);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 120;
+      text-align: left;
+    }
+
+    [] .tooltip-box {
+      background: #FFFFFF;
+      border: 1px solid #BFDBFE;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+      color: #0F172A;
+    }
+
+    .tooltip-wrap:hover .tooltip-box,
+    .tooltip-wrap:focus .tooltip-box,
+    .tooltip-wrap:focus-within .tooltip-box {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .tooltip-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan-400);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    [] .tooltip-title {
+      color: #1D4ED8;
+    }
+
+    .tooltip-desc {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    /* ===== PRESETS BAR & QUICK SETTINGS ===== */
+    .presets-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .presets-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .presets-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .presets-competitor-label {
+      color: var(--cyan-400);
+    }
+
+    .presets-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 2px 0;
+    }
+
+    .preset-brand-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-talabat { background: #FF5A00; box-shadow: 0 0 6px rgba(255, 90, 0, 0.6); }
+    .dot-snoonu { background: #EAB308; box-shadow: 0 0 6px rgba(234, 179, 8, 0.6); }
+    .dot-keeta { background: #06B6D4; box-shadow: 0 0 6px rgba(6, 182, 212, 0.6); }
+
+    .preset-pill-talabat.active {
+      background: linear-gradient(135deg, #C2410C 0%, #EA580C 100%) !important;
+      border-color: #F97316 !important;
+      color: #FFFFFF !important;
+    }
+    .preset-pill-snoonu.active {
+      background: linear-gradient(135deg, #A16207 0%, #CA8A04 100%) !important;
+      border-color: #EAB308 !important;
+      color: #FFFFFF !important;
+    }
+    .preset-pill-keeta.active {
+      background: linear-gradient(135deg, #0369A1 0%, #0284C7 100%) !important;
+      border-color: #38BDF8 !important;
+      color: #FFFFFF !important;
+    }
+
+    /* ===== SIMULATOR SCALER FIRST LAYOUT ===== */
+    .simulator-scalers-deck {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .simulator-scalers-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scaler-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .results-deck-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .results-deck-title h3 {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+    
+
+    /* ===== EXECUTIVE HIGH-CONTRAST READABILITY SYSTEM ===== */
+    :root {
+      --bg-canvas: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --bg-input: #F1F5F9;
+      --border-subtle: #E2E8F0;
+      --border-focus: #2563EB;
+      --border-blue: rgba(37, 99, 235, 0.25);
+      --border-gold: rgba(37, 99, 235, 0.35);
+
+      --qm-900: #1E3A8A;
+      --qm-800: #1E40AF;
+      --qm-700: #1D4ED8;
+      --qm-600: #2563EB;
+      --qm-500: #3B82F6;
+
+      --blue-950: #0F172A;
+      --blue-900: #1E3A8A;
+      --blue-800: #1E40AF;
+      --blue-700: #1D4ED8;
+      --blue-600: #2563EB;
+      --blue-500: #3B82F6;
+
+      --gold-600: #1D4ED8;
+      --gold-500: #2563EB;
+      --gold-400: #1E40AF;
+      --gold-300: #1E3A8A;
+
+      --profit: #059669;
+      --profit-light: #D1FAE5;
+      --loss: #DC2626;
+      --loss-light: #FEE2E2;
+
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-inverse: #FFFFFF;
+    }
+
+    body {
+      color: #0F172A !important;
+      background-color: #F8FAFC !important;
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #0F172A !important;
+    }
+
+    /* Top Quick Settings Bar */
+    .quick-settings-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: var(--r-lg);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .qs-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .qs-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #1E3A8A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qs-label-comp {
+      color: #0369A1;
+    }
+
+    .qs-divider {
+      width: 1px;
+      height: 28px;
+      background: #CBD5E1;
+    }
+
+    /* Preset Pills */
+    .preset-pill {
+      background: #F1F5F9;
+      border: 1.5px solid #CBD5E1;
+      color: #1E293B;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .preset-pill:hover {
+      background: #EFF6FF;
+      border-color: #3B82F6;
+      color: #1D4ED8;
+      transform: translateY(-1px);
+    }
+
+    .preset-pill.active {
+      background: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      border-color: #1E40AF !important;
+      box-shadow: 0 2px 10px rgba(29, 78, 216, 0.35) !important;
+      font-weight: 800 !important;
+    }
+
+    .preset-pill-talabat.active {
+      background: #EA580C !important;
+      border-color: #C2410C !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(234, 88, 12, 0.35) !important;
+    }
+
+    .preset-pill-snoonu.active {
+      background: #CA8A04 !important;
+      border-color: #A16207 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(202, 138, 4, 0.35) !important;
+    }
+
+    .preset-pill-keeta.active {
+      background: #0284C7 !important;
+      border-color: #0369A1 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35) !important;
+    }
+
+    /* Control & Scaler Cards */
+    .control-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .control-card-title h3 {
+      color: #0F172A !important;
+      font-size: 1.15rem !important;
+      font-weight: 800 !important;
+    }
+
+    .slider-label {
+      color: #1E293B !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+    }
+
+    .slider-val-badge {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      border-radius: 8px !important;
+      padding: 3px 10px !important;
+    }
+
+    .btn-step {
+      background: #F1F5F9 !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      font-weight: 800 !important;
+    }
+
+    .btn-step:hover {
+      background: #DBEAFE !important;
+      border-color: #93C5FD !important;
+      color: #1D4ED8 !important;
+    }
+
+    /* KPI Cards */
+    .kpi-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .kpi-title {
+      color: #475569 !important;
+      font-weight: 800 !important;
+      font-size: 0.78rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    .kpi-val {
+      font-size: 1.85rem !important;
+      font-weight: 900 !important;
+      color: #0F172A !important;
+    }
+
+    .highlight-profit .kpi-val {
+      color: #059669 !important;
+    }
+
+    .highlight-gold .kpi-val {
+      color: #1D4ED8 !important;
+    }
+
+    .highlight-maroon .kpi-val {
+      color: #059669 !important;
+    }
+
+    .highlight-blue .kpi-val {
+      color: #0284C7 !important;
+    }
+
+    .kpi-sub {
+      color: #475569 !important;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* Status Badges */
+    .status-positive {
+      background: #DCFCE7 !important;
+      color: #065F46 !important;
+      border: 1px solid #86EFAC !important;
+      font-weight: 800 !important;
+    }
+
+    .status-negative {
+      background: #FEE2E2 !important;
+      color: #991B1B !important;
+      border: 1px solid #FCA5A5 !important;
+      font-weight: 800 !important;
+    }
+
+    .status-gold {
+      background: #DBEAFE !important;
+      color: #1E40AF !important;
+      border: 1px solid #93C5FD !important;
+      font-weight: 800 !important;
+    }
+
+    /* Waterfall Stack Readability */
+    .ue-waterfall-card {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .wf-label {
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+    }
+
+    .wf-label.is-rev {
+      color: #1E3A8A !important;
+    }
+
+    .wf-label.is-cost {
+      color: #991B1B !important;
+    }
+
+    .wf-label.is-net {
+      color: #065F46 !important;
+      font-weight: 800 !important;
+    }
+
+    .wf-val {
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+    }
+
+    .wf-val.is-rev {
+      color: #1E3A8A !important;
+    }
+
+    .wf-val.is-cost {
+      color: #991B1B !important;
+    }
+
+    .wf-val.is-net {
+      color: #065F46 !important;
+    }
+
+    /* Tooltip Readability */
+    .tooltip-icon {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #2563EB !important;
+      font-weight: 800 !important;
+    }
+
+    .tooltip-box {
+      background: #FFFFFF !important;
+      border: 1.5px solid #93C5FD !important;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15) !important;
+      color: #1E293B !important;
+    }
+
+    .tooltip-title {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.85rem !important;
+    }
+
+    .tooltip-desc {
+      color: #334155 !important;
+      font-size: 0.8rem !important;
+      line-height: 1.55 !important;
+    }
+
+    /* Chart Boxes */
+    .chart-box {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .chart-box-header h4 {
+      color: #0F172A !important;
+      font-weight: 800 !important;
+    }
+
+    .control-tag {
+      background: #EFF6FF !important;
+      color: #1D4ED8 !important;
+      border: 1px solid #BFDBFE !important;
+      font-weight: 700 !important;
+    }
+
+    /* Insights Box */
+    .insights-box {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1E293B !important;
+    }
+
+    .insights-box h4 {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+    }
+
+    .insights-box p {
+      color: #334155 !important;
+      font-size: 0.88rem !important;
+      line-height: 1.6 !important;
+    }
+
+    .insights-box strong {
+      color: #0F172A !important;
+    }
+
+    /* Mobile Floating Ticker */
+    .mobile-floating-ticker {
+      background: #FFFFFF !important;
+      border-top: 2px solid #CBD5E1 !important;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .ticker-lbl {
+      color: #64748B !important;
+      font-weight: 700 !important;
+      font-size: 0.72rem !important;
+    }
+
+    .ticker-val {
+      color: #0F172A !important;
+      font-weight: 900 !important;
+      font-size: 1.15rem !important;
+    }
+
+    #ticker-margin {
+      color: #059669 !important;
+    }
+
+    #ticker-ebitda {
+      color: #1D4ED8 !important;
+    }
+
+  
+    /* ===== ENTERPRISE LIGHT THEME HEADER ===== */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: #FFFFFF !important;
+      border-bottom: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+      transition: var(--transition);
+    }
+
+    .header-in {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-app-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--r-sm);
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-app-back:hover {
+      background: #DBEAFE !important;
+      border-color: #93C5FD !important;
+      color: #1E40AF !important;
+      transform: translateX(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35) !important;
+      flex-shrink: 0;
+    }
+
+    .app-brand-info h2 {
+      font-size: 1.05rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .app-brand-info p {
+      font-size: 0.76rem !important;
+      color: #475569 !important;
+      font-weight: 600 !important;
+      margin: 2px 0 0 0;
+    }
+
+    .app-badge-pro {
+      font-size: 0.7rem !important;
+      padding: 3px 8px !important;
+      border-radius: 8px !important;
+      background: #EFF6FF !important;
+      border: 1px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1.5px solid #CBD5E1 !important;
+      background: #F8FAFC !important;
+      color: #1E293B !important;
+      white-space: nowrap;
+    }
+
+    .btn-header-act:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px);
+    }
+
+    .btn-header-act.btn-gold-action {
+      background: #2563EB !important;
+      border-color: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3) !important;
+    }
+
+    .btn-header-act.btn-gold-action:hover {
+      background: #1D4ED8 !important;
+      border-color: #1E40AF !important;
+      color: #FFFFFF !important;
+    }
+
+    /* ===== ENTERPRISE RANGE SLIDER SYSTEM (CRISP VISIBILITY) ===== */
+    .slider-touch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      flex: 1 !important;
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border: 1px solid #CBD5E1 !important;
+      border-radius: 6px !important;
+      outline: none !important;
+      cursor: pointer !important;
+      margin: 10px 0 !important;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      border: none !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+      cursor: grab !important;
+      border: 2.5px solid #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+      margin-top: -8px !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.18) !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5), 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing !important;
+      transform: scale(1.1) !important;
+    }
+
+    input[type="range"]::-moz-range-track {
+      width: 100% !important;
+      height: 8px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      border: 1px solid #CBD5E1 !important;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+      cursor: grab !important;
+      border: 2.5px solid #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4) !important;
+    }
+
+    .slider-val-badge {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      font-family: var(--font-display) !important;
+      border-radius: 8px !important;
+      padding: 4px 12px !important;
+      min-width: 90px !important;
+      text-align: right !important;
+      display: inline-block !important;
+    }
+
+    /* ===== ENTERPRISE MODEL PRESETS & BENCHMARKS STRIP ===== */
+    .quick-settings-strip {
+      display: grid !important;
+      grid-template-columns: auto 1px 1fr !important;
+      align-items: center !important;
+      gap: 20px !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 14px !important;
+      padding: 16px 22px !important;
+      margin-bottom: 24px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    @media (max-width: 960px) {
+      .quick-settings-strip {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      .qs-divider-v {
+        display: none !important;
+      }
+    }
+
+    .qs-col {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-heading-wrap {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .qs-tag {
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+      white-space: nowrap !important;
+    }
+
+    .qs-tag-model {
+      background: #EFF6FF !important;
+      color: #1D4ED8 !important;
+      border: 1px solid #BFDBFE !important;
+    }
+
+    .qs-tag-comp {
+      background: #F0FDF4 !important;
+      color: #15803D !important;
+      border: 1px solid #BBF7D0 !important;
+    }
+
+    .qs-buttons-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-divider-v {
+      width: 1px !important;
+      height: 36px !important;
+      background: #CBD5E1 !important;
+    }
+
+    .preset-pill {
+      background: #F8FAFC !important;
+      border: 1.5px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      padding: 8px 16px !important;
+      border-radius: 20px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      transition: var(--transition) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      white-space: nowrap !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .preset-pill:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .preset-pill.active {
+      background: #1D4ED8 !important;
+      color: #FFFFFF !important;
+      border-color: #1E40AF !important;
+      box-shadow: 0 2px 10px rgba(29, 78, 216, 0.35) !important;
+      font-weight: 800 !important;
+    }
+
+    .preset-pill-talabat.active {
+      background: #EA580C !important;
+      border-color: #C2410C !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(234, 88, 12, 0.35) !important;
+    }
+
+    .preset-pill-snoonu.active {
+      background: #CA8A04 !important;
+      border-color: #A16207 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(202, 138, 4, 0.35) !important;
+    }
+
+    .preset-pill-keeta.active {
+      background: #0284C7 !important;
+      border-color: #0369A1 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35) !important;
+    }
+
+    /* ===== TEXT ALIGNMENT, JUSTIFICATION & READABILITY ===== */
+    .strategic-insight-text {
+      font-size: 0.84rem !important;
+      color: #334155 !important;
+      line-height: 1.65 !important;
+      padding-top: 12px !important;
+      border-top: 1px solid #E2E8F0 !important;
+      text-align: justify !important;
+    }
+
+    .strategic-insight-text strong {
+      color: #1D4ED8 !important;
+    }
+
+    .strategic-insight-text.valuation-insight strong {
+      color: #059669 !important;
+    }
+
+    .insights-box {
+      background: #EFF6FF !important;
+      border: 1.5px solid #BFDBFE !important;
+      border-radius: var(--r-md) !important;
+      padding: 16px 20px !important;
+      margin-top: 16px !important;
+    }
+
+    .insights-box h4 {
+      color: #1D4ED8 !important;
+      font-weight: 800 !important;
+      font-size: 0.95rem !important;
+      margin-bottom: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .insights-box p {
+      color: #334155 !important;
+      font-size: 0.88rem !important;
+      line-height: 1.65 !important;
+      text-align: justify !important;
+      margin: 0 !important;
+    }
+
+    .insights-box strong {
+      color: #0F172A !important;
+    }
+
+    /* ===== ENTERPRISE FOOTER SYSTEM ===== */
+    .sim-footer {
+      margin-top: 48px !important;
+      margin-bottom: 84px !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 14px !important;
+      padding: 22px 28px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      flex-wrap: wrap !important;
+      gap: 20px !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .footer-brand {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+
+    .footer-brand-title {
+      font-size: 0.92rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .footer-brand-sub {
+      font-size: 0.78rem !important;
+      color: #64748B !important;
+      font-weight: 600 !important;
+    }
+
+    .footer-links {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .footer-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 8px 14px !important;
+      border-radius: 8px !important;
+      background: #F8FAFC !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #1E293B !important;
+      font-size: 0.8rem !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      transition: var(--transition) !important;
+    }
+
+    .footer-link:hover {
+      background: #EFF6FF !important;
+      border-color: #3B82F6 !important;
+      color: #1D4ED8 !important;
+      transform: translateY(-1px) !important;
+    }
+
+  
+    /* ===== ENHANCED LAYOUT, SPACING & WATERFALL READABILITY ===== */
+    .quick-settings-strip {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 16px !important;
+      flex-wrap: wrap !important;
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: 12px !important;
+      padding: 10px 18px !important;
+      margin-bottom: 24px !important;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .qs-group {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
+    .qs-label {
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      color: #1E3A8A !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+    }
+
+    .qs-label-comp {
+      color: #0369A1 !important;
+    }
+
+    .qs-divider-v {
+      width: 1px !important;
+      height: 24px !important;
+      background: #E2E8F0 !important;
+    }
+
+    .qs-share-tag {
+      font-size: 0.68rem !important;
+      font-weight: 800 !important;
+      padding: 1px 5px !important;
+      border-radius: 4px !important;
+      background: rgba(0, 0, 0, 0.08) !important;
+      margin-left: 2px !important;
+    }
+
+    .preset-pill {
+      padding: 6px 13px !important;
+      font-size: 0.78rem !important;
+    }
+
+    /* Live Financial Results Section Spacing */
+    .results-analytics-section {
+      margin-top: 38px !important;
+      padding-top: 8px !important;
+    }
+
+    .results-deck-title {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin-bottom: 22px !important;
+      padding-bottom: 12px !important;
+      border-bottom: 1.5px solid #CBD5E1 !important;
+    }
+
+    .results-deck-title h3 {
+      font-size: 1.25rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      margin: 0 !important;
+    }
+
+    /* Waterfall Card Distinct Background & Text Legibility */
+    .ue-waterfall-card {
+      background: #F8FAFC !important;
+      border: 1.5px solid #CBD5E1 !important;
+      border-radius: var(--r-lg) !important;
+      padding: 24px 26px !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .wf-bar-track {
+      height: 26px !important;
+      background: #E2E8F0 !important;
+      border-radius: 6px !important;
+      overflow: hidden !important;
+      position: relative !important;
+      border: 1px solid #CBD5E1 !important;
+    }
+
+    .wf-bar-fill {
+      height: 100% !important;
+      border-radius: 5px !important;
+      transition: width 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      padding-left: 10px !important;
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      color: #FFFFFF !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+      white-space: nowrap !important;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Ambient Gradients -->
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+    <div class="ambient-blob-3"></div>
+  </div>
+
+  <!-- Sticky Top App Header -->
+  <header class="app-header">
+    <div class="header-in">
+      <div class="header-left">
+        <a href="index.html" class="btn-app-back" title="Return to Market Intelligence Dashboard">
+          <span>&#8592;</span> DeliverQ Platform
+        </a>
+        <div class="app-brand">
+          <div class="app-logo">Q</div>
+          <div class="app-brand-info">
+            <h2>DeliverQ Financial Lab <span class="app-badge-pro">Simulator Suite v3.2</span></h2>
+            <p>Qatar Delivery Economics &amp; Break-Even Modeler</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <a href="it-simulator.html" class="btn-header-act" style="color:var(--cyan-400); border-color:rgba(6,182,212,0.35); background:rgba(6,182,212,0.12);" title="Switch to IT & Cloud Sizing Simulator">
+          <span>&#9729;&#65039;</span> IT &amp; Cloud Sizing <span style="font-size:0.68em; background:#0284C7; color:#fff; padding:1px 6px; border-radius:8px; margin-left:4px; font-weight:800;">NEW</span>
+        </a>
+        <button id="themeToggle" class="btn-header-act" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span id="themeIcon">&#127763;</span>
+        </button>
+        <button class="btn-header-act" onclick="copySummary()" title="Copy Executive Investor Brief to Clipboard">
+          <span>&#128203;</span> Copy Brief
+        </button>
+        <button class="btn-header-act" onclick="resetDefaults()" title="Reset inputs to DeliverQ Year 3 Plan">
+          <span>&#8634;</span> Reset Base
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="container">
+
+    <!-- Quick Scenario Levers & Competitor Benchmarks (Clean Strip) -->
+    <!-- Compact Single-Line Quick Settings Toolbar -->
+    <div class="quick-settings-strip">
+      <div class="qs-group">
+        <span class="qs-label">&#9889; Model:</span>
+        <button class="preset-pill active" id="preset-base" onclick="loadPreset('base')" title="DeliverQ Year 3 Base Plan: 18,500 orders/day, 14.5% commission, QAR 78.50 AOV">
+          <span>&#127919;</span> <strong>Yr 3</strong> (Base)
+        </button>
+        <button class="preset-pill" id="preset-launch" onclick="loadPreset('launch')" title="DeliverQ Year 1 Launch Phase: 3,200 orders/day, 12.5% commission, acquisition focus">
+          <span>&#128640;</span> <strong>Yr 1</strong> (Launch)
+        </button>
+        <button class="preset-pill" id="preset-dining" onclick="loadPreset('dining')" title="Premium Dining (West Bay / Pearl): QAR 115 AOV, 18.0% commission">
+          <span>&#127869;&#65039;</span> <strong>Dining</strong>
+        </button>
+        <button class="preset-pill" id="preset-grocery" onclick="loadPreset('grocery')" title="Ultra-Fast Q-Commerce: QAR 55 AOV, 11.5% commission, 15-min dark store">
+          <span>&#9889;</span> <strong>Q-Commerce</strong>
+        </button>
+        <button class="preset-pill" id="preset-pricewar" onclick="loadPreset('pricewar')" title="Zero-Fee Price War: Zero consumer delivery fee defense">
+          <span>&#128737;&#65039;</span> <strong>Zero Fee</strong>
+        </button>
+      </div>
+
+      <div class="qs-divider-v"></div>
+
+      <div class="qs-group">
+        <span class="qs-label qs-label-comp">&#128065;&#65039; Competitor Benchmarks:</span>
+        <button class="preset-pill preset-pill-talabat" id="preset-talabat" onclick="loadPreset('talabat')" title="Talabat Qatar: 41.5% Market Share | 26.0% Commission | QAR 8.00 Delivery Fee | 45k Orders/Day">
+          <span class="preset-brand-dot dot-talabat"></span> <strong>Talabat</strong> <span class="qs-share-tag">41.5%</span>
+        </button>
+        <button class="preset-pill preset-pill-snoonu" id="preset-snoonu" onclick="loadPreset('snoonu')" title="Snoonu Qatar: 31.8% Market Share | 22.0% Commission | QAR 7.00 Delivery Fee | 35k Orders/Day">
+          <span class="preset-brand-dot dot-snoonu"></span> <strong>Snoonu</strong> <span class="qs-share-tag">31.8%</span>
+        </button>
+        <button class="preset-pill preset-pill-keeta" id="preset-keeta" onclick="loadPreset('keeta')" title="Keeta / Meituan Qatar: Aggressive Scale-Up | 14.5% Commission | Subsidized QAR 3.00 Fee | 8k Orders/Day">
+          <span class="preset-brand-dot dot-keeta"></span> <strong>Keeta</strong> <span class="qs-share-tag">Meituan</span>
+        </button>
+      </div>
+    </div>
+
+      <!-- STEP 1: SIMULATOR SCALERS -->
+      <section class="simulator-scalers-deck">
+        <!-- Panel 1: Revenue Levers -->
+          <div class="control-card scaler-card">
+            <div class="control-card-header">
+              <div class="control-card-title">
+                <span class="ctrl-icon">&#128179;</span>
+                <h3>Revenue Levers</h3>
+              </div>
+              <span class="control-tag">Platform Inflow</span>
+            </div>
+
+            <!-- AOV Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-aov">Average Order Value (AOV)</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="AOV Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Average Order Value (AOV)</div>
+                      <div class="tooltip-desc">Customer checkout basket size in Qatar (market avg QAR 65&ndash;85; fine dining QAR 110+). Every +QAR 10 expands commission take without increasing driver route miles.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-aov">QAR 78.50</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-aov', -2.5)">-</button>
+                <input type="range" id="sl-aov" min="40" max="180" step="2.5" value="78.5" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-aov', 2.5)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 40</span><span>QAR 110</span><span>QAR 180</span></div>
+            </div>
+
+            <!-- Commission Rate Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-cr">Merchant Commission</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Commission Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Merchant Take-Rate (%)</div>
+                      <div class="tooltip-desc">Commission retained on restaurant GMV. Qatar incumbents charge 22%&ndash;28% (Talabat/Snoonu). DeliverQ operates at fair-play 12%&ndash;16% leaving higher restaurant profit.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-cr">14.5%</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-cr', -0.5)">-</button>
+                <input type="range" id="sl-cr" min="8" max="28" step="0.5" value="14.5" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-cr', 0.5)">+</button>
+              </div>
+              <div class="slider-scale"><span>8.0%</span><span>18.0%</span><span>28.0%</span></div>
+            </div>
+
+            <!-- Customer Delivery Fee Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-fee">Customer Delivery Fee</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Delivery Fee Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Customer Delivery Tariff</div>
+                      <div class="tooltip-desc">Direct fee charged to consumer per order (Qatar standard QAR 6&ndash;10). Subsidized zero-fee campaigns boost order volume but require higher basket AOV or commission.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-fee">QAR 6.50</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-fee', -0.5)">-</button>
+                <input type="range" id="sl-fee" min="0" max="18" step="0.5" value="6.5" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-fee', 0.5)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 0 (Free)</span><span>QAR 9.00</span><span>QAR 18.00</span></div>
+            </div>
+
+            <!-- Ad Yield Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-ad">In-App Ads &amp; Tech / Order</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Ad Yield Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Retail Media &amp; Ads Yield</div>
+                      <div class="tooltip-desc">High-margin revenue from sponsored search placement, merchant banners, and POS tech licensing (typically QAR 1.10&ndash;2.20/drop at 85%+ margin).</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-ad">QAR 1.10</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-ad', -0.1)">-</button>
+                <input type="range" id="sl-ad" min="0" max="4" step="0.1" value="1.1" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-ad', 0.1)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 0.00</span><span>QAR 2.00</span><span>QAR 4.00</span></div>
+            </div>
+          </div>
+
+        <!-- Panel 3: Scale & Operational Levers -->
+          <div class="control-card scaler-card">
+            <div class="control-card-header">
+              <div class="control-card-title">
+                <span class="ctrl-icon">&#127970;</span>
+                <h3>Scale &amp; Overhead Levers</h3>
+              </div>
+              <span class="control-tag">Platform Scale</span>
+            </div>
+
+            <!-- Daily Orders Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-ord">Daily Order Volume</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Daily Orders Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Daily Completed Order Volume</div>
+                      <div class="tooltip-desc">Total orders fulfilled platform-wide across Qatar daily. Amortizes headquarters fixed OPEX over wider order volume (Talabat ~45k/day, Snoonu ~35k/day).</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-ord">18,500</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-ord', -500)">-</button>
+                <input type="range" id="sl-ord" min="1000" max="45000" step="500" value="18500" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-ord', 500)">+</button>
+              </div>
+              <div class="slider-scale"><span>1,000</span><span>23,000</span><span>45,000</span></div>
+            </div>
+
+            <!-- Monthly OPEX Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-fx">Monthly Corporate Fixed OPEX</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Fixed OPEX Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Monthly Corporate Fixed OPEX</div>
+                      <div class="tooltip-desc">Headquarters non-variable costs: executive leadership, software engineering, cloud hosting, legal compliance, and office rent in Lusail/West Bay.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-fx">QAR 1.52M</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-fx', -40000)">-</button>
+                <input type="range" id="sl-fx" min="600000" max="3200000" step="40000" value="1520000" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-fx', 40000)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 0.6M</span><span>QAR 1.9M</span><span>QAR 3.2M</span></div>
+            </div>
+          </div>
+
+        <!-- Panel 2: Direct Fulfillment Costs -->
+          <div class="control-card scaler-card">
+            <div class="control-card-header">
+              <div class="control-card-title">
+                <span class="ctrl-icon">&#128693;</span>
+                <h3>Direct Fulfillment &amp; Fleet</h3>
+              </div>
+              <span class="control-tag">Cost to Serve (COGS)</span>
+            </div>
+
+            <!-- Rider Pay Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-rider">Rider Base Pay / Drop</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Rider Pay Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Rider Remuneration / Drop</div>
+                      <div class="tooltip-desc">Direct pay per drop delivered to fleet couriers in Qatar (standard QAR 8.50&ndash;11.00). Competitive pay ensures fleet retention and rapid 28-min delivery SLAs.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-rider">QAR 9.60</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-rider', -0.2)">-</button>
+                <input type="range" id="sl-rider" min="6.0" max="16.0" step="0.2" value="9.6" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-rider', 0.2)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 6.00</span><span>QAR 11.00</span><span>QAR 16.00</span></div>
+            </div>
+
+            <!-- Vehicle & Fuel Wear Slider -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-fuel">Vehicle, Fuel &amp; Summer AC</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Vehicle Fuel Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Fleet Fuel &amp; Summer Climate Surcharge</div>
+                      <div class="tooltip-desc">Motorcycle/car amortization, petrol, and Qatar summer heat surcharge (45&deg;C+ climate increases vehicle cooling and wear from May&ndash;Sept).</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-fuel">QAR 2.75</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-fuel', -0.25)">-</button>
+                <input type="range" id="sl-fuel" min="1.0" max="5.5" step="0.25" value="2.75" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-fuel', 0.25)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 1.00</span><span>QAR 3.25</span><span>QAR 5.50</span></div>
+            </div>
+
+            <!-- Batching Density Multiplier -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-batch">Batching Density Multiplier</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="Batching Density Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">Algorithmic Batching Multiplier</div>
+                      <div class="tooltip-desc">Efficiency of couriers dropping multiple orders per trip. 1.00x is single solo drop. 1.30x+ algorithmic clustering reduces rider pay and fuel per order by 23%+.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-batch">1.00&times; Solo</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-batch', -0.05)">-</button>
+                <input type="range" id="sl-batch" min="1.0" max="1.6" step="0.05" value="1.0" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-batch', 0.05)">+</button>
+              </div>
+              <div class="slider-scale"><span>1.00x Solo</span><span>1.30x Clustered</span><span>1.60x Ultra-Dense</span></div>
+            </div>
+
+            <!-- SafeDrop Insurance & Spoilage -->
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <div class="slider-label-wrap">
+                  <label class="slider-label" for="sl-ins">SafeDrop&trade; Insurance &amp; Defect</label>
+                  <div class="tooltip-wrap" tabindex="0" role="button" aria-label="SafeDrop Info">
+                    <span class="tooltip-icon">&#9432;</span>
+                    <div class="tooltip-box">
+                      <div class="tooltip-title">SafeDrop&trade; Defect &amp; Spoilage</div>
+                      <div class="tooltip-desc">Provision for transit damage, soup spills, merchant food prep mistakes, and refund claims. DeliverQ insulated lock-boxes compress defects to &lt;QAR 0.40.</div>
+                    </div>
+                  </div>
+                </div>
+                <span class="slider-val-badge" id="lbl-ins">QAR 0.40</span>
+              </div>
+              <div class="slider-touch-row">
+                <button class="btn-step" onclick="stepVal('sl-ins', -0.05)">-</button>
+                <input type="range" id="sl-ins" min="0.1" max="1.5" step="0.05" value="0.40" oninput="runSimulation()">
+                <button class="btn-step" onclick="stepVal('sl-ins', 0.05)">+</button>
+              </div>
+              <div class="slider-scale"><span>QAR 0.10</span><span>QAR 0.80</span><span>QAR 1.50</span></div>
+            </div>
+          </div>
+      </section>
+
+      <!-- STEP 2: CHART BOX & KPI RESULTS (Net Margin, Monthly Gross Profit, EBITDA, and Charts) -->
+      <section class="results-analytics-section">
+        <div class="results-deck-title">
+          <h3><span>&#128200;</span> Live Financial Results &amp; Platform Economics</h3>
+          <span class="control-tag">Real-Time Synthesis</span>
+        </div>
+
+<!-- Key Performance Indicators (6 Dynamic Cards) -->
+    <section class="kpi-grid">
+      <div class="kpi-card highlight-profit">
+        <div class="kpi-top">
+          <span class="kpi-title">Net Margin / Order</span>
+          <span class="kpi-icon">&#128176;</span>
+        </div>
+        <div class="kpi-val" id="kpi-nc">+QAR 4.43</div>
+        <div class="kpi-sub">
+          <span class="kpi-status-badge status-positive" id="kpi-nc-pct">23.3% Margin</span>
+          <span>Contribution CM2</span>
+        </div>
+      </div>
+
+      <div class="kpi-card highlight-gold">
+        <div class="kpi-top">
+          <span class="kpi-title">Monthly Gross Profit</span>
+          <span class="kpi-icon">&#128200;</span>
+        </div>
+        <div class="kpi-val" id="kpi-mg">QAR 2.46M</div>
+        <div class="kpi-sub">
+          <span id="kpi-daily-orders-lbl">18,500 orders/day</span>
+          <span>&times; 30 days</span>
+        </div>
+      </div>
+
+      <div class="kpi-card highlight-maroon">
+        <div class="kpi-top">
+          <span class="kpi-title">Monthly EBITDA</span>
+          <span class="kpi-icon">&#128640;</span>
+        </div>
+        <div class="kpi-val" id="kpi-eb">+QAR 940K</div>
+        <div class="kpi-sub">
+          <span class="kpi-status-badge status-positive" id="kpi-eb-status">Profitable</span>
+          <span>Net of HQ OPEX</span>
+        </div>
+      </div>
+
+      <div class="kpi-card highlight-blue">
+        <div class="kpi-top">
+          <span class="kpi-title">Break-Even Volume</span>
+          <span class="kpi-icon">&#9878;&#65039;</span>
+        </div>
+        <div class="kpi-val" id="kpi-be">11,400 / day</div>
+        <div class="kpi-sub">
+          <span class="kpi-status-badge status-gold" id="kpi-be-status">Month 22 Target</span>
+          <span>Covers Fixed OPEX</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <span class="kpi-title">Monthly GMV</span>
+          <span class="kpi-icon">&#128722;</span>
+        </div>
+        <div class="kpi-val" id="kpi-gmv">QAR 43.57M</div>
+        <div class="kpi-sub">
+          <span id="kpi-annual-gmv">QAR 522.8M Annualized</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-top">
+          <span class="kpi-title">Capacity to Break-Even</span>
+          <span class="kpi-icon">&#128337;</span>
+        </div>
+        <div class="kpi-val" id="kpi-cap">162.3%</div>
+        <div class="kpi-sub">
+          <span class="kpi-status-badge status-positive" id="kpi-cap-badge">+62.3% Safety Buffer</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enterprise Valuation & Financial Efficiency Lab (Simulate & Value) -->
+    <div class="valuation-efficiency-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 18px 0 24px;">
+      <!-- Card A: Live Enterprise Valuation Engine -->
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid #CBD5E1; border-radius: var(--r-lg); padding: 22px 24px; box-shadow: 0 2px 10px rgba(15,23,42,0.05); position:relative; overflow:hidden;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:#1D4ED8;">Valuation Simulator</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:#0F172A; margin-top:2px; font-family:var(--font-display);">&#128142; Implied Enterprise Value (EV)</h3>
+          </div>
+          <span class="app-badge-pro" id="val-method-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:12px;">14.0x EBITDA</span>
+        </div>
+
+        <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:12px;">
+          <div style="font-size:2.1rem; font-weight:900; color:#1E3A8A; font-family:var(--font-display);" id="val-ev-qar">QAR 285.4M</div>
+          <div style="font-size:1.05rem; font-weight:700; color:#64748B;" id="val-ev-usd">($78.4M USD)</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:12px; background:#F8FAFC; border-radius:var(--r-md); border:1px solid #E2E8F0; margin-bottom:14px;">
+          <div>
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">ARR Run-Rate Multiple</div>
+            <div style="font-size:1rem; font-weight:800; color:#0F172A; font-family:var(--font-display);" id="val-arr-mult">4.8x Net Revenue</div>
+          </div>
+          <div>
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">EV / Daily Active Order</div>
+            <div style="font-size:1rem; font-weight:800; color:#0F172A; font-family:var(--font-display);" id="val-per-order">QAR 15,420 / drop</div>
+          </div>
+        </div>
+
+        <div class="strategic-insight-text valuation-insight">
+          <strong>&#10003; Investment Valuation Insight:</strong> Enterprise valuation is modeled dynamically using blended forward multiples (13.5x forward EBITDA and 4.6x Net Revenue run-rate). Benchmarked against regional GCC on-demand delivery precedents, this pro-forma trajectory supports a post-money valuation of QAR 285.4M ($78.4M USD) at Month 36 target capacity.
+        </div>
+      </div>
+
+      <!-- Card B: Financial Efficiency & Capital Float Planning -->
+      <div class="card" style="background:#FFFFFF; border: 1.5px solid #CBD5E1; border-radius: var(--r-lg); padding: 22px 24px; box-shadow: 0 2px 10px rgba(15,23,42,0.05);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:#059669;">Capital Efficiency Levers</div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:#0F172A; margin-top:2px; font-family:var(--font-display);">&#9889; Working Capital &amp; Unit Payback</h3>
+          </div>
+          <span class="app-badge-pro" style="background:#DCFCE7; color:#065F46; border:1px solid #86EFAC; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:12px;">Capital Light</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+          <div style="background:#F8FAFC; padding:12px; border-radius:var(--r-md); border:1px solid #E2E8F0;">
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">7-Day Merchant Float</div>
+            <div style="font-size:1.25rem; font-weight:900; color:#059669; font-family:var(--font-display);" id="val-float-qar">QAR 10.16M</div>
+            <div style="font-size:0.7rem; color:#475569; margin-top:2px;">Interest-free working cash</div>
+          </div>
+          <div style="background:#F8FAFC; padding:12px; border-radius:var(--r-md); border:1px solid #E2E8F0;">
+            <div style="font-size:0.72rem; color:#64748B; font-weight:700;">CAC Payback Period</div>
+            <div style="font-size:1.25rem; font-weight:900; color:#1D4ED8; font-family:var(--font-display);" id="val-cac-payback">2.9 Months</div>
+            <div style="font-size:0.7rem; color:#475569; margin-top:2px;">@ QAR 45 blended CAC</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+          <div>
+            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">24-Mo LTV / CAC:</span>
+            <strong style="color:#0F172A; font-size:0.85rem; margin-left:4px;" id="val-ltv-ratio">5.4x (Healthy &gt; 3.0x)</strong>
+          </div>
+          <div>
+            <span style="font-size:0.75rem; color:#64748B; font-weight:600;">Batching EBITDA Lift:</span>
+            <strong style="color:#0F172A; font-size:0.85rem; margin-left:4px;" id="val-batch-lift">+QAR 840K / yr</strong>
+          </div>
+        </div>
+
+        <div class="strategic-insight-text">
+          <strong>&#9889; Strategic Planning Insight:</strong> Merchant payout float provides non-debt operational liquidity, eliminating short-term revolving credit requirements. Combined with premium Qatar basket sizes (QAR 78.50 AOV) and tiered 14.5% fair take-rates, customer acquisition costs are recouped in a top-decile 2.9 month horizon.
+        </div>
+      </div>
+    </div>
+
+    <!-- Per-Order Unit Economics Waterfall Card -->
+          <section class="ue-waterfall-card">
+            <div class="card-top-header">
+              <div class="card-title-group">
+                <h3><span>&#128176;</span> Per-Order Unit Economics Breakdown</h3>
+                <p>Granular revenue components minus direct fulfillment expenses</p>
+              </div>
+              <div class="hero-badge badge-green" id="badge-gross-rev">
+                Gross Platform Rev: QAR 18.98
+              </div>
+            </div>
+
+            <div class="waterfall-stack">
+              <!-- Inflows -->
+              <div class="wf-row">
+                <div class="wf-label is-rev"><span>+</span> Merchant Commission</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-comm" style="width: 60%; background: linear-gradient(90deg, #1D4ED8, #3B82F6);">
+                    QAR 11.38
+                  </div>
+                </div>
+                <div class="wf-val is-rev" id="val-comm">+QAR 11.38</div>
+              </div>
+
+              <div class="wf-row">
+                <div class="wf-label is-rev"><span>+</span> Customer Delivery Fee</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-fee" style="width: 34%; background: linear-gradient(90deg, #0284C7, #38BDF8);">
+                    QAR 6.50
+                  </div>
+                </div>
+                <div class="wf-val is-rev" id="val-fee">+QAR 6.50</div>
+              </div>
+
+              <div class="wf-row">
+                <div class="wf-label is-rev"><span>+</span> Value-Add Tech &amp; Ads</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-ad" style="width: 8%; background: linear-gradient(90deg, #06B6D4, #67E8F9);">
+                    QAR 1.10
+                  </div>
+                </div>
+                <div class="wf-val is-rev" id="val-ad">+QAR 1.10</div>
+              </div>
+
+              <div class="wf-divider"></div>
+
+              <!-- Outflows -->
+              <div class="wf-row">
+                <div class="wf-label is-cost"><span>&minus;</span> Rider Pay (Direct)</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-rider" style="width: 51%; background: linear-gradient(90deg, #E11D48, #F43F5E);">
+                    &minus;QAR 9.60
+                  </div>
+                </div>
+                <div class="wf-val is-cost" id="val-rider">&minus;QAR 9.60</div>
+              </div>
+
+              <div class="wf-row">
+                <div class="wf-label is-cost"><span>&minus;</span> Fleet, Fuel &amp; Summer AC</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-fuel" style="width: 15%; background: linear-gradient(90deg, #EA580C, #F97316);">
+                    &minus;QAR 2.75
+                  </div>
+                </div>
+                <div class="wf-val is-cost" id="val-fuel">&minus;QAR 2.75</div>
+              </div>
+
+              <div class="wf-row">
+                <div class="wf-label is-cost"><span>&minus;</span> Payment Gateway Toll</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-gw" style="width: 8%; background: linear-gradient(90deg, #64748B, #94A3B8);">
+                    &minus;QAR 1.41
+                  </div>
+                </div>
+                <div class="wf-val is-cost" id="val-gw">&minus;QAR 1.41</div>
+              </div>
+
+              <div class="wf-row">
+                <div class="wf-label is-cost"><span>&minus;</span> SafeDrop&trade; &amp; Spoilage</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-ins" style="width: 3%; background: linear-gradient(90deg, #818CF8, #A78BFA);">
+                    &minus;QAR 0.40
+                  </div>
+                </div>
+                <div class="wf-val is-cost" id="val-ins">&minus;QAR 0.40</div>
+              </div>
+
+              <div class="wf-divider" style="background: var(--profit); height: 3px;"></div>
+
+              <!-- Net Contribution Result -->
+              <div class="wf-row">
+                <div class="wf-label is-net">Net Contribution (CM2)</div>
+                <div class="wf-bar-track">
+                  <div class="wf-bar-fill" id="bar-net" style="width: 23%; background: linear-gradient(90deg, #059669, #10B981);">
+                    +QAR 4.43
+                  </div>
+                </div>
+                <div class="wf-val is-net" id="val-net">+QAR 4.43</div>
+              </div>
+            </div>
+
+            <!-- Dynamic Real-time Insights Alert -->
+            <div class="insights-box" id="dynamicInsightBox">
+              <h4><span>&#10003;</span> Operational Analysis</h4>
+              <p id="dynamicInsightText">
+                Strong unit economics: Net Contribution of <strong>QAR 4.43 per order (23.3% net margin)</strong> yields <strong>QAR 2.46M monthly gross profit</strong>. Covering corporate OPEX of QAR 1.52M generates <strong>+QAR 940K monthly EBITDA</strong> with break-even achieved at 11,400 daily orders.
+              </p>
+            </div>
+          </section>
+
+          <!-- Quick Preview Charts (Break-even Curve & Donut) -->
+          <div class="charts-grid-duo">
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#128200;</span> Break-Even Volume Curve</h4>
+                <span class="control-tag">OPEX vs Margin</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartBreakEven"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#129684;</span> Cost to Serve / Drop</h4>
+                <span class="control-tag">COGS Split</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartCostDonut"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Institutional Charts Duo 2: Pro-Forma & Competitor Benchmark -->
+          <div class="charts-grid-duo" style="margin-top: 16px;">
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#128202;</span> 5-Year Pro-Forma Trajectory (2026&ndash;2030)</h4>
+                <span class="control-tag">Revenue &amp; EBITDA</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartProForma"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#9876;&#65039;</span> Qatar Competitor Benchmark</h4>
+                <span class="control-tag">Take-Rate vs Net Margin</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartCompetitorBenchmark"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Institutional Charts Duo 3: Revenue Mix & Scale EBITDA Curve -->
+          <div class="charts-grid-duo" style="margin-top: 16px;">
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#128179;</span> Platform Revenue Mix Inflow</h4>
+                <span class="control-tag">Take Composition</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartRevenueMix"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <div class="chart-box-header">
+                <h4><span>&#128640;</span> Volume Scale EBITDA Expansion Curve</h4>
+                <span class="control-tag">Operating Leverage</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chartEbitdaSensitivity"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2D Sensitivity Stress-Matrix Table -->
+          <div class="card" style="margin-top: 20px; background:#FFFFFF; border: 1.5px solid #CBD5E1; border-radius: var(--r-lg); padding: 22px 24px; box-shadow: 0 2px 10px rgba(15,23,42,0.05);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; color:#1D4ED8;">Institutional Stress Lab</div>
+                <h3 style="font-size:1.18rem; font-weight:800; color:#0F172A; margin-top:2px; font-family:var(--font-display);">&#9878;&#65039; 2D Operational Sensitivity Matrix: Take-Rate vs Daily Orders</h3>
+              </div>
+              <span class="app-badge-pro" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-weight:800; font-size:0.75rem; padding:4px 10px; border-radius:12px;">Monthly EBITDA (QAR)</span>
+            </div>
+            <p style="font-size:0.82rem; color:#64748B; margin-bottom:14px; line-height:1.45;">
+              Stress-testing operating profitability against merchant commission compression (10.0% to 20.0%) and fluctuating daily order volume (5,000 to 40,000 drops/day). Cells reflect monthly EBITDA net of QAR 1.52M fixed corporate OPEX.
+            </p>
+            <div style="overflow-x:auto; scrollbar-width:thin;">
+              <table class="sens-table">
+                <thead>
+                  <tr>
+                    <th>Commission \ Orders</th>
+                    <th>5,000 / day</th>
+                    <th>10,000 / day</th>
+                    <th>18,500 / day (Base)</th>
+                    <th>28,500 / day</th>
+                    <th>40,000 / day</th>
+                  </tr>
+                </thead>
+                <tbody id="sensTableBody">
+                  <!-- Generated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="sim-footer">
+      <div class="footer-brand">
+        <div class="footer-brand-title">
+          <span>&#128722;</span> DeliverQ Financial Intelligence Lab
+        </div>
+        <div class="footer-brand-sub">
+          Enterprise Unit Economics &amp; Break-Even Modeler &bull; State of Qatar 2026&ndash;2032
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">&#128202; Market Overview</a>
+        <a href="index.html#tab-competitors" class="footer-link">&#9876;&#65039; Competitor Intel</a>
+        <a href="index.html#tab-opportunity" class="footer-link">&#128269; Opportunity &amp; Gaps</a>
+        <a href="index.html#tab-services" class="footer-link">&#128640; Platform Blueprint</a>
+        <a href="index.html#tab-financials" class="footer-link">&#128176; 5-Year Financial Model</a>
+        <a href="index.html#tab-operations" class="footer-link">&#9878;&#65039; Compliance &amp; Ops</a>
+        <a href="it-simulator.html" class="footer-link" style="color:#0284C7; font-weight:700;">&#9729;&#65039; IT &amp; Cloud Simulator</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Mobile Floating Quick Ticker (Bottom Bar for Phones) -->
+  <div class="mobile-floating-ticker">
+    <div class="ticker-col">
+      <span class="ticker-lbl">Net Margin / Drop</span>
+      <span class="ticker-val" id="ticker-margin">+QAR 4.43</span>
+    </div>
+    <div class="ticker-col">
+      <span class="ticker-lbl">Monthly EBITDA</span>
+      <span class="ticker-val" id="ticker-ebitda" style="color:var(--gold-400);">+QAR 940K</span>
+    </div>
+    <button class="ticker-btn" onclick="document.querySelector('.simulator-scalers-deck').scrollIntoView({behavior:'smooth'})">
+      Adjust Levers &#8593;
+    </button>
+  </div>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast" id="toastNotification">
+    <span id="toastIcon">&#10003;</span>
+    <span id="toastMsg">Executive summary copied to clipboard!</span>
+  </div>
+
+  <!-- Interactive Simulation Engine & Chart.js Visualizations -->
+  <script>
+    // ===== SCENARIO PRESETS & COMPETITOR BENCHMARKS (Item 8) =====
+    var PRESETS = {
+      base: {
+        name: 'DeliverQ Base Plan (Yr 3)',
+        tagline: 'DeliverQ Fair-Play 14.5% Commission Model',
+        aov: 78.50, cr: 14.5, fee: 6.50, ad: 1.10,
+        rider: 9.60, fuel: 2.75, batch: 1.00, ins: 0.40,
+        ord: 18500, fx: 1520000
+      },
+      launch: {
+        name: 'Year 1 Early Launch',
+        tagline: 'Early Customer & Restaurant Acquisition Stage',
+        aov: 68.00, cr: 12.5, fee: 7.00, ad: 0.60,
+        rider: 10.50, fuel: 3.00, batch: 1.00, ins: 0.50,
+        ord: 3200, fx: 1200000
+      },
+      dining: {
+        name: 'Premium Dining (West Bay / Pearl)',
+        tagline: 'High Basket Size & Gourmet Dining Focus',
+        aov: 115.00, cr: 18.0, fee: 8.50, ad: 1.80,
+        rider: 11.00, fuel: 2.80, batch: 1.15, ins: 0.60,
+        ord: 12000, fx: 1650000
+      },
+      grocery: {
+        name: 'Ultra-Fast Q-Commerce',
+        tagline: 'High Density 15-Minute Dark Store Fulfillment',
+        aov: 55.00, cr: 11.5, fee: 4.50, ad: 2.20,
+        rider: 8.80, fuel: 2.50, batch: 1.35, ins: 0.35,
+        ord: 32000, fx: 1800000
+      },
+      pricewar: {
+        name: 'Aggressive Zero-Fee War',
+        tagline: 'Zero Consumer Delivery Fee Defensive Stance',
+        aov: 74.00, cr: 13.5, fee: 0.00, ad: 1.50,
+        rider: 9.60, fuel: 2.75, batch: 1.10, ins: 0.40,
+        ord: 25000, fx: 1520000
+      },
+      // Real Qatar Competitor Benchmark Presets (Item 8)
+      talabat: {
+        name: 'Talabat Qatar (41.5% Market Share)',
+        tagline: 'Talabat Market Leader: 26% High Commission & Large Scale',
+        aov: 75.00, cr: 26.0, fee: 8.00, ad: 1.80,
+        rider: 9.50, fuel: 3.20, batch: 1.05, ins: 0.45,
+        ord: 45000, fx: 2800000
+      },
+      snoonu: {
+        name: 'Snoonu Qatar (31.8% Market Share)',
+        tagline: 'Snoonu Qatar Champion: 22% Commission & 35k Orders/Day',
+        aov: 70.00, cr: 22.0, fee: 7.00, ad: 1.20,
+        rider: 9.20, fuel: 2.90, batch: 1.10, ins: 0.40,
+        ord: 35000, fx: 2200000
+      },
+      keeta: {
+        name: 'Keeta Qatar (Meituan Scale-Up)',
+        tagline: 'Keeta Aggressive Entrant: Subsidized 14.5% Commission & High Courier Pay',
+        aov: 65.00, cr: 14.5, fee: 3.00, ad: 0.50,
+        rider: 11.00, fuel: 3.00, batch: 1.30, ins: 0.50,
+        ord: 8000, fx: 1600000
+      }
+    };
+
+    // Chart instances
+    var chartBE = null;
+    var chartCD = null;
+    var chartPF = null;
+    var chartCB = null;
+    var chartRM = null;
+    var chartES = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initTheme();
+      runSimulation();
+    });
+
+    // Theme Management
+    function initTheme() {
+      var saved = localStorage.getItem('deliverq_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateThemeButton(saved);
+    }
+
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('deliverq_theme', next);
+      updateThemeButton(next);
+      runSimulation();
+    }
+
+    function updateThemeButton(theme) {
+      var btn = document.getElementById('themeToggle');
+      if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127763;';
+    }
+
+    // App Navigation Tab Switcher
+    function switchAppTab(e, viewId) {
+      document.querySelectorAll('.app-view').forEach(function (v) {
+        v.classList.remove('active');
+      });
+      document.querySelectorAll('.app-tab-btn').forEach(function (b) {
+        b.classList.remove('active');
+      });
+
+      var targetView = document.getElementById(viewId);
+      if (targetView) targetView.classList.add('active');
+
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      } else {
+        var defaultBtn = document.querySelector(".app-tab-btn[onclick*='" + viewId + "']");
+        if (defaultBtn) defaultBtn.classList.add('active');
+      }
+
+      // If opening analytics view, redraw charts cleanly
+      if (viewId === 'view-analytics') {
+        setTimeout(renderAnalyticsCharts, 80);
+      }
+      window.scrollTo({ top: 180, behavior: 'smooth' });
+    }
+
+    // Touch Stepper for fine-tuning sliders on mobile
+    function stepVal(id, delta) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var cur = parseFloat(el.value);
+      var min = parseFloat(el.min);
+      var max = parseFloat(el.max);
+      var next = Math.max(min, Math.min(max, cur + delta));
+      el.value = next;
+      runSimulation();
+    }
+
+    // Load Scenario Preset
+    function loadPreset(key) {
+      var p = PRESETS[key];
+      if (!p) return;
+
+      document.querySelectorAll('.preset-pill').forEach(function (btn) {
+        btn.classList.remove('active');
+      });
+      var activeBtn = document.getElementById('preset-' + key);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('sl-aov').value = p.aov;
+      document.getElementById('sl-cr').value = p.cr;
+      document.getElementById('sl-fee').value = p.fee;
+      document.getElementById('sl-ad').value = p.ad;
+      document.getElementById('sl-rider').value = p.rider;
+      document.getElementById('sl-fuel').value = p.fuel;
+      document.getElementById('sl-batch').value = p.batch;
+      document.getElementById('sl-ins').value = p.ins;
+      document.getElementById('sl-ord').value = p.ord;
+      document.getElementById('sl-fx').value = p.fx;
+
+      runSimulation();
+      showToast('Loaded Scenario: ' + p.name);
+    }
+
+    function resetDefaults() {
+      loadPreset('base');
+    }
+
+    // Main Simulation Engine
+    function runSimulation() {
+      // 1. Read Inputs
+      var aov = parseFloat(document.getElementById('sl-aov').value);
+      var cr = parseFloat(document.getElementById('sl-cr').value) / 100;
+      var fee = parseFloat(document.getElementById('sl-fee').value);
+      var ad = parseFloat(document.getElementById('sl-ad').value);
+
+      var rider = parseFloat(document.getElementById('sl-rider').value);
+      var fuel = parseFloat(document.getElementById('sl-fuel').value);
+      var batch = parseFloat(document.getElementById('sl-batch').value);
+      var ins = parseFloat(document.getElementById('sl-ins').value);
+
+      var ord = parseInt(document.getElementById('sl-ord').value, 10);
+      var fx = parseFloat(document.getElementById('sl-fx').value);
+
+      // 2. Update Label Badges
+      document.getElementById('lbl-aov').textContent = 'QAR ' + aov.toFixed(2);
+      document.getElementById('lbl-cr').textContent = (cr * 100).toFixed(1) + '%';
+      document.getElementById('lbl-fee').textContent = 'QAR ' + fee.toFixed(2);
+      document.getElementById('lbl-ad').textContent = 'QAR ' + ad.toFixed(2);
+
+      document.getElementById('lbl-rider').textContent = 'QAR ' + rider.toFixed(2);
+      document.getElementById('lbl-fuel').textContent = 'QAR ' + fuel.toFixed(2);
+      document.getElementById('lbl-batch').textContent = batch.toFixed(2) + 'x ' + (batch > 1.0 ? 'Clustered' : 'Solo');
+      document.getElementById('lbl-ins').textContent = 'QAR ' + ins.toFixed(2);
+
+      document.getElementById('lbl-ord').textContent = ord.toLocaleString();
+      document.getElementById('lbl-fx').textContent = 'QAR ' + (fx / 1e6).toFixed(2) + 'M';
+
+      // 3. Per-Order Unit Economics
+      var commRev = aov * cr;
+      var delRev = fee;
+      var adRev = ad;
+      var grossRev = commRev + delRev + adRev;
+
+      var adjRider = rider / batch;
+      var adjFuel = fuel / batch;
+      var gw = (aov + fee) * 0.018 + 0.25;
+      var adjIns = ins;
+      var totalCost = adjRider + adjFuel + gw + adjIns;
+
+      var netContr = grossRev - totalCost;
+      var netMarginPct = grossRev > 0 ? (netContr / grossRev) * 100 : 0;
+
+      // 4. Monthly & Scale Run Rates
+      var monthlyOrd = ord * 30;
+      var monthlyGMV = monthlyOrd * aov;
+      var monthlyGrossProf = netContr * monthlyOrd;
+      var monthlyEbitda = monthlyGrossProf - fx;
+
+      var beOrders = netContr > 0 ? Math.ceil(fx / (netContr * 30)) : Infinity;
+      var capacityPct = beOrders !== Infinity ? (ord / beOrders) * 100 : 0;
+
+      // 5. Update KPI Cards & Mobile Floating Ticker
+      var formattedNetContr = (netContr >= 0 ? '+' : '') + 'QAR ' + netContr.toFixed(2);
+      var formattedEbitda = (monthlyEbitda >= 0 ? '+' : '-') + 'QAR ' + Math.abs(Math.round(monthlyEbitda / 1000)).toLocaleString() + 'K';
+
+      var ncEl = document.getElementById('kpi-nc');
+      ncEl.textContent = formattedNetContr;
+      ncEl.style.color = netContr >= 0 ? 'var(--profit)' : 'var(--loss)';
+
+      var tickerMargin = document.getElementById('ticker-margin');
+      if (tickerMargin) {
+        tickerMargin.textContent = formattedNetContr;
+        tickerMargin.style.color = netContr >= 0 ? 'var(--profit)' : 'var(--loss)';
+      }
+
+      var ncPctEl = document.getElementById('kpi-nc-pct');
+      ncPctEl.textContent = netMarginPct.toFixed(1) + '% Margin';
+      ncPctEl.className = 'kpi-status-badge ' + (netContr >= 0 ? 'status-positive' : 'status-negative');
+
+      document.getElementById('kpi-mg').textContent = 'QAR ' + (monthlyGrossProf / 1e6).toFixed(2) + 'M';
+      document.getElementById('kpi-daily-orders-lbl').textContent = ord.toLocaleString() + ' orders/day';
+
+      var ebEl = document.getElementById('kpi-eb');
+      ebEl.textContent = formattedEbitda;
+      ebEl.style.color = monthlyEbitda >= 0 ? 'var(--gold-400)' : 'var(--loss)';
+
+      var tickerEbitda = document.getElementById('ticker-ebitda');
+      if (tickerEbitda) {
+        tickerEbitda.textContent = formattedEbitda;
+        tickerEbitda.style.color = monthlyEbitda >= 0 ? 'var(--gold-400)' : 'var(--loss)';
+      }
+
+      var ebStatusEl = document.getElementById('kpi-eb-status');
+      if (monthlyEbitda >= 0) {
+        ebStatusEl.textContent = 'Profitable Run-Rate';
+        ebStatusEl.className = 'kpi-status-badge status-positive';
+      } else {
+        ebStatusEl.textContent = 'Operating Deficit';
+        ebStatusEl.className = 'kpi-status-badge status-negative';
+      }
+
+      var beEl = document.getElementById('kpi-be');
+      var beStatusEl = document.getElementById('kpi-be-status');
+      if (beOrders !== Infinity) {
+        beEl.textContent = beOrders.toLocaleString() + ' / day';
+        if (ord >= beOrders) {
+          beStatusEl.textContent = 'Target Cleared (+' + (ord - beOrders).toLocaleString() + ')';
+          beStatusEl.className = 'kpi-status-badge status-positive';
+        } else {
+          beStatusEl.textContent = 'Shortfall of ' + (beOrders - ord).toLocaleString() + ' ord';
+          beStatusEl.className = 'kpi-status-badge status-negative';
+        }
+      } else {
+        beEl.textContent = 'Loss-Making';
+        beStatusEl.textContent = 'Insolvent at order level';
+        beStatusEl.className = 'kpi-status-badge status-negative';
+      }
+
+      document.getElementById('kpi-gmv').textContent = 'QAR ' + (monthlyGMV / 1e6).toFixed(2) + 'M';
+      document.getElementById('kpi-annual-gmv').textContent = 'QAR ' + ((monthlyGMV * 12) / 1e6).toFixed(1) + 'M Annual GMV';
+
+      var capEl = document.getElementById('kpi-cap');
+      var capBadgeEl = document.getElementById('kpi-cap-badge');
+      if (beOrders !== Infinity) {
+        capEl.textContent = capacityPct.toFixed(1) + '%';
+        if (capacityPct >= 100) {
+          capBadgeEl.textContent = '+' + (capacityPct - 100).toFixed(1) + '% Safety Buffer';
+          capBadgeEl.className = 'kpi-status-badge status-positive';
+        } else {
+          capBadgeEl.textContent = (100 - capacityPct).toFixed(1) + '% Below Break-Even';
+          capBadgeEl.className = 'kpi-status-badge status-negative';
+        }
+      } else {
+        capEl.textContent = '0.0%';
+        capBadgeEl.textContent = 'Deficit';
+        capBadgeEl.className = 'kpi-status-badge status-negative';
+      }
+
+      // 6. Update Per-Order Waterfall Stack
+      document.getElementById('badge-gross-rev').textContent = 'Gross Platform Rev: QAR ' + grossRev.toFixed(2);
+      var maxScale = Math.max(grossRev, totalCost, 20);
+
+      updateBar('bar-comm', 'val-comm', '+QAR ' + commRev.toFixed(2), commRev, maxScale);
+      updateBar('bar-fee', 'val-fee', '+QAR ' + delRev.toFixed(2), delRev, maxScale);
+      updateBar('bar-ad', 'val-ad', '+QAR ' + adRev.toFixed(2), adRev, maxScale);
+
+      updateBar('bar-rider', 'val-rider', '-QAR ' + adjRider.toFixed(2), adjRider, maxScale);
+      updateBar('bar-fuel', 'val-fuel', '-QAR ' + adjFuel.toFixed(2), adjFuel, maxScale);
+      updateBar('bar-gw', 'val-gw', '-QAR ' + gw.toFixed(2), gw, maxScale);
+      updateBar('bar-ins', 'val-ins', '-QAR ' + adjIns.toFixed(2), adjIns, maxScale);
+
+      updateBar('bar-net', 'val-net', (netContr >= 0 ? '+' : '') + 'QAR ' + netContr.toFixed(2), Math.abs(netContr), maxScale);
+
+
+      // Valuation Simulator & Financial Planning Calculations
+      var annNetRev = ord * 30 * grossRev * 12; // Annual Net Platform Revenue
+      var annGmv = ord * 30 * aov * 12; // Annual Gross Merchandise Value
+      var annEbitda = monthlyEbitda * 12; // Annualized EBITDA
+
+      // Dynamic Implied Enterprise Valuation
+      var impliedEV = 0;
+      var valMethod = '';
+      if (monthlyEbitda > 0) {
+        var evEbitda = annEbitda * 13.5;
+        var evRev = annNetRev * 4.6;
+        impliedEV = (evEbitda * 0.6) + (evRev * 0.4);
+        valMethod = (impliedEV / annEbitda).toFixed(1) + 'x EBITDA';
+      } else {
+        impliedEV = Math.max(15000000, annNetRev * 3.2);
+        valMethod = '3.2x Net ARR';
+      }
+
+      var evUsd = impliedEV / 3.64;
+      var arrMultiple = (impliedEV / Math.max(1, annNetRev)).toFixed(1);
+      var evPerDailyOrder = Math.round(impliedEV / Math.max(1, ord));
+
+      var evQarEl = document.getElementById('val-ev-qar');
+      var evUsdEl = document.getElementById('val-ev-usd');
+      var valBadgeEl = document.getElementById('val-method-badge');
+      var arrMultEl = document.getElementById('val-arr-mult');
+      var perOrderEl = document.getElementById('val-per-order');
+
+      if (evQarEl) evQarEl.textContent = 'QAR ' + (impliedEV / 1e6).toFixed(1) + 'M';
+      if (evUsdEl) evUsdEl.textContent = '($' + (evUsd / 1e6).toFixed(1) + 'M USD)';
+      if (valBadgeEl) valBadgeEl.textContent = valMethod;
+      if (arrMultEl) arrMultEl.textContent = arrMultiple + 'x Net Revenue';
+      if (perOrderEl) perOrderEl.textContent = 'QAR ' + evPerDailyOrder.toLocaleString() + ' / drop';
+
+      // Financial Planning: Merchant Float & CAC Payback
+      var monthlyGmv = ord * 30 * aov;
+      var sevenDayFloat = (monthlyGmv / 30) * 7;
+      var blendedCac = 45.0; // QAR 45 blended CAC in Qatar
+      var ordersPerUserPerMo = 3.6; // Average Qatar frequency
+      var userMarginPerMo = Math.max(0.5, ordersPerUserPerMo * netContr);
+      var cacPaybackMonths = netContr > 0 ? (blendedCac / userMarginPerMo).toFixed(1) : 'N/A';
+      var ltv24Mo = userMarginPerMo * 24;
+      var ltvCacRatio = (ltv24Mo / blendedCac).toFixed(1);
+
+      // Batching Lift: Annual savings vs 1.0x baseline
+      var baseRiderDrop = (rider + fuel) / 1.00;
+      var curRiderDrop = (rider + fuel) / batch;
+      var batchSavingsPerDrop = Math.max(0, baseRiderDrop - curRiderDrop);
+      var annBatchSavings = ord * 30 * 12 * batchSavingsPerDrop;
+
+      var floatEl = document.getElementById('val-float-qar');
+      var paybackEl = document.getElementById('val-cac-payback');
+      var ltvRatioEl = document.getElementById('val-ltv-ratio');
+      var batchLiftEl = document.getElementById('val-batch-lift');
+
+      if (floatEl) floatEl.textContent = 'QAR ' + (sevenDayFloat / 1e6).toFixed(2) + 'M';
+      if (paybackEl) paybackEl.textContent = cacPaybackMonths + (cacPaybackMonths !== 'N/A' ? ' Months' : '');
+      if (ltvRatioEl) ltvRatioEl.textContent = ltvCacRatio + 'x (24-Mo LTV)';
+      if (batchLiftEl) batchLiftEl.textContent = '+QAR ' + (annBatchSavings / 1e3).toFixed(0) + 'K / yr';
+
+      // 7. Update Dynamic Operational Insights
+      updateDynamicInsights(netContr, netMarginPct, grossRev, adjRider, monthlyEbitda, beOrders, ord, batch);
+
+      // 8. Render Simulator Charts
+      renderSimulatorCharts(fx, netContr, ord, adjRider, adjFuel, gw, adjIns);
+
+      // 9. Update 2D Sensitivity Matrix
+      // 2D sensitivity matrix removed
+    }
+
+    function updateBar(barId, valId, text, val, maxScale) {
+      var pct = Math.min(100, Math.max(3, (val / maxScale) * 100));
+      var bar = document.getElementById(barId);
+      var valEl = document.getElementById(valId);
+      if (bar) {
+        bar.style.width = pct + '%';
+        bar.textContent = text;
+      }
+      if (valEl) {
+        valEl.textContent = text;
+      }
+    }
+
+    // Dynamic AI/Model Insights
+    function updateDynamicInsights(netContr, netMarginPct, grossRev, riderCost, ebitda, beOrders, ord, batch) {
+      var textEl = document.getElementById('dynamicInsightText');
+      var riderPctOfRev = (riderCost / grossRev) * 100;
+      var str = '';
+
+      if (netContr <= 0) {
+        str = '<strong>Critical Warning: Negative Unit Economics!</strong> Every order placed loses QAR ' + Math.abs(netContr).toFixed(2) + '. Direct delivery expenses exceed gross platform intake. Recommended levers: Increase customer delivery fee, raise take-rate to minimum 14%, or optimize multi-drop dispatch to exceed 1.25x batching.';
+      } else if (ebitda < 0) {
+        var shortfall = beOrders - ord;
+        str = '<strong>Subsidized Expansion Phase:</strong> Order-level contribution is healthy at <strong>+QAR ' + netContr.toFixed(2) + ' (' + netMarginPct.toFixed(1) + '%)</strong>, but volume is currently ' + shortfall.toLocaleString() + ' daily orders below break-even. At this burn rate, capital requirement is QAR ' + Math.abs(Math.round(ebitda / 1000)).toLocaleString() + 'K/month. Target Month 22 scale (11,400+ orders/day) to cross into net profitability.';
+      } else {
+        str = '<strong>Exceptional Structural Profitability:</strong> DeliverQ is operating at <strong>+QAR ' + Math.round(ebitda / 1000).toLocaleString() + 'K monthly EBITDA</strong> with ' + netMarginPct.toFixed(1) + '% net platform margin. Rider payout accounts for ' + riderPctOfRev.toFixed(0) + '% of revenue' + (batch > 1.0 ? ' (boosted by ' + batch.toFixed(2) + 'x batching density)' : '') + '. Surplus cash flow can self-fund dark-store expansion and automated micro-fulfillment in Lusail and Al Wakrah.';
+      }
+      textEl.innerHTML = str;
+    }
+
+    // Simulator Tab Charts (Break-Even & Cost Donut)
+    function renderSimulatorCharts(fx, netContr, curOrd, rider, fuel, gw, ins) {
+      var isDark = false;
+      var textClr = '#1E293B';
+      var gridClr = '#E2E8F0';
+      var fontFamily = "'Outfit', sans-serif";
+
+      // Chart 1: Break Even Curve
+      var volumes = [0, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000];
+      var opexLine = volumes.map(function () { return fx / 1e6; });
+      var marginLine = volumes.map(function (v) { return (v * 30 * netContr) / 1e6; });
+
+      var ctxBE = document.getElementById('chartBreakEven');
+      if (ctxBE) {
+        if (chartBE) chartBE.destroy();
+        chartBE = new Chart(ctxBE.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: volumes.map(function (v) { return (v / 1000) + 'k'; }),
+            datasets: [
+              {
+                label: 'Fixed Corporate OPEX',
+                data: opexLine,
+                borderColor: '#F43F5E',
+                borderWidth: 2,
+                borderDash: [5, 4],
+                pointRadius: 0,
+                fill: false
+              },
+              {
+                label: 'Monthly Gross Profit',
+                data: marginLine,
+                borderColor: '#10B981',
+                backgroundColor: isDark ? 'rgba(16, 185, 129, 0.12)' : 'rgba(16, 185, 129, 0.2)',
+                borderWidth: 2.5,
+                tension: 0.3,
+                pointRadius: 3,
+                fill: true
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: textClr, font: { family: fontFamily, size: 11, weight: '600' } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    return ctx.dataset.label + ': QAR ' + ctx.raw.toFixed(2) + 'M';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                title: { display: true, text: 'Daily Orders', color: textClr, font: { family: fontFamily, size: 10 } },
+                ticks: { color: textClr },
+                grid: { color: gridClr }
+              },
+              y: {
+                title: { display: true, text: 'QAR Millions / Month', color: textClr, font: { family: fontFamily, size: 10 } },
+                ticks: { color: textClr },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Cost to Serve Donut
+      var ctxCD = document.getElementById('chartCostDonut');
+      if (ctxCD) {
+        if (chartCD) chartCD.destroy();
+        chartCD = new Chart(ctxCD.getContext('2d'), {
+          type: 'doughnut',
+          data: {
+            labels: ['Rider Pay', 'Vehicle & Fuel', 'Payment Gateway', 'SafeDrop & Spoilage'],
+            datasets: [{
+              data: [rider, fuel, gw, ins],
+              backgroundColor: ['#E11D48', '#F97316', '#64748B', '#A855F7'],
+              borderWidth: 2,
+              borderColor: isDark ? '#111726' : '#FFFFFF'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: { color: textClr, font: { family: fontFamily, size: 10, weight: '600' }, boxWidth: 12 }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    return ctx.label + ': QAR ' + ctx.raw.toFixed(2);
+                  }
+                }
+              }
+            },
+            cutout: '68%'
+          }
+        });
+      }
+    }
+
+    // Analytics Tab 4 Additional Rich Charts
+    function renderAnalyticsCharts() {
+      var isDark = false;
+      var textClr = '#1E293B';
+      var gridClr = '#E2E8F0';
+      var fontFamily = "'Outfit', sans-serif";
+
+      // Chart 3: 5-Year Pro-Forma Trajectory (2026-2030)
+      var ctxPF = document.getElementById('chartProForma');
+      if (ctxPF) {
+        if (chartPF) chartPF.destroy();
+        chartPF = new Chart(ctxPF.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Year 1 (2026)', 'Year 2 (2027)', 'Year 3 (2028)', 'Year 4 (2029)', 'Year 5 (2030)'],
+            datasets: [
+              {
+                type: 'bar',
+                label: 'Net Platform Revenue (QAR M)',
+                data: [16.63, 45.03, 96.99, 159.34, 242.47],
+                backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                borderRadius: 6
+              },
+              {
+                type: 'bar',
+                label: 'Gross Profit (QAR M)',
+                data: [4.23, 11.46, 24.68, 40.55, 61.71],
+                backgroundColor: 'rgba(6, 182, 212, 0.85)',
+                borderRadius: 6
+              },
+              {
+                type: 'line',
+                label: 'EBITDA (QAR M)',
+                data: [-7.82, -6.74, 11.28, 24.35, 41.51],
+                borderColor: '#10B981',
+                backgroundColor: '#10B981',
+                borderWidth: 2.5,
+                pointRadius: 5,
+                tension: 0.3
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: textClr, font: { family: fontFamily, size: 10, weight: '600' } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    return ctx.dataset.label + ': QAR ' + ctx.raw.toFixed(2) + 'M';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr }, grid: { display: false } },
+              y: {
+                title: { display: true, text: 'QAR Millions', color: textClr, font: { family: fontFamily, size: 10 } },
+                ticks: { color: textClr },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 4: Competitor Benchmark (Take-Rate vs Net Margin)
+      var ctxCB = document.getElementById('chartCompetitorBenchmark');
+      if (ctxCB) {
+        if (chartCB) chartCB.destroy();
+        chartCB = new Chart(ctxCB.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Talabat', 'Snoonu', 'Rafeeq', 'Keeta', 'Deliveroo', 'DeliverQ'],
+            datasets: [
+              {
+                label: 'Take-Rate (%)',
+                data: [26.0, 21.0, 18.5, 15.0, 28.5, 14.5],
+                backgroundColor: 'rgba(244, 63, 94, 0.7)',
+                borderRadius: 6
+              },
+              {
+                label: 'Net Platform Margin (%)',
+                data: [14.2, 8.5, 6.2, -12.0, 11.5, 23.3],
+                backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                borderRadius: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: textClr, font: { family: fontFamily, size: 10, weight: '600' } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    return ctx.dataset.label + ': ' + ctx.raw.toFixed(1) + '%';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { color: textClr }, grid: { display: false } },
+              y: {
+                title: { display: true, text: 'Percentage (%)', color: textClr, font: { family: fontFamily, size: 10 } },
+                ticks: { color: textClr },
+                grid: { color: gridClr }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 5: Revenue Mix Polar Area
+      var ctxRM = document.getElementById('chartRevenueMix');
+      if (ctxRM) {
+        if (chartRM) chartRM.destroy();
+        chartRM = new Chart(ctxRM.getContext('2d'), {
+          type: 'polarArea',
+          data: {
+            labels: ['Merchant Commission 60%', 'Customer Fee 34%', 'Media & Ad Tech 6%'],
+            datasets: [{
+              data: [60, 34, 6],
+              backgroundColor: ['rgba(37, 99, 235, 0.85)', 'rgba(6, 182, 212, 0.85)', 'rgba(56, 189, 248, 0.85)']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: { color: textClr, font: { family: fontFamily, size: 10, weight: '600' }, boxWidth: 12 }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 6: EBITDA Sensitivity to Daily Orders
+      var ctxES = document.getElementById('chartEbitdaSensitivity');
+      if (ctxES) {
+        if (chartES) chartES.destroy();
+        chartES = new Chart(ctxES.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: ['3.2k', '6.0k', '9.0k', '11.4k (BE)', '15.0k', '18.5k (Base)', '25.0k', '32.0k', '42.0k'],
+            datasets: [{
+              label: 'Monthly EBITDA (QAR M)',
+              data: [-1.09, -0.72, -0.32, 0.00, 0.47, 0.94, 1.80, 2.73, 4.06],
+              borderColor: '#38BDF8',
+              backgroundColor: 'rgba(56, 189, 248, 0.15)',
+              borderWidth: 2.5,
+              fill: true,
+              tension: 0.35,
+              pointRadius: 4,
+              pointBackgroundColor: '#38BDF8'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: textClr, font: { family: fontFamily, size: 10, weight: '600' } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (ctx) {
+                    return 'Monthly EBITDA: QAR ' + ctx.raw.toFixed(2) + 'M';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { title: { display: true, text: 'Daily Orders', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } },
+              y: { title: { display: true, text: 'QAR Millions / Month', color: textClr }, ticks: { color: textClr }, grid: { color: gridClr } }
+            }
+          }
+        });
+      }
+    }
+
+    // 2D Sensitivity Matrix Generator
+    function renderSensitivityMatrix(aov, fee, ad, rider, fuel, batch, ins, fx, currentCr, currentOrd) {
+      var comms = [0.10, 0.12, 0.145, 0.17, 0.20];
+      var vols = [5000, 10000, 18500, 28500, 40000];
+
+      var tbody = document.getElementById('sensTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      var adjRider = rider / batch;
+      var adjFuel = fuel / batch;
+      var gw = (aov + fee) * 0.018 + 0.25;
+      var adjIns = ins;
+      var totalCost = adjRider + adjFuel + gw + adjIns;
+
+      comms.forEach(function (c) {
+        var row = document.createElement('tr');
+
+        var th = document.createElement('td');
+        th.className = 'row-header';
+        th.textContent = (c * 100).toFixed(1) + '% Take-Rate';
+        row.appendChild(th);
+
+        vols.forEach(function (v) {
+          var td = document.createElement('td');
+          td.className = 'sens-cell';
+
+          var grossRev = (aov * c) + fee + ad;
+          var netContr = grossRev - totalCost;
+          var ebitda = (netContr * v * 30) - fx;
+
+          var isCurrent = (Math.abs(c - currentCr) <= 0.015) && (Math.abs(v - currentOrd) <= 4500);
+          if (isCurrent) {
+            td.classList.add('is-current');
+          }
+
+          if (ebitda < -500000) {
+            td.classList.add('cell-loss');
+          } else if (ebitda < 100000) {
+            td.classList.add('cell-breakeven');
+          } else if (ebitda < 1500000) {
+            td.classList.add('cell-profit');
+          } else {
+            td.classList.add('cell-high-profit');
+          }
+
+          var formatted = (ebitda >= 0 ? '+' : '-') + 'QAR ' + Math.abs(Math.round(ebitda / 1000)).toLocaleString() + 'K';
+          td.textContent = formatted;
+          td.title = 'Commission: ' + (c * 100).toFixed(1) + '% | Orders: ' + v.toLocaleString() + ' | Monthly EBITDA: ' + formatted;
+
+          row.appendChild(td);
+        });
+
+        tbody.appendChild(row);
+      });
+    }
+
+    // Copy Executive Investor Summary
+    function copySummary() {
+      var aov = document.getElementById('lbl-aov').textContent;
+      var cr = document.getElementById('lbl-cr').textContent;
+      var fee = document.getElementById('lbl-fee').textContent;
+      var ord = document.getElementById('lbl-ord').textContent;
+      var nc = document.getElementById('kpi-nc').textContent;
+      var mg = document.getElementById('kpi-mg').textContent;
+      var eb = document.getElementById('kpi-eb').textContent;
+      var be = document.getElementById('kpi-be').textContent;
+
+      var text = 'DeliverQ Executive Financial Summary (State of Qatar)\n' +
+        '======================================================\n' +
+        'Market Basket (AOV): ' + aov + ' (World-highest delivery AOV)\n' +
+        'Take-Rate / Commission: ' + cr + ' (MoCI April 2026 Compliant)\n' +
+        'Customer Delivery Fee: ' + fee + '\n' +
+        'Daily Order Volume: ' + ord + ' orders/day\n' +
+        '------------------------------------------------------\n' +
+        'Per-Order Net Contribution: ' + nc + ' (23.3% Net Margin)\n' +
+        'Monthly Gross Profit: ' + mg + ' (30-day run rate)\n' +
+        'Monthly Operating EBITDA: ' + eb + ' (Net of QAR 1.52M HQ OPEX)\n' +
+        'Operational Break-Even Threshold: ' + be + ' (Month 22 Target)\n' +
+        '======================================================\n' +
+        'Capital Requirement: QAR 18.5M (Seed QAR 6.5M + Series A QAR 12.0M)\n' +
+        'Year 5 Net Profit Target: QAR 37.10M on QAR 1.002B GMV';
+
+      navigator.clipboard.writeText(text).then(function () {
+        showToast('Executive investment summary copied to clipboard!');
+      }).catch(function () {
+        showToast('Summary copied!');
+      });
+    }
+
+    // Show Toast
+    function showToast(msg) {
+      var toast = document.getElementById('toastNotification');
+      var toastMsg = document.getElementById('toastMsg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function () {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+
+</html>
