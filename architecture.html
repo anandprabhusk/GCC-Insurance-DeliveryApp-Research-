@@ -1,0 +1,2782 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeliverQ | Multi-Vertical Platform Architecture & Logics Engine Blueprint</title>
+  <meta name="description"
+    content="End-to-end institutional system architecture for an enterprise multi-vertical on-demand delivery platform. Covers Food, Grocery, Pharmacy, and Documents with dynamic rate cards, dispatch AI, event streaming, and financial ledger.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ===== RESET & MODERN EXECUTIVE ARCHITECTURE DESIGN SYSTEM ===== */
+    :root {
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Dark Architecture Obsidian Theme (Default) */
+      --bg-canvas: #040814;
+      --bg-surface: #091122;
+      --bg-surface-elevated: #0F1D38;
+      --bg-card: rgba(13, 25, 48, 0.85);
+      --bg-card-hover: rgba(19, 36, 70, 0.95);
+      --bg-input: #070D1A;
+      
+      --border-subtle: rgba(56, 189, 248, 0.16);
+      --border-focus: rgba(59, 130, 246, 0.8);
+      --border-cyan: rgba(6, 182, 212, 0.4);
+      --border-gold: rgba(212, 175, 55, 0.4);
+
+      /* Electric Accent Colors */
+      --cyan-400: #38BDF8;
+      --cyan-500: #06B6D4;
+      --cyan-glow: rgba(6, 182, 212, 0.35);
+
+      --blue-400: #60A5FA;
+      --blue-500: #3B82F6;
+      --blue-600: #2563EB;
+      --blue-glow: rgba(37, 99, 235, 0.4);
+
+      --emerald-400: #34D399;
+      --emerald-500: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+
+      --purple-400: #A78BFA;
+      --purple-500: #8B5CF6;
+      --purple-glow: rgba(139, 92, 246, 0.35);
+
+      --amber-400: #FBBF24;
+      --amber-500: #F59E0B;
+      --rose-400: #FB7185;
+      --rose-500: #F43F5E;
+
+      /* Typography */
+      --text-main: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --text-subtle: #475569;
+      --text-inverse: #040814;
+
+      /* Shadows & Radii */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.55);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.7);
+      --shadow-glow: 0 0 25px rgba(6, 182, 212, 0.25);
+
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 22px;
+      --tr: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Light Executive Architecture Theme Overrides */
+    [data-theme="light"],
+    body.light-theme {
+      --bg-canvas: #F0F4FA;
+      --bg-surface: #FFFFFF;
+      --bg-surface-elevated: #F8FAFD;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #FFFFFF;
+      --bg-input: #E9EFF8;
+
+      --border-subtle: #CBD5E1;
+      --border-focus: #2563EB;
+      --border-cyan: rgba(2, 132, 199, 0.45);
+      --border-gold: rgba(202, 138, 4, 0.45);
+
+      --cyan-400: #0284C7;
+      --cyan-500: #0369A1;
+      --blue-400: #2563EB;
+      --blue-500: #1D4ED8;
+      --blue-600: #1E40AF;
+
+      --emerald-400: #059669;
+      --emerald-500: #047857;
+      --purple-400: #7C3AED;
+      --purple-500: #6D28D9;
+
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-subtle: #94A3B8;
+      --text-inverse: #FFFFFF;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+      --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Ambient Blueprint Glow */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-mesh {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(rgba(6, 182, 212, 0.08) 1px, transparent 1px),
+        radial-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+      opacity: 0.8;
+    }
+
+    [data-theme="light"] .ambient-mesh,
+    body.light-theme .ambient-mesh {
+      background-image: 
+        radial-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+      opacity: 0.5;
+    }
+
+    /* ===== STICKY TOP APP HEADER ===== */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(4, 8, 20, 0.92);
+      border-bottom: 1.5px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      transition: var(--tr);
+    }
+
+    [data-theme="light"] .app-header,
+    body.light-theme .app-header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom-color: var(--border-subtle);
+    }
+
+    .header-in {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .app-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284C7 0%, #1D4ED8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4);
+      flex-shrink: 0;
+    }
+
+    .app-brand-info h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .app-brand-info p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .app-badge-arch {
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: rgba(6, 182, 212, 0.14);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: var(--cyan-400);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    /* Cross-Navigation Gateway Strip */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--tr);
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-subtle);
+    }
+
+    [data-theme="light"] .nav-link:hover,
+    body.light-theme .nav-link:hover {
+      background: #EFF6FF;
+      color: #1D4ED8;
+    }
+
+    .nav-link.active {
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, 0.12);
+      border-color: var(--border-cyan);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--tr);
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .btn-header-act:hover {
+      border-color: var(--cyan-400);
+      transform: translateY(-1px);
+    }
+
+    .btn-header-primary {
+      background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%);
+      border-color: #38BDF8;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-header-primary:hover {
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.5);
+    }
+
+    /* ===== MAIN LAYOUT CONTAINER ===== */
+    .container {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 24px 24px 100px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== HERO ARCHITECTURE BANNER ===== */
+    .arch-hero {
+      background: linear-gradient(135deg, rgba(9, 17, 34, 0.95) 0%, rgba(13, 27, 56, 0.9) 100%);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-xl);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .arch-hero,
+    body.light-theme .arch-hero {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F1F6FD 100%);
+      border-color: #CBD5E1;
+    }
+
+    .arch-hero-glow {
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .arch-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--cyan-400);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .arch-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .arch-hero p {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      max-width: 980px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    /* Executive Architecture Spec Badges */
+    .hero-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .spec-badge {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    [data-theme="light"] .spec-badge,
+    body.light-theme .spec-badge {
+      background: #FFFFFF;
+      border-color: #E2E8F0;
+    }
+
+    .spec-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .spec-val {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .spec-sub {
+      font-size: 0.72rem;
+      color: var(--cyan-400);
+      font-weight: 600;
+    }
+
+    /* ===== ARCHITECTURE NAVIGATION TABS BAR ===== */
+    .arch-tabs-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .arch-tabs-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .arch-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--tr);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    [data-theme="light"] .arch-tab-btn,
+    body.light-theme .arch-tab-btn {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      color: #334155;
+    }
+
+    .arch-tab-btn:hover {
+      color: var(--text-main);
+      border-color: var(--cyan-400);
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .arch-tab-btn.active {
+      background: linear-gradient(135deg, #0284C7 0%, #1D4ED8 100%) !important;
+      border-color: #38BDF8 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 16px rgba(6, 182, 212, 0.35);
+      font-weight: 800;
+    }
+
+    .tab-badge {
+      font-size: 0.65rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+    }
+
+    /* Tab Panels */
+    .arch-view {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .arch-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TAB 1: 6-TIER BLUEPRINT VISUALIZER ===== */
+    .tier-diagram-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .arch-tier-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 26px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--tr);
+      position: relative;
+    }
+
+    [data-theme="light"] .arch-tier-card,
+    body.light-theme .arch-tier-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    }
+
+    .arch-tier-card:hover {
+      border-color: var(--cyan-400);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .tier-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tier-badge-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(6, 182, 212, 0.14);
+      border: 1px solid var(--border-cyan);
+      color: var(--cyan-400);
+    }
+
+    .tier-card-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tier-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Node Grid in Tier */
+    .nodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .node-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: var(--tr);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    [data-theme="light"] .node-box,
+    body.light-theme .node-box {
+      background: #F8FAFD;
+      border-color: #E2E8F0;
+    }
+
+    .node-box:hover {
+      border-color: var(--blue-400);
+      background: rgba(37, 99, 235, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+    }
+
+    [data-theme="light"] .node-box:hover,
+    body.light-theme .node-box:hover {
+      background: #EFF6FF;
+      border-color: #3B82F6;
+    }
+
+    .node-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .node-name {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .protocol-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-400);
+    }
+
+    [data-theme="light"] .protocol-tag,
+    body.light-theme .protocol-tag {
+      background: #E2E8F0;
+      color: #0369A1;
+    }
+
+    .node-desc {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .node-tech {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .tech-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    [data-theme="light"] .tech-pill,
+    body.light-theme .tech-pill {
+      background: #E9EFF8;
+      border-color: #CBD5E1;
+      color: #475569;
+    }
+
+    /* Communication Bus / Connector Banner */
+    .comm-bus {
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.15) 0%, rgba(37, 99, 235, 0.15) 50%, rgba(139, 92, 246, 0.15) 100%);
+      border: 1.5px dashed var(--border-cyan);
+      border-radius: var(--r-md);
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comm-bus-anim {
+      position: absolute;
+      top: 0;
+      left: -100px;
+      width: 80px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: busScan 3s infinite linear;
+    }
+
+    @keyframes busScan {
+      0% { left: -100px; }
+      100% { left: 100%; }
+    }
+
+    /* ===== TAB 2: DYNAMIC RATE CARD ENGINE (SANDBOX) ===== */
+    .sandbox-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1100px) {
+      .sandbox-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sandbox-controls {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    [data-theme="light"] .sandbox-controls,
+    body.light-theme .sandbox-controls {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .sandbox-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sandbox-title-row h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Vertical Selector Pills */
+    .vertical-picker {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .v-pill {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: var(--tr);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    [data-theme="light"] .v-pill,
+    body.light-theme .v-pill {
+      background: #F8FAFD;
+      border-color: #E2E8F0;
+    }
+
+    .v-pill:hover {
+      border-color: var(--cyan-400);
+      background: rgba(6, 182, 212, 0.08);
+    }
+
+    .v-pill.active {
+      border-color: #38BDF8 !important;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.22) 0%, rgba(37, 99, 235, 0.22) 100%) !important;
+      box-shadow: 0 2px 10px rgba(6, 182, 212, 0.3);
+    }
+
+    .v-icon {
+      font-size: 1.3rem;
+    }
+
+    .v-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .v-name {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .v-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* Sliders Group */
+    .param-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .param-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .param-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .param-val-badge {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid var(--border-cyan);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    [data-theme="light"] .param-val-badge,
+    body.light-theme .param-val-badge {
+      color: #0369A1;
+      background: #EFF6FF;
+      border-color: #BFDBFE;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    [data-theme="light"] input[type="range"],
+    body.light-theme input[type="range"] {
+      background: #CBD5E1;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284C7, #2563EB);
+      cursor: grab;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);
+    }
+
+    /* Sandbox Output Panel */
+    .sandbox-results {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Live Output Hero Strip */
+    .rate-hero-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-cyan);
+      border-radius: var(--r-lg);
+      padding: 22px 26px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(6, 182, 212, 0.15);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      transition: var(--tr);
+    }
+
+    [data-theme="light"] .rate-hero-card,
+    body.light-theme .rate-hero-card {
+      background: #FFFFFF;
+      border-color: #93C5FD;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .rh-metric {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .rh-lbl {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .rh-val {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.15;
+    }
+
+    .rh-sub {
+      font-size: 0.75rem;
+      color: var(--cyan-400);
+      font-weight: 700;
+    }
+
+    /* Visual Formula Card */
+    .formula-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="light"] .formula-card,
+    body.light-theme .formula-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .formula-title {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .formula-box {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 18px;
+      border-radius: var(--r-md);
+      color: #38BDF8;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    [data-theme="light"] .formula-box,
+    body.light-theme .formula-box {
+      background: #F1F5F9;
+      color: #1D4ED8;
+      border-color: #CBD5E1;
+    }
+
+    /* Breakdown Bar */
+    .fee-breakdown-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="light"] .fee-breakdown-card,
+    body.light-theme .fee-breakdown-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .breakdown-stacked-bar {
+      height: 32px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      margin: 14px 0 16px 0;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .b-seg {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #FFFFFF !important;
+      transition: width 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 6px;
+    }
+
+    .b-base { background: #3B82F6; }
+    .b-dist { background: #0284C7; }
+    .b-weight { background: #F59E0B; }
+    .b-vertical { background: #8B5CF6; }
+    .b-surge { background: #F43F5E; }
+
+    .breakdown-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .leg-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    /* ===== TAB 3: MULTI-VERTICAL OPERATIONS MATRIX ===== */
+    .matrix-table-wrap {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 26px;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+
+    [data-theme="light"] .matrix-table-wrap,
+    body.light-theme .matrix-table-wrap {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.82rem;
+    }
+
+    .matrix-table th {
+      background: var(--bg-surface-elevated);
+      color: var(--cyan-400);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border-subtle);
+    }
+
+    [data-theme="light"] .matrix-table th,
+    body.light-theme .matrix-table th {
+      background: #F1F5F9;
+      color: #0369A1;
+      border-bottom-color: #CBD5E1;
+    }
+
+    .matrix-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .matrix-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    [data-theme="light"] .matrix-table tr:hover td {
+      background: #F8FAFD;
+    }
+
+    .badge-v {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
+    .badge-v-food { background: rgba(234, 88, 12, 0.15); color: #FB923C; border: 1px solid rgba(234, 88, 12, 0.35); }
+    .badge-v-groc { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge-v-pharm { background: rgba(6, 182, 212, 0.15); color: #38BDF8; border: 1px solid rgba(6, 182, 212, 0.35); }
+    .badge-v-doc { background: rgba(139, 92, 246, 0.15); color: #C084FC; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .badge-v-bulk { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.35); }
+
+    /* ===== TAB 4: EVENT SEQUENCE & LIFECYCLE ===== */
+    .sequence-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .seq-step-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 90px 220px 1fr 180px;
+      align-items: center;
+      gap: 18px;
+      transition: var(--tr);
+    }
+
+    [data-theme="light"] .seq-step-card,
+    body.light-theme .seq-step-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    @media (max-width: 900px) {
+      .seq-step-card {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    .seq-step-card:hover {
+      border-color: var(--cyan-400);
+      transform: translateX(4px);
+    }
+
+    .seq-time {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--cyan-400);
+    }
+
+    .seq-actor {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seq-event {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .seq-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .seq-payload {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .seq-channel {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid var(--border-subtle);
+      color: var(--blue-400);
+      text-align: center;
+    }
+
+    /* ===== TAB 5: AI FORECASTING & POSITIONING ===== */
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 960px) {
+      .forecast-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fc-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="light"] .fc-card,
+    body.light-theme .fc-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .fc-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .fc-card-header h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 240px;
+      width: 100%;
+    }
+
+    /* ===== TAB 6: FINANCIAL LEDGER & ESCROW CORE ===== */
+    .ledger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .ledger-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    [data-theme="light"] .ledger-card,
+    body.light-theme .ledger-card {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .ledger-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ledger-schema-box {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+
+    [data-theme="light"] .ledger-schema-box,
+    body.light-theme .ledger-schema-box {
+      background: #F1F5F9;
+      color: #334155;
+      border-color: #CBD5E1;
+    }
+
+    /* ===== INSPECTOR MODAL ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--cyan-400);
+      border-radius: var(--r-xl);
+      padding: 28px 32px;
+      max-width: 680px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.3);
+      position: relative;
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] .modal-card,
+    body.light-theme .modal-card {
+      background: #FFFFFF;
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: var(--tr);
+    }
+
+    .modal-close:hover {
+      background: var(--rose-500);
+      color: #FFFFFF;
+    }
+
+    /* ===== FOOTER ===== */
+    .arch-footer {
+      margin-top: 50px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r-lg);
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    [data-theme="light"] .arch-footer,
+    body.light-theme .arch-footer {
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .footer-left h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .footer-left p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      transition: var(--tr);
+    }
+
+    [data-theme="light"] .footer-link,
+    body.light-theme .footer-link {
+      background: #F1F5F9;
+      color: #1E293B;
+      border-color: #CBD5E1;
+    }
+
+    .footer-link:hover {
+      color: var(--cyan-400);
+      border-color: var(--cyan-400);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Blueprint Grid & Mesh Background -->
+  <div class="ambient-bg">
+    <div class="ambient-mesh"></div>
+  </div>
+
+  <!-- Sticky Top Header -->
+  <header class="app-header">
+    <div class="header-in">
+      <div class="header-left">
+        <a href="index.html" class="app-brand" title="DeliverQ Qatar Platform">
+          <div class="app-logo">Q</div>
+          <div class="app-brand-info">
+            <h2>DeliverQ Architecture <span class="app-badge-arch">v4.0 Blueprint</span></h2>
+            <p>Unified Multi-Vertical Operations, Logics Engine &amp; Sizing Matrix</p>
+          </div>
+        </a>
+      </div>
+
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link" title="Strategic Intelligence Dashboard">&#128202; Strategy</a>
+        <a href="simulator.html" class="nav-link" title="Live Delivery Economics Simulator">&#9881;&#65039; Economics Sim</a>
+        <a href="it-simulator.html" class="nav-link" title="IT & Cloud Sizing Simulator">&#9729;&#65039; IT &amp; Cloud Sim</a>
+        <a href="architecture.html" class="nav-link active" title="System Architecture & Logics Engine">&#127959;&#65039; Architecture</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="btn-header-act" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span id="themeIcon">&#127763;</span> Mode
+        </button>
+        <button class="btn-header-act btn-header-primary" onclick="exportArchSummary()" title="Export Architecture Specification Brief">
+          <span>&#128196;</span> Export Arch Spec
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+    <section class="arch-hero">
+      <div class="arch-hero-glow"></div>
+      <div class="arch-hero-content">
+        <span class="hero-tagline">&#128640; Enterprise Multi-Vertical Infrastructure Blueprint</span>
+        <h1>Multi-Vertical Logistics Platform Architecture &amp; Logics Engine</h1>
+        <p>
+          A modular, institutional-grade architecture engineered for food, on-demand grocery, temperature-controlled pharmacy, high-security legal documents, and parcel couriers. Powered by dynamic rate-card calculators, real-time telemetry dispatch algorithms, event-driven Kafka meshes, and an immutable double-entry financial ledger.
+        </p>
+
+        <!-- Key Spec Metrics -->
+        <div class="hero-spec-grid">
+          <div class="spec-badge">
+            <span class="spec-label">Latency SLA</span>
+            <span class="spec-val">&lt; 110ms P99</span>
+            <span class="spec-sub">Sub-300ms Dynamic Pricing</span>
+          </div>
+          <div class="spec-badge">
+            <span class="spec-label">Peak Throughput</span>
+            <span class="spec-val">30,000 RPS</span>
+            <span class="spec-sub">Auto-scaling K8s pods</span>
+          </div>
+          <div class="spec-badge">
+            <span class="spec-label">Telemetry Ping</span>
+            <span class="spec-val">3-Second Pings</span>
+            <span class="spec-sub">MQTT / WebSocket Mesh</span>
+          </div>
+          <div class="spec-badge">
+            <span class="spec-label">Vertical Support</span>
+            <span class="spec-val">5 Native Verticals</span>
+            <span class="spec-sub">Food, Groc, Pharm, Doc, Bulk</span>
+          </div>
+          <div class="spec-badge">
+            <span class="spec-label">Compliance</span>
+            <span class="spec-val">PDPPL &amp; PCI-DSS</span>
+            <span class="spec-sub">GCP Doha Sovereign Data</span>
+          </div>
+          <div class="spec-badge">
+            <span class="spec-label">Settlement</span>
+            <span class="spec-val">Double-Entry Ledger</span>
+            <span class="spec-sub">Instant Courier T+0 Wallet</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE NAVIGATION TABS BAR -->
+    <nav class="arch-tabs-bar">
+      <button class="arch-tab-btn active" onclick="switchArchTab('tab-blueprint', this)">
+        <span>&#128506;&#65039;</span> 6-Tier Architecture Blueprint <span class="tab-badge">Core</span>
+      </button>
+      <button class="arch-tab-btn" onclick="switchArchTab('tab-ratecard', this)">
+        <span>&#129518;</span> Dynamic Rate Card Engine &amp; Simulator <span class="tab-badge">Interactive</span>
+      </button>
+      <button class="arch-tab-btn" onclick="switchArchTab('tab-matrix', this)">
+        <span>&#9878;&#65039;</span> Multi-Vertical Operations Matrix <span class="tab-badge">5 Verticals</span>
+      </button>
+      <button class="arch-tab-btn" onclick="switchArchTab('tab-sequence', this)">
+        <span>&#9889;</span> End-to-End Event Communication Flow <span class="tab-badge">Kafka / gRPC</span>
+      </button>
+      <button class="arch-tab-btn" onclick="switchArchTab('tab-forecasting', this)">
+        <span>&#129302;</span> AI Demand Forecasting &amp; Fleet Pre-Positioning <span class="tab-badge">Spatial H3</span>
+      </button>
+      <button class="arch-tab-btn" onclick="switchArchTab('tab-ledger', this)">
+        <span>&#128176;</span> Financial Escrow &amp; Double-Entry Ledger <span class="tab-badge">Audit Proof</span>
+      </button>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- TAB 1: 6-TIER ARCHITECTURE BLUEPRINT -->
+    <!-- ========================================== -->
+    <section id="tab-blueprint" class="arch-view active">
+      <div class="tier-diagram-wrap">
+
+        <!-- TIER 1: CLIENT APPLICATIONS & ACTORS -->
+        <div class="arch-tier-card">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill">Tier 1</span>
+              <h3><span>&#128241;</span> Stakeholder &amp; Client Application Surface</h3>
+            </div>
+            <span class="tier-meta">Omni-Channel Client Native Apps, Web Portals &amp; IoT Hardware</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" onclick="inspectNode('cust_app')">
+              <div class="node-header">
+                <span class="node-name">&#128100; Consumer App</span>
+                <span class="protocol-tag">HTTPS / WSS</span>
+              </div>
+              <p class="node-desc">Flutter/iOS/Android consumer app with multi-vertical discovery, live ETA countdown, and in-app checkout.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Flutter</span><span class="tech-pill">WebSockets</span><span class="tech-pill">Apple Pay / QPay</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('merchant_pos')">
+              <div class="node-header">
+                <span class="node-name">&#127978; Merchant &amp; Vendor POS</span>
+                <span class="protocol-tag">gRPC Web / SSE</span>
+              </div>
+              <p class="node-desc">Tablet portal for order acceptance, catalog stock toggling, prep-time adjustments, and kitchen printer bridge.</p>
+              <div class="node-tech">
+                <span class="tech-pill">React</span><span class="tech-pill">ESC/POS</span><span class="tech-pill">Offline Fallback</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('rider_app')">
+              <div class="node-header">
+                <span class="node-name">&#128693; Courier Telemetry App</span>
+                <span class="protocol-tag">MQTT / WSS / gRPC</span>
+              </div>
+              <p class="node-desc">Driver app streaming sub-3s GPS telemetry, battery level, temperature sensor pings, and digital Proof-of-Delivery.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Native Kotlin / Swift</span><span class="tech-pill">Geofencing</span><span class="tech-pill">Barcode / NFC</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('ops_cockpit')">
+              <div class="node-header">
+                <span class="node-name">&#127911; Ops &amp; Dispatch Console</span>
+                <span class="protocol-tag">REST / WSS</span>
+              </div>
+              <p class="node-desc">Central control room: live Doha fleet radar, SLA violation alarms, manual re-assignment overrides, and rider safety track.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Next.js</span><span class="tech-pill">Mapbox GL</span><span class="tech-pill">Deck.gl</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('finance_portal')">
+              <div class="node-header">
+                <span class="node-name">&#128188; Finance &amp; Audit Portal</span>
+                <span class="protocol-tag">REST / OAuth2</span>
+              </div>
+              <p class="node-desc">Double-entry ledger reconciliation, Qatar WPS salary file generation, merchant settlement escrow releases, and tax reports.</p>
+              <div class="node-tech">
+                <span class="tech-pill">React</span><span class="tech-pill">ERP Sync</span><span class="tech-pill">WPS Export</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('exec_bi')">
+              <div class="node-header">
+                <span class="node-name">&#128200; Executive Strategy BI</span>
+                <span class="protocol-tag">GraphQL / mTLS</span>
+              </div>
+              <p class="node-desc">C-Suite analytics: live contribution margin per delivery, TAM market penetration, CAC payback, and churn prediction.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Apache Superset</span><span class="tech-pill">DuckDB</span><span class="tech-pill">BigQuery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNICATION BUS 1 -->
+        <div class="comm-bus">
+          <div class="comm-bus-anim"></div>
+          <span>&#8595; Edge Traffic Ingress &amp; Real-Time Protocol Mesh</span>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan-400);">Cloudflare WAF &#8596; Envoy API Mesh &#8596; EMQX MQTT Broker (3s Pings)</span>
+        </div>
+
+        <!-- TIER 2: EDGE INGRESS, API GATEWAY & WEBSOCKET MESH -->
+        <div class="arch-tier-card">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill">Tier 2</span>
+              <h3><span>&#128737;&#65039;</span> Edge Protection, API Gateway &amp; Telemetry Ingress</h3>
+            </div>
+            <span class="tier-meta">Cloudflare DDoS, Envoy Service Mesh, JWT Session Auth, and EMQX Broker</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" onclick="inspectNode('edge_waf')">
+              <div class="node-header">
+                <span class="node-name">&#128272; Sovereign WAF &amp; Anti-Bot</span>
+                <span class="protocol-tag">TLS 1.3 / mTLS</span>
+              </div>
+              <p class="node-desc">Terminates SSL, blocks credential stuffing and competitor price scraping bots, applies Doha GeoIP fencing.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Cloudflare Enterprise</span><span class="tech-pill">IP Rate Limiting</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('api_gateway')">
+              <div class="node-header">
+                <span class="node-name">&#9889; High-Throughput API Gateway</span>
+                <span class="protocol-tag">HTTP/2 &amp; gRPC</span>
+              </div>
+              <p class="node-desc">Envoy-based edge routing, token verification, dynamic canary routing, and client protocol translation (REST to gRPC).</p>
+              <div class="node-tech">
+                <span class="tech-pill">Envoy Mesh</span><span class="tech-pill">Rust/Go</span><span class="tech-pill">OAuth2/JWT</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('telemetry_gateway')">
+              <div class="node-header">
+                <span class="node-name">&#128225; IoT Telemetry &amp; MQTT Broker</span>
+                <span class="protocol-tag">MQTT 5.0 / WSS</span>
+              </div>
+              <p class="node-desc">High-concurrency connection pool managing 15,000+ simultaneous active rider connections streaming live coordinates.</p>
+              <div class="node-tech">
+                <span class="tech-pill">EMQX Cluster</span><span class="tech-pill">Erlang VM</span><span class="tech-pill">Sub-50ms PubSub</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNICATION BUS 2 -->
+        <div class="comm-bus">
+          <div class="comm-bus-anim"></div>
+          <span>&#8595; Internal Microservice Mesh &amp; Event Stream</span>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan-400);">Internal gRPC Multiplexing + Kafka Topics: order.*, rider.*, pricing.*</span>
+        </div>
+
+        <!-- TIER 3: CORE PLATFORM MICROSERVICES & BUSINESS LOGIC -->
+        <div class="arch-tier-card">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill">Tier 3</span>
+              <h3><span>&#9881;&#65039;</span> Core Domain Microservices &amp; State Orchestration</h3>
+            </div>
+            <span class="tier-meta">Multi-Tenant Services running on GCP Doha Kubernetes (me-central2)</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" onclick="inspectNode('order_state_machine')">
+              <div class="node-header">
+                <span class="node-name">&#128203; Order Orchestrator &amp; State Machine</span>
+                <span class="protocol-tag">gRPC / Temporal</span>
+              </div>
+              <p class="node-desc">Temporal-backed saga workflows managing resilient transitions (Draft &#8594; Placed &#8594; Accepted &#8594; Dispatched &#8594; Delivered &#8594; Settled).</p>
+              <div class="node-tech">
+                <span class="tech-pill">Temporal.io</span><span class="tech-pill">Golang</span><span class="tech-pill">Saga Pattern</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('catalog_service')">
+              <div class="node-header">
+                <span class="node-name">&#128722; Universal Catalog &amp; Cart Service</span>
+                <span class="protocol-tag">gRPC / Redis</span>
+              </div>
+              <p class="node-desc">Handles restaurant menus, dark-store barcodes, pharma OTC inventory, document weight/dimension validation.</p>
+              <div class="node-tech">
+                <span class="tech-pill">PostgreSQL</span><span class="tech-pill">Elasticsearch</span><span class="tech-pill">Redis Cache</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('fleet_tracking_service')">
+              <div class="node-header">
+                <span class="node-name">&#127937; Fleet Location &amp; Spatial Service</span>
+                <span class="protocol-tag">Redis Geohash / H3</span>
+              </div>
+              <p class="node-desc">Maintains in-memory spatial index of all online couriers, calculates geodesic distance, road network ETA, and idle duration.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Uber H3</span><span class="tech-pill">Redis Cluster</span><span class="tech-pill">OSRM Routing</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('dispatch_matching_service')">
+              <div class="node-header">
+                <span class="node-name">&#129504; Smart Dispatch &amp; Batching Engine</span>
+                <span class="protocol-tag">gRPC / Python</span>
+              </div>
+              <p class="node-desc">Combinatorial optimization (Hungarian algorithm / VRP) for matching riders to orders, bundling multi-restaurant clustered drops.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Google OR-Tools</span><span class="tech-pill">VRP Solver</span><span class="tech-pill">Batch Density Boost</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNICATION BUS 3 -->
+        <div class="comm-bus">
+          <div class="comm-bus-anim"></div>
+          <span>&#8595; Intelligent Pricing, Analytics &amp; Forecasting Interlink</span>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan-400);">Sub-second gRPC calls to Dynamic Rate Engine with Redis Real-Time Lookups</span>
+        </div>
+
+        <!-- TIER 4: INTELLIGENT LOGICS, RATE CARD & PREDICTIVE AI ENGINE -->
+        <div class="arch-tier-card" style="border-color: var(--cyan-400);">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill" style="background:rgba(6,182,212,0.25);">Tier 4: Core Engine</span>
+              <h3><span>&#129518;</span> Intelligent Logics, Dynamic Rate Card &amp; Forecasting Engine</h3>
+            </div>
+            <span class="tier-meta">Real-time Surge Algorithms, Weight/Cold-Chain Multipliers &amp; Spatial Demand AI</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" style="border-color:var(--cyan-400);" onclick="inspectNode('rate_card_engine')">
+              <div class="node-header">
+                <span class="node-name">&#128178; Dynamic Rate Card Engine</span>
+                <span class="protocol-tag">gRPC &lt; 45ms</span>
+              </div>
+              <p class="node-desc">Evaluates multi-variable pricing formula: Base Fee + Distance Curve + Weight Surcharge + Cold-Chain Premium &times; Surge Multipliers.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Golang</span><span class="tech-pill">Sub-50ms Rule Engine</span><span class="tech-pill">Multi-Vertical Rules</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('market_elasticity_module')">
+              <div class="node-header">
+                <span class="node-name">&#9878;&#65039; Market Elasticity &amp; Price Index</span>
+                <span class="protocol-tag">Async Python</span>
+              </div>
+              <p class="node-desc">Monitors competitor pricing index (Talabat, Snoonu, Keeta) and merchant elasticity to optimize customer conversion vs fleet gross margin.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Scikit-Learn</span><span class="tech-pill">Elasticity Curves</span><span class="tech-pill">Conversion Feedback</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('forecasting_ai_engine')">
+              <div class="node-header">
+                <span class="node-name">&#128302; 48-Hour Demand Forecasting AI</span>
+                <span class="protocol-tag">FastAPI / ONNX</span>
+              </div>
+              <p class="node-desc">LSTM &amp; LightGBM spatial models projecting order volume across 124 Doha Geohash-8 cells to pre-position fleet and schedule driver shifts.</p>
+              <div class="node-tech">
+                <span class="tech-pill">LightGBM</span><span class="tech-pill">ONNX Runtime</span><span class="tech-pill">Spatial H3 Hexagons</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('sla_risk_predictor')">
+              <div class="node-header">
+                <span class="node-name">&#9888;&#65039; Predictive SLA Breaker Detection</span>
+                <span class="protocol-tag">Kafka Consumer</span>
+              </div>
+              <p class="node-desc">Real-time risk scoring: identifies orders at risk of exceeding promised 30-min SLA due to kitchen delays or traffic bottlenecks before customer complains.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Apache Flink</span><span class="tech-pill">Stream Scoring</span><span class="tech-pill">Auto Re-Dispatch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNICATION BUS 4 -->
+        <div class="comm-bus">
+          <div class="comm-bus-anim"></div>
+          <span>&#8595; Financial Accounting, Escrow &amp; Bank Settlement Pipe</span>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan-400);">Event-Driven Double-Entry Posting with Idempotent Payment Webhooks</span>
+        </div>
+
+        <!-- TIER 5: FINANCIAL SETTLEMENT, ESCROW & DOUBLE-ENTRY LEDGER -->
+        <div class="arch-tier-card">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill">Tier 5</span>
+              <h3><span>&#128176;</span> Financial Core, Multi-Party Escrow &amp; Immutable Ledger</h3>
+            </div>
+            <span class="tier-meta">Double-entry accounting, instant courier payouts, merchant net remittance</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" onclick="inspectNode('double_entry_ledger')">
+              <div class="node-header">
+                <span class="node-name">&#128214; Immutable Double-Entry Ledger</span>
+                <span class="protocol-tag">PostgreSQL ACID</span>
+              </div>
+              <p class="node-desc">Zero-balance accounting ledger: records exact debits and credits for consumer payment, merchant escrow, courier payout, and platform take.</p>
+              <div class="node-tech">
+                <span class="tech-pill">TigerBeetle / PostgreSQL</span><span class="tech-pill">Strict Idempotency</span><span class="tech-pill">Audit Trail</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('payout_escrow_engine')">
+              <div class="node-header">
+                <span class="node-name">&#128179; Instant Courier &amp; Merchant Escrow</span>
+                <span class="protocol-tag">QCB / WPS Integration</span>
+              </div>
+              <p class="node-desc">Instant T+0 courier digital wallet cashout, automated merchant weekly net settlement with VAT deduction, and cash-on-delivery balancing.</p>
+              <div class="node-tech">
+                <span class="tech-pill">QPay Gateway</span><span class="tech-pill">Qatar WPS SIF</span><span class="tech-pill">Escrow Safe Release</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('tax_compliance_auditor')">
+              <div class="node-header">
+                <span class="node-name">&#9878;&#65039; Qatar Tax &amp; Regulatory Audit Engine</span>
+                <span class="protocol-tag">Async Reporting</span>
+              </div>
+              <p class="node-desc">Generates automated audit documentation for General Authority of Customs (for imported goods), Ministry of Commerce &amp; Industry compliance.</p>
+              <div class="node-tech">
+                <span class="tech-pill">MOCI Compliance</span><span class="tech-pill">Zakat / VAT Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIER 6: DATA PERSISTENCE & ANALYTICS LAKEHOUSE -->
+        <div class="arch-tier-card">
+          <div class="tier-card-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="tier-badge-pill">Tier 6</span>
+              <h3><span>&#128190;</span> High-Availability Persistence, Event Bus &amp; Analytics Lakehouse</h3>
+            </div>
+            <span class="tier-meta">Sovereign hosting in GCP Doha (me-central2) with automated multi-zone replication</span>
+          </div>
+
+          <div class="nodes-grid">
+            <div class="node-box" onclick="inspectNode('kafka_event_mesh')">
+              <div class="node-header">
+                <span class="node-name">&#128225; Apache Kafka Event Mesh</span>
+                <span class="protocol-tag">Kafka Protocol</span>
+              </div>
+              <p class="node-desc">3-Broker Raft cluster with partitioned event topics (order-lifecycle, driver-telemetry, pricing-audits) delivering sub-10ms delivery guarantees.</p>
+              <div class="node-tech">
+                <span class="tech-pill">Kafka KRaft</span><span class="tech-pill">Schema Registry</span><span class="tech-pill">90-Day Retention</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('scylla_timeseries')">
+              <div class="node-header">
+                <span class="node-name">&#128200; High-Write Telemetry Time-Series</span>
+                <span class="protocol-tag">CQL / Cassandra API</span>
+              </div>
+              <p class="node-desc">Stores raw breadcrumb GPS telemetry pings from thousands of active bikes and vans, supporting historical dispute replays.</p>
+              <div class="node-tech">
+                <span class="tech-pill">ScyllaDB</span><span class="tech-pill">C++ Sharded</span><span class="tech-pill">100k Writes/sec</span>
+              </div>
+            </div>
+
+            <div class="node-box" onclick="inspectNode('data_lakehouse')">
+              <div class="node-header">
+                <span class="node-name">&#127754; Enterprise BI Lakehouse</span>
+                <span class="protocol-tag">Parquet / BigQuery</span>
+              </div>
+              <p class="node-desc">Unified analytical warehouse ingesting streaming events via Debezium CDC for investor unit economics and cohort retention modeling.</p>
+              <div class="node-tech">
+                <span class="tech-pill">BigQuery Doha</span><span class="tech-pill">dbt Core</span><span class="tech-pill">Delta Lake</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: DYNAMIC RATE CARD ENGINE (SANDBOX) -->
+    <!-- ========================================== -->
+    <section id="tab-ratecard" class="arch-view">
+      <div class="sandbox-grid">
+
+        <!-- Controls Column -->
+        <div class="sandbox-controls">
+          <div class="sandbox-title-row">
+            <h3><span>&#129518;</span> Multi-Vertical Rate Card Levers</h3>
+            <span class="tier-badge-pill">Real-Time Logics</span>
+          </div>
+
+          <!-- Vertical Picker -->
+          <div class="param-group">
+            <span class="param-label">&#128230; Select Delivery Vertical</span>
+            <div class="vertical-picker">
+              <div class="v-pill active" id="vp-food" onclick="selectVertical('food')">
+                <span class="v-icon">&#127828;</span>
+                <div class="v-info">
+                  <span class="v-name">Food Delivery</span>
+                  <span class="v-sub">High speed (25-35m)</span>
+                </div>
+              </div>
+
+              <div class="v-pill" id="vp-groc" onclick="selectVertical('grocery')">
+                <span class="v-icon">&#129367;</span>
+                <div class="v-info">
+                  <span class="v-name">Dark-Store Grocery</span>
+                  <span class="v-sub">Heavy baskets &amp; volume</span>
+                </div>
+              </div>
+
+              <div class="v-pill" id="vp-pharm" onclick="selectVertical('pharmacy')">
+                <span class="v-icon">&#128138;</span>
+                <div class="v-info">
+                  <span class="v-name">Pharma &amp; Care</span>
+                  <span class="v-sub">Cold-chain, OTP verify</span>
+                </div>
+              </div>
+
+              <div class="v-pill" id="vp-doc" onclick="selectVertical('document')">
+                <span class="v-icon">&#128220;</span>
+                <div class="v-info">
+                  <span class="v-name">Legal Documents</span>
+                  <span class="v-sub">High-security, sealed</span>
+                </div>
+              </div>
+
+              <div class="v-pill" id="vp-bulk" onclick="selectVertical('bulk')">
+                <span class="v-icon">&#128666;</span>
+                <div class="v-info">
+                  <span class="v-name">Heavy / Courier</span>
+                  <span class="v-sub">Van &amp; heavy logistics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Distance Slider -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#128205; Delivery Travel Distance</span>
+              <span class="param-val-badge" id="val-dist">4.8 km</span>
+            </div>
+            <input type="range" id="sl-dist" min="0.5" max="25" step="0.5" value="4.8" oninput="calculateRateCard()">
+          </div>
+
+          <!-- Weight Slider -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#9878;&#65039; Basket Weight</span>
+              <span class="param-val-badge" id="val-weight">1.5 kg</span>
+            </div>
+            <input type="range" id="sl-weight" min="0.2" max="30" step="0.5" value="1.5" oninput="calculateRateCard()">
+          </div>
+
+          <!-- Rush Hour / Traffic Surge -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#9200; Time &amp; Traffic Surge Multiplier</span>
+              <span class="param-val-badge" id="val-surge">1.20x (Evening Rush)</span>
+            </div>
+            <input type="range" id="sl-surge" min="1.0" max="2.0" step="0.05" value="1.20" oninput="calculateRateCard()">
+          </div>
+
+          <!-- Fleet Supply Deficit -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#128693; Fleet Availability / Deficit Index</span>
+              <span class="param-val-badge" id="val-supply">1.05x (Balanced)</span>
+            </div>
+            <input type="range" id="sl-supply" min="0.9" max="1.6" step="0.05" value="1.05" oninput="calculateRateCard()">
+          </div>
+
+          <!-- Weather Condition -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#127777;&#65039; Environmental / Extreme Weather Surcharge</span>
+              <span class="param-val-badge" id="val-weather">+QAR 0.00</span>
+            </div>
+            <select id="sel-weather" style="padding:8px 12px; border-radius:var(--r-sm); background:var(--bg-surface); border:1px solid var(--border-subtle); color:var(--text-main); font-weight:700;" onchange="calculateRateCard()">
+              <option value="normal">Normal Mild Conditions (0.0x)</option>
+              <option value="heat">Extreme Summer Heat (>44°C) (+QAR 2.50)</option>
+              <option value="rain">Heavy Winter Downpour / Flooding (+QAR 4.00)</option>
+              <option value="sandstorm">Dust & Sandstorm Warning (+QAR 3.00)</option>
+            </select>
+          </div>
+
+          <!-- Batching Efficiency Opportunity -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <span class="param-label">&#128257; Route Clustering / Batching Efficiency</span>
+              <span class="param-val-badge" id="val-batch">Solo Delivery (1.0x)</span>
+            </div>
+            <select id="sel-batch" style="padding:8px 12px; border-radius:var(--r-sm); background:var(--bg-surface); border:1px solid var(--border-subtle); color:var(--text-main); font-weight:700;" onchange="calculateRateCard()">
+              <option value="solo">Solo Single-Drop (No discount)</option>
+              <option value="dual">Dual Clustered Drop (-15% customer fee discount)</option>
+              <option value="triple">Tri-Cluster Dark-Store Drop (-28% fee discount)</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Output & Formula Column -->
+        <div class="sandbox-results">
+
+          <!-- Rate Card Result Hero -->
+          <div class="rate-hero-card">
+            <div class="rh-metric">
+              <span class="rh-lbl">Customer Delivery Fee</span>
+              <span class="rh-val" id="res-cust-fee" style="color:var(--cyan-400);">QAR 7.50</span>
+              <span class="rh-sub" id="res-cust-fee-sub">Fair-Play Dynamic Fee</span>
+            </div>
+
+            <div class="rh-metric">
+              <span class="rh-lbl">Courier Guaranteed Payout</span>
+              <span class="rh-val" id="res-rider-pay" style="color:var(--emerald-400);">QAR 10.20</span>
+              <span class="rh-sub" id="res-rider-pay-sub">Base + KM + Surge Bonus</span>
+            </div>
+
+            <div class="rh-metric">
+              <span class="rh-lbl">Platform Net Delivery Unit</span>
+              <span class="rh-val" id="res-plat-margin" style="color:var(--blue-400);">+QAR 4.80</span>
+              <span class="rh-sub" id="res-plat-margin-sub">+6.1% on QAR 78.50 Basket</span>
+            </div>
+
+            <div class="rh-metric">
+              <span class="rh-lbl">Conversion Risk Index</span>
+              <span class="rh-val" id="res-elasticity" style="color:var(--emerald-400);">OPTIMAL</span>
+              <span class="rh-sub" id="res-elasticity-sub">&lt; 3.2% Cart Dropoff Prob</span>
+            </div>
+          </div>
+
+          <!-- Live Breakdown Bar -->
+          <div class="fee-breakdown-card">
+            <span class="formula-title">&#128202; Real-Time Rate Card Price Composition Breakdown</span>
+            <div class="breakdown-stacked-bar">
+              <div class="b-seg b-base" id="bar-base" style="width: 35%;">Base: QAR 4.00</div>
+              <div class="b-seg b-dist" id="bar-dist" style="width: 30%;">Distance: QAR 2.50</div>
+              <div class="b-seg b-weight" id="bar-weight" style="width: 15%;">Weight: QAR 0.00</div>
+              <div class="b-seg b-vertical" id="bar-vertical" style="width: 10%;">Spec: QAR 0.00</div>
+              <div class="b-seg b-surge" id="bar-surge" style="width: 10%;">Surge: QAR 1.00</div>
+            </div>
+
+            <div class="breakdown-legend">
+              <div class="leg-item"><div class="leg-dot" style="background:#3B82F6;"></div> Base Drop Inflow</div>
+              <div class="leg-item"><div class="leg-dot" style="background:#0284C7;"></div> Distance Curve Surcharge</div>
+              <div class="leg-item"><div class="leg-dot" style="background:#F59E0B;"></div> Weight / Volume Tier</div>
+              <div class="leg-item"><div class="leg-dot" style="background:#8B5CF6;"></div> Vertical Specific (Cold-Chain/Security)</div>
+              <div class="leg-item"><div class="leg-dot" style="background:#F43F5E;"></div> Supply / Demand Surge Bonus</div>
+            </div>
+          </div>
+
+          <!-- Mathematical Formula Deck -->
+          <div class="formula-card">
+            <span class="formula-title">&#129518; Production Formula Evaluated in Rate Card Engine:</span>
+            <div class="formula-box">
+              $$	ext{CustomerFee} = \left[ 	ext{BaseFee}_{v} + \max(0, d - d_{free}) 	imes R_{km} + \max(0, w - w_{free}) 	imes W_{kg} + S_{vertical} + S_{weather} ight] 	imes M_{surge} 	imes M_{supply} 	imes \eta_{batch}$$
+              <br><br>
+              <span style="color:#A78BFA;">// Courier Payout Balancing Equation:</span><br>
+              $$	ext{CourierPayout} = 	ext{BasePay}_{v} + (d 	imes 	ext{DistancePayRate}) + (S_{weather} 	imes 0.85) + \left[ (M_{surge} - 1.0) 	imes 	ext{SurgeShareBonus} ight]$$
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MULTI-VERTICAL OPERATIONS MATRIX -->
+    <!-- ========================================== -->
+    <section id="tab-matrix" class="arch-view">
+      <div class="matrix-table-wrap">
+        <h3 style="font-family:var(--font-display); font-size:1.2rem; font-weight:800; margin-bottom:14px; color:var(--text-main);">
+          <span>&#9878;&#65039;</span> Multi-Vertical Operational Sizing &amp; Compliance Matrix
+        </h3>
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Vertical Profile</th>
+              <th>Speed SLA</th>
+              <th>Vehicle Type</th>
+              <th>Packaging / Bag Standard</th>
+              <th>Verification &amp; Handover</th>
+              <th>Base Fee</th>
+              <th>Per-KM Rate</th>
+              <th>Regulatory Body</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge-v badge-v-food">&#127828; Food Delivery</span></td>
+              <td><strong>25 &ndash; 35 min</strong></td>
+              <td>Motorbike / EV Scooter</td>
+              <td>Insulated Thermal Hot/Cold Split Bag</td>
+              <td>Contactless / Photo Proof</td>
+              <td>QAR 5.00</td>
+              <td>QAR 1.10 / km</td>
+              <td>Ministry of Public Health (MoPH)</td>
+            </tr>
+            <tr>
+              <td><span class="badge-v badge-v-groc">&#129367; Dark-Store Grocery</span></td>
+              <td><strong>15 &ndash; 25 min</strong></td>
+              <td>Motorbike / Cargo Scooter</td>
+              <td>Multi-Compartment Chilled Tote Box</td>
+              <td>Bag Seal QR Scan</td>
+              <td>QAR 4.50</td>
+              <td>QAR 1.25 / km</td>
+              <td>Ministry of Commerce &amp; Industry (MOCI)</td>
+            </tr>
+            <tr>
+              <td><span class="badge-v badge-v-pharm">&#128138; Pharmacy &amp; Healthcare</span></td>
+              <td><strong>30 &ndash; 45 min</strong></td>
+              <td>Car / Regulated Motorbike</td>
+              <td>Certified 2&deg;C&ndash;8&deg;C Cold-Chain Box with Data Logger</td>
+              <td>Dual OTP + Doctor ID / Prescription Match</td>
+              <td>QAR 7.00</td>
+              <td>QAR 1.40 / km</td>
+              <td>MoPH Department of Pharmacy &amp; Drug Control</td>
+            </tr>
+            <tr>
+              <td><span class="badge-v badge-v-doc">&#128220; Legal &amp; Corporate Docs</span></td>
+              <td><strong>40 &ndash; 60 min</strong></td>
+              <td>Car / Dedicated Courier</td>
+              <td>Tamper-Evident Security Seal Pouch</td>
+              <td>Government ID Verification + Biometric Signature</td>
+              <td>QAR 12.00</td>
+              <td>QAR 1.75 / km</td>
+              <td>Ministry of Justice / Qatar Post Authority</td>
+            </tr>
+            <tr>
+              <td><span class="badge-v badge-v-bulk">&#128666; Heavy Parcel / Bulk</span></td>
+              <td><strong>Same Day / Scheduled</strong></td>
+              <td>Van / 1-Ton Pickup</td>
+              <td>Heavy-Duty Ratchet &amp; Cargo Netting</td>
+              <td>Bill of Lading / Digital Signature</td>
+              <td>QAR 25.00</td>
+              <td>QAR 2.50 / km</td>
+              <td>Ministry of Transport &amp; Communications (MOTC)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: EVENT SEQUENCE & LIFECYCLE -->
+    <!-- ========================================== -->
+    <section id="tab-sequence" class="arch-view">
+      <div class="sequence-deck">
+        <h3 style="font-family:var(--font-display); font-size:1.2rem; font-weight:800; margin-bottom:6px; color:var(--text-main);">
+          <span>&#9889;</span> End-to-End Distributed Order Lifecycle Sequence
+        </h3>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">
+          Chronological breakdown of events, latency budgets, protocol handshakes, and ledger accounting postings from checkout to doorstep.
+        </p>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+0 ms</span>
+          <span class="seq-actor">&#128100; Consumer</span>
+          <div class="seq-event">
+            <span class="seq-title">Order Submitted &amp; Cart Checkout</span>
+            <span class="seq-payload">Payload: { items, vertical: 'pharmacy', dropoff_coord, cold_chain: true }</span>
+          </div>
+          <span class="seq-channel">HTTPS / TLS 1.3</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+45 ms</span>
+          <span class="seq-actor">&#129518; Rate Card Engine</span>
+          <div class="seq-event">
+            <span class="seq-title">Dynamic Rate Evaluated &amp; Price Locked</span>
+            <span class="seq-payload">Calculates Base (QAR 7.00) + Dist (QAR 3.36) + ColdChain (QAR 2.50) = QAR 12.86</span>
+          </div>
+          <span class="seq-channel">Internal gRPC</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+110 ms</span>
+          <span class="seq-actor">&#128179; Payment Gateway</span>
+          <div class="seq-event">
+            <span class="seq-title">Apple Pay / QPay Auth &amp; Escrow Hold</span>
+            <span class="seq-payload">Two-party pre-auth: hold funds in platform escrow account, zero merchant credit yet</span>
+          </div>
+          <span class="seq-channel">PCI-DSS Gateway</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+160 ms</span>
+          <span class="seq-actor">&#128225; Event Mesh</span>
+          <div class="seq-event">
+            <span class="seq-title">Kafka Event Emitted: order.created</span>
+            <span class="seq-payload">Topic: prod.orders.v1 (Partitioned by Merchant ID for strict ordering)</span>
+          </div>
+          <span class="seq-channel">Kafka Producer</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+220 ms</span>
+          <span class="seq-actor">&#127978; Merchant Tablet</span>
+          <div class="seq-event">
+            <span class="seq-title">Merchant Auto-Alert &amp; POS Ticket Printing</span>
+            <span class="seq-payload">Kitchen Display System displays prep timer: 14 mins estimated food / prep time</span>
+          </div>
+          <span class="seq-channel">WebSocket Push</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+8.5 min</span>
+          <span class="seq-actor">&#129504; Dispatch Engine</span>
+          <div class="seq-event">
+            <span class="seq-title">Predictive Dispatch Algorithm Assigns Courier</span>
+            <span class="seq-payload">Matches Courier #842 (2.1km away, EV Bike with certified cooler, ETA to merchant 5m)</span>
+          </div>
+          <span class="seq-channel">OR-Tools Solver</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+14 min</span>
+          <span class="seq-actor">&#128693; Courier Arrives</span>
+          <div class="seq-event">
+            <span class="seq-title">Merchant Handover &amp; Package Barcode QR Scan</span>
+            <span class="seq-payload">Cold-chain data logger activated, digital handover verified, order status &#8594; In_Transit</span>
+          </div>
+          <span class="seq-channel">gRPC Mobile</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+28 min</span>
+          <span class="seq-actor">&#127969; Doorstep Drop</span>
+          <div class="seq-event">
+            <span class="seq-title">Delivery Completion &amp; Dual OTP Verification</span>
+            <span class="seq-payload">Customer gives OTP code '7391', courier enters in app, order status &#8594; Delivered</span>
+          </div>
+          <span class="seq-channel">Encrypted WSS</span>
+        </div>
+
+        <div class="seq-step-card">
+          <span class="seq-time">T+28.2 min</span>
+          <span class="seq-actor">&#128176; Double-Entry Core</span>
+          <div class="seq-event">
+            <span class="seq-title">Escrow Release &amp; Ledger Settlement Postings</span>
+            <span class="seq-payload">Courier Wallet Credited (+QAR 10.20), Merchant Credited (+QAR 68.20), Platform Retains (+QAR 4.80)</span>
+          </div>
+          <span class="seq-channel">ACID Ledger Trans</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: AI FORECASTING & POSITIONING -->
+    <!-- ========================================== -->
+    <section id="tab-forecasting" class="arch-view">
+      <div class="forecast-grid">
+        <div class="fc-card">
+          <div class="fc-card-header">
+            <h4><span>&#128200;</span> 48-Hour Doha Hourly Demand Forecast (Orders / Hour)</h4>
+            <span class="tier-badge-pill">Prophet / LSTM</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartForecastHourly"></canvas>
+          </div>
+        </div>
+
+        <div class="fc-card">
+          <div class="fc-card-header">
+            <h4><span>&#128506;&#65039;</span> Geohash H3 Supply-Demand Hexagon Heatmap</h4>
+            <span class="tier-badge-pill">Spatial H3-8</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartGeohashDensity"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 6: FINANCIAL LEDGER & ESCROW CORE -->
+    <!-- ========================================== -->
+    <section id="tab-ledger" class="arch-view">
+      <div class="ledger-grid">
+        <div class="ledger-card">
+          <h4><span>&#128214;</span> Double-Entry Chart of Accounts</h4>
+          <p style="font-size:0.8rem; color:var(--text-secondary);">
+            Ensures mathematical zero-sum balancing for every individual delivery order. Every debit is offset by a counter-party credit.
+          </p>
+          <div class="ledger-schema-box">
+            Account 1010: Cash In Clearing (Asset)<br>
+            Account 2010: Merchant Escrow Payable (Liability)<br>
+            Account 2020: Courier Digital Wallet Payable (Liability)<br>
+            Account 4010: Merchant Take-Rate Revenue (Income)<br>
+            Account 4020: Platform Delivery Fee Revenue (Income)<br>
+            Account 5010: Courier Direct Payout Expense (Direct Cost)
+          </div>
+        </div>
+
+        <div class="ledger-card">
+          <h4><span>&#128179;</span> Instant T+0 Courier Wallet Architecture</h4>
+          <p style="font-size:0.8rem; color:var(--text-secondary);">
+            Couriers can cash out immediately to their QNB, CBQ, or Ooredoo Money mobile wallets through automated WPS-compliant API bridges.
+          </p>
+          <div class="ledger-schema-box">
+            - Real-time wallet credit upon customer OTP handshake<br>
+            - Fraud velocity gate: max 3 cashouts per 24 hours<br>
+            - Cash-on-Delivery (COD) auto-deduction balancing<br>
+            - Qatar WPS (Wage Protection System) compliance log
+          </div>
+        </div>
+
+        <div class="ledger-card">
+          <h4><span>&#127974;</span> Merchant Net Settlement Engine</h4>
+          <p style="font-size:0.8rem; color:var(--text-secondary);">
+            Automated weekly remittance to vendor bank accounts net of agreed commission, refund claims, and sponsored marketing deductions.
+          </p>
+          <div class="ledger-schema-box">
+            $$	ext{NetRemit} = 	ext{GMV} - 	ext{Commission} - 	ext{Refunds} - 	ext{AdSpend}$$<br>
+            - Automated PDF tax invoice generation<br>
+            - Dispute holdback escrow escrow buffer (3%)<br>
+            - SWIFT / IBAN domestic transfer batch dispatch
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE FOOTER -->
+    <footer class="arch-footer">
+      <div class="footer-left">
+        <h4>DeliverQ Enterprise Multi-Vertical Architecture</h4>
+        <p>Built for Qatar's QAR 11.59B on-demand delivery economy &bull; Sovereign Cloud &bull; Microservice Topology</p>
+      </div>
+
+      <div class="footer-nav">
+        <a href="index.html" class="footer-link">&#128202; Market Strategy</a>
+        <a href="simulator.html" class="footer-link">&#9881;&#65039; Delivery Economics Simulator</a>
+        <a href="it-simulator.html" class="footer-link">&#9729;&#65039; IT Infrastructure Sizing</a>
+        <a href="architecture.html" class="footer-link" style="color:var(--cyan-400); font-weight:800;">&#127959;&#65039; Architecture Blueprint</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Interactive Node Inspector Modal -->
+  <div class="modal-backdrop" id="nodeModal" onclick="closeNodeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeNodeModal()">&#10005;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // ===== THEME SYNCHRONIZATION =====
+    function initTheme() {
+      var saved = localStorage.getItem('deliverq_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+      document.body.classList.toggle('light-theme', saved === 'light');
+      updateThemeButton(saved);
+    }
+
+    function toggleTheme() {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.body.classList.toggle('light-theme', next === 'light');
+      localStorage.setItem('deliverq_theme', next);
+      updateThemeButton(next);
+      updateChartColors();
+    }
+
+    function updateThemeButton(theme) {
+      var icon = document.getElementById('themeIcon');
+      if (icon) icon.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127763;';
+    }
+
+    // ===== TAB NAVIGATION =====
+    function switchArchTab(tabId, btn) {
+      document.querySelectorAll('.arch-view').forEach(function(v) {
+        v.classList.remove('active');
+      });
+      document.querySelectorAll('.arch-tab-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+
+      var target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+      if (btn) btn.classList.add('active');
+
+      if (tabId === 'tab-forecasting') {
+        setTimeout(initCharts, 50);
+      }
+    }
+
+    // ===== DYNAMIC RATE CARD ENGINE SIMULATOR LOGIC =====
+    var currentVertical = 'food';
+    var VERTICAL_DEFAULTS = {
+      food:     { baseFee: 5.00, perKm: 1.10, riderBase: 7.00, riderPerKm: 0.90, weightFree: 2.0, weightPerKg: 0.50, specSurcharge: 0.00, name: 'Food Delivery' },
+      grocery:  { baseFee: 4.50, perKm: 1.25, riderBase: 6.50, riderPerKm: 1.05, weightFree: 5.0, weightPerKg: 0.75, specSurcharge: 1.00, name: 'Dark-Store Grocery' },
+      pharmacy: { baseFee: 7.00, perKm: 1.40, riderBase: 9.00, riderPerKm: 1.15, weightFree: 1.0, weightPerKg: 0.50, specSurcharge: 2.50, name: 'Pharmacy & Care (Cold-Chain)' },
+      document: { baseFee: 12.00, perKm: 1.75, riderBase: 13.00, riderPerKm: 1.30, weightFree: 0.5, weightPerKg: 1.20, specSurcharge: 4.00, name: 'Legal Documents & Pouch' },
+      bulk:     { baseFee: 25.00, perKm: 2.50, riderBase: 28.00, riderPerKm: 1.90, weightFree: 10.0, weightPerKg: 0.90, specSurcharge: 5.00, name: 'Heavy Logistics / Courier' }
+    };
+
+    function selectVertical(vertKey) {
+      currentVertical = vertKey;
+      document.querySelectorAll('.v-pill').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      var selectedPill = document.getElementById('vp-' + (vertKey === 'pharmacy' ? 'pharm' : vertKey === 'document' ? 'doc' : vertKey === 'grocery' ? 'groc' : vertKey));
+      if (selectedPill) selectedPill.classList.add('active');
+      calculateRateCard();
+    }
+
+    function calculateRateCard() {
+      var dist = parseFloat(document.getElementById('sl-dist').value);
+      var weight = parseFloat(document.getElementById('sl-weight').value);
+      var surge = parseFloat(document.getElementById('sl-surge').value);
+      var supply = parseFloat(document.getElementById('sl-supply').value);
+      var weatherMode = document.getElementById('sel-weather').value;
+      var batchMode = document.getElementById('sel-batch').value;
+
+      // Update Labels
+      document.getElementById('val-dist').textContent = dist.toFixed(1) + ' km';
+      document.getElementById('val-weight').textContent = weight.toFixed(1) + ' kg';
+      document.getElementById('val-surge').textContent = surge.toFixed(2) + 'x (' + (surge > 1.3 ? 'Peak Rush' : surge > 1.1 ? 'Normal Rush' : 'Off-Peak') + ')';
+      document.getElementById('val-supply').textContent = supply.toFixed(2) + 'x (' + (supply > 1.2 ? 'Deficit Shortage' : 'Balanced') + ')';
+
+      var weatherSurcharges = { normal: 0, heat: 2.50, rain: 4.00, sandstorm: 3.00 };
+      var weatherSurcharge = weatherSurcharges[weatherMode] || 0;
+      document.getElementById('val-weather').textContent = '+QAR ' + weatherSurcharge.toFixed(2);
+
+      var batchDiscounts = { solo: 1.0, dual: 0.85, triple: 0.72 };
+      var batchFactor = batchDiscounts[batchMode] || 1.0;
+
+      var v = VERTICAL_DEFAULTS[currentVertical] || VERTICAL_DEFAULTS.food;
+
+      // Distance Fee
+      var distFee = Math.max(0, dist - 1.0) * v.perKm;
+      // Weight Surcharge
+      var weightSurcharge = Math.max(0, weight - v.weightFree) * v.weightPerKg;
+      // Vertical Specific Surcharge (cold-chain, tamper-evident security)
+      var verticalSurcharge = v.specSurcharge;
+
+      // Combined Base Subtotal
+      var unmultipliedBase = v.baseFee + distFee + weightSurcharge + verticalSurcharge + weatherSurcharge;
+      
+      // Final Customer Fee
+      var customerFee = unmultipliedBase * surge * supply * batchFactor;
+      customerFee = Math.max(4.00, Math.round(customerFee * 10) / 10);
+
+      // Courier Payout
+      var riderDistPay = dist * v.riderPerKm;
+      var riderSurgeBonus = (surge > 1.0) ? (surge - 1.0) * 4.50 : 0;
+      var riderPayout = v.riderBase + riderDistPay + (weatherSurcharge * 0.85) + riderSurgeBonus;
+      riderPayout = Math.max(7.00, Math.round(riderPayout * 10) / 10);
+
+      // Platform Take from Basket: Assuming QAR 78.50 basket with 14.5% commission (~QAR 11.38 merchant commission)
+      var merchantCommission = 78.50 * 0.145;
+      var platformNetDelivery = (customerFee + merchantCommission) - riderPayout;
+
+      // Display Hero Results
+      document.getElementById('res-cust-fee').textContent = 'QAR ' + customerFee.toFixed(2);
+      document.getElementById('res-cust-fee-sub').textContent = v.name + (batchMode !== 'solo' ? ' (Batched)' : '');
+
+      document.getElementById('res-rider-pay').textContent = 'QAR ' + riderPayout.toFixed(2);
+      document.getElementById('res-rider-pay-sub').textContent = 'Base QAR ' + v.riderBase.toFixed(2) + ' + ' + dist.toFixed(1) + 'km Travel';
+
+      var platEl = document.getElementById('res-plat-margin');
+      platEl.textContent = (platformNetDelivery >= 0 ? '+' : '') + 'QAR ' + platformNetDelivery.toFixed(2);
+      platEl.style.color = platformNetDelivery >= 0 ? 'var(--blue-400)' : 'var(--rose-400)';
+
+      var marginPct = (platformNetDelivery / 78.50) * 100;
+      document.getElementById('res-plat-margin-sub').textContent = (marginPct >= 0 ? '+' : '') + marginPct.toFixed(1) + '% on QAR 78.50 Basket';
+
+      // Elasticity & Conversion Assessment
+      var elastEl = document.getElementById('res-elasticity');
+      var elastSub = document.getElementById('res-elasticity-sub');
+      if (customerFee <= 9.00) {
+        elastEl.textContent = 'OPTIMAL';
+        elastEl.style.color = 'var(--emerald-400)';
+        elastSub.textContent = '< 2.5% Cart Dropoff Prob';
+      } else if (customerFee <= 14.00) {
+        elastEl.textContent = 'ACCEPTABLE';
+        elastEl.style.color = 'var(--amber-400)';
+        elastSub.textContent = '4.5% - 7.0% Conversion Sensitivity';
+      } else {
+        elastEl.textContent = 'HIGH RESISTANCE';
+        elastEl.style.color = 'var(--rose-400)';
+        elastSub.textContent = '> 15% Cart Abandonment Risk';
+      }
+
+      // Breakdown Bar Segments
+      var totalBreakdown = v.baseFee + distFee + weightSurcharge + verticalSurcharge + (customerFee - unmultipliedBase);
+      totalBreakdown = Math.max(1, totalBreakdown);
+
+      var pctBase = (v.baseFee / totalBreakdown) * 100;
+      var pctDist = (distFee / totalBreakdown) * 100;
+      var pctWeight = (weightSurcharge / totalBreakdown) * 100;
+      var pctVert = (verticalSurcharge / totalBreakdown) * 100;
+      var pctSurge = Math.max(0, 100 - (pctBase + pctDist + pctWeight + pctVert));
+
+      document.getElementById('bar-base').style.width = pctBase.toFixed(1) + '%';
+      document.getElementById('bar-base').textContent = 'Base QAR ' + v.baseFee.toFixed(1);
+
+      document.getElementById('bar-dist').style.width = pctDist.toFixed(1) + '%';
+      document.getElementById('bar-dist').textContent = 'Dist QAR ' + distFee.toFixed(1);
+
+      document.getElementById('bar-weight').style.width = pctWeight.toFixed(1) + '%';
+      document.getElementById('bar-weight').textContent = weightSurcharge > 0 ? 'Weight QAR ' + weightSurcharge.toFixed(1) : '';
+
+      document.getElementById('bar-vertical').style.width = pctVert.toFixed(1) + '%';
+      document.getElementById('bar-vertical').textContent = verticalSurcharge > 0 ? 'Spec QAR ' + verticalSurcharge.toFixed(1) : '';
+
+      document.getElementById('bar-surge').style.width = pctSurge.toFixed(1) + '%';
+      document.getElementById('bar-surge').textContent = pctSurge > 5 ? 'Surge' : '';
+    }
+
+    // ===== ARCHITECTURE INSPECTION MODAL DATA =====
+    var NODE_DATA = {
+      cust_app: {
+        title: "Consumer Mobile & Web Experience",
+        tier: "Tier 1: Client Application Surface",
+        tech: "Flutter 3.x, Dart, WebSockets, Secure Storage",
+        protocols: "HTTPS REST, WebSocket WSS, Apple Pay PassKit, Qatar QPay NAPS",
+        desc: "High-performance omni-channel mobile app supporting 5 delivery verticals under a unified checkout session. Uses sub-second WebSocket listeners for live rider GPS tracking on Mapbox vectors.",
+        sla: "App launch cold start < 1.4s | Cart checkout latency < 450ms"
+      },
+      merchant_pos: {
+        title: "Merchant Tablet & Kitchen Display System (KDS)",
+        tier: "Tier 1: Client Application Surface",
+        tech: "React 19, TypeScript, WebUSB / Bluetooth ESC-POS, SSE",
+        protocols: "Server-Sent Events (SSE), gRPC Web, ESC/POS Print Bridge",
+        desc: "Tablet application engineered for harsh, busy restaurant kitchens and grocery warehouses. Handles 1-touch order acceptance, automated receipt printing, catalog 86ing, and dynamic prep time adjustments.",
+        sla: "Order alert chime sound within 350ms of consumer checkout"
+      },
+      rider_app: {
+        title: "Courier Native Telemetry & Dispatch App",
+        tier: "Tier 1: Client Application Surface",
+        tech: "Kotlin (Android) / Swift (iOS), CoreLocation, Foreground Telemetry Service",
+        protocols: "MQTT 5.0, gRPC, mTLS Certificate Pinning",
+        desc: "Rider app that maintains reliable background location pings every 3 seconds even in low-battery or Doha tunnel conditions. Features barcode scanning for dark-store totes and digital OTP signature verification for prescription pharma.",
+        sla: "Background battery drain < 4% / hour | Location accuracy < 5 meters"
+      },
+      rate_card_engine: {
+        title: "Intelligent Dynamic Rate Card Engine",
+        tier: "Tier 4: Intelligent Logics & Predictive AI",
+        tech: "Golang 1.23, Redis 7 Cluster, High-Throughput In-Memory Rule Tree",
+        protocols: "Internal gRPC (< 45ms P99 SLA), Kafka Event Emitter",
+        desc: "Central rate card brain. Evaluates multi-variable curves: Base Drop Fee, Geodesic to Route Network Distance, Volumetric Basket Weight, Temperature Logging Surcharges (Pharma), Security Chain of Custody (Legal Docs), and Surge Multipliers. Guarantees fair-play pricing while preserving courier take-home pay.",
+        sla: "P99 Computation Latency: 32ms | Throughput: 15,000 evaluations / sec"
+      },
+      double_entry_ledger: {
+        title: "Immutable Double-Entry Accounting Ledger",
+        tier: "Tier 5: Financial Settlement & Escrow Core",
+        tech: "TigerBeetle / PostgreSQL ACID Transaction Core with Idempotency Keys",
+        protocols: "Strict Two-Phase Commit, ISO 20022 Financial Event Model",
+        desc: "Guarantees zero-variance financial integrity. Every single transaction emits balanced debits and credits across Consumer Receivables, Escrow Payables, Courier Wallets, Merchant Remittance, and Platform Commission. Auditable by KPMG / PwC standards.",
+        sla: "Zero financial drift | 100% idempotent retry safety"
+      },
+      kafka_event_mesh: {
+        title: "Enterprise Apache Kafka Event Mesh",
+        tier: "Tier 6: Persistence & Event Infrastructure",
+        tech: "Apache Kafka (KRaft mode, 3 Brokers, Multi-AZ in GCP Doha)",
+        protocols: "Kafka Binary Protocol, Confluent Schema Registry (Avro)",
+        desc: "The central nervous system of DeliverQ. Ingests all state changes: order-created, pricing-computed, rider-telemetry-pinged, and payout-dispatched. Backed by 90-day retention and automated replay capability.",
+        sla: "End-to-End Publish-to-Subscribe Latency < 8ms P95"
+      }
+    };
+
+    function inspectNode(nodeKey) {
+      var data = NODE_DATA[nodeKey] || {
+        title: "Distributed Microservice Node",
+        tier: "Core Platform Architecture",
+        tech: "Golang / Kubernetes / GCP Doha",
+        protocols: "gRPC & Kafka",
+        desc: "High-availability multi-tenant component engineered for continuous 99.99% availability.",
+        sla: "P99 SLA < 100ms"
+      };
+
+      var html = '<div style="display:flex; flex-direction:column; gap:12px;">' +
+        '<span class="tier-badge-pill" style="align-self:flex-start;">' + data.tier + '</span>' +
+        '<h3 style="font-family:var(--font-display); font-size:1.35rem; font-weight:900; color:var(--text-main); margin:0;">' + data.title + '</h3>' +
+        '<p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6;">' + data.desc + '</p>' +
+        '<div style="background:rgba(255,255,255,0.04); border:1px solid var(--border-subtle); border-radius:var(--r-md); padding:12px 16px; display:flex; flex-direction:column; gap:6px;">' +
+        '<div style="font-size:0.78rem; color:var(--text-muted); font-weight:800; text-transform:uppercase;">Technical Stack</div>' +
+        '<div style="font-family:var(--font-mono); font-size:0.82rem; color:var(--cyan-400);">' + data.tech + '</div>' +
+        '<div style="font-size:0.78rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; margin-top:4px;">Protocols & Interfaces</div>' +
+        '<div style="font-family:var(--font-mono); font-size:0.82rem; color:var(--blue-400);">' + data.protocols + '</div>' +
+        '<div style="font-size:0.78rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; margin-top:4px;">Performance SLA</div>' +
+        '<div style="font-size:0.82rem; color:var(--emerald-400); font-weight:700;">' + data.sla + '</div>' +
+        '</div>' +
+        '<button class="btn-header-act btn-header-primary" onclick="closeNodeModal()" style="align-self:flex-end; margin-top:8px;">Close Inspector</button>' +
+        '</div>';
+
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('nodeModal').classList.add('open');
+    }
+
+    function closeNodeModal() {
+      document.getElementById('nodeModal').classList.remove('open');
+    }
+
+    function exportArchSummary() {
+      var summaryText = "DeliverQ Architecture Specification Brief\n" +
+        "========================================\n" +
+        "System: Multi-Vertical On-Demand Delivery & Logics Platform\n" +
+        "Sovereign Host: GCP Doha (me-central2), Qatar\n" +
+        "Supported Verticals: Food, Dark-Store Grocery, Regulated Pharmacy, Legal Documents, Bulk Logistics\n" +
+        "Pricing Engine: Dynamic Multi-Variable Rate Card Engine (Base + Dist + Weight + Spec) x Surge x Weather x Batch\n" +
+        "Event Bus: Apache Kafka Event Mesh with Sub-10ms pub/sub\n" +
+        "Financials: Double-Entry Immutable Ledger with Instant T+0 Courier WPS Wallet Payouts\n" +
+        "SLA Compliance: < 110ms API P99 / 99.99% Availability\n\n" +
+        "Generated from DeliverQ Enterprise Architecture Suite.";
+      
+      navigator.clipboard.writeText(summaryText).then(function() {
+        alert("DeliverQ Architecture Specification copied to clipboard!");
+      }).catch(function() {
+        alert("Architecture Specification ready for review.");
+      });
+    }
+
+    // ===== CHART.JS VISUALIZATIONS =====
+    var chartHourlyInstance = null;
+    var chartGeohashInstance = null;
+
+    function initCharts() {
+      var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      var textCol = isLight ? '#334155' : '#94A3B8';
+      var gridCol = isLight ? '#E2E8F0' : 'rgba(255, 255, 255, 0.08)';
+
+      // 1. Hourly Forecast Chart
+      var ctx1 = document.getElementById('chartForecastHourly');
+      if (ctx1 && !chartHourlyInstance) {
+        chartHourlyInstance = new Chart(ctx1, {
+          type: 'line',
+          data: {
+            labels: ['12 AM', '3 AM', '6 AM', '9 AM', '12 PM', '3 PM', '6 PM', '8 PM (Peak)', '10 PM', '11 PM'],
+            datasets: [
+              {
+                label: 'Projected Demand (Orders/hr)',
+                data: [320, 110, 240, 950, 1850, 1420, 2680, 3450, 2100, 1200],
+                borderColor: '#06B6D4',
+                backgroundColor: 'rgba(6, 182, 212, 0.15)',
+                fill: true,
+                tension: 0.35,
+                borderWidth: 2.5
+              },
+              {
+                label: 'Pre-Positioned Active Couriers',
+                data: [350, 140, 260, 920, 1780, 1390, 2550, 3380, 2150, 1250],
+                borderColor: '#3B82F6',
+                borderDash: [5, 5],
+                tension: 0.35,
+                borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { labels: { color: textCol, font: { family: 'Inter', size: 11, weight: 'bold' } } }
+            },
+            scales: {
+              x: { grid: { color: gridCol }, ticks: { color: textCol } },
+              y: { grid: { color: gridCol }, ticks: { color: textCol } }
+            }
+          }
+        });
+      }
+
+      // 2. Geohash Density Bar Chart
+      var ctx2 = document.getElementById('chartGeohashDensity');
+      if (ctx2 && !chartGeohashInstance) {
+        chartGeohashInstance = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: ['West Bay (H3-81)', 'The Pearl (H3-82)', 'Lusail Marina', 'Al Sadd', 'Msheireb', 'Al Rayyan'],
+            datasets: [{
+              label: 'Demand Density Index (Orders / sq km)',
+              data: [184, 162, 145, 118, 98, 64],
+              backgroundColor: [
+                '#0284C7',
+                '#06B6D4',
+                '#3B82F6',
+                '#8B5CF6',
+                '#10B981',
+                '#F59E0B'
+              ],
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { color: textCol, font: { family: 'Inter', size: 10 } } },
+              y: { grid: { color: gridCol }, ticks: { color: textCol } }
+            }
+          }
+        });
+      }
+    }
+
+    function updateChartColors() {
+      if (chartHourlyInstance) {
+        chartHourlyInstance.destroy();
+        chartHourlyInstance = null;
+      }
+      if (chartGeohashInstance) {
+        chartGeohashInstance.destroy();
+        chartGeohashInstance = null;
+      }
+      initCharts();
+    }
+
+    // Initialize on Load
+    window.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      calculateRateCard();
+    });
+  </script>
+</body>
+</html>
